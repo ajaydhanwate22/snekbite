@@ -14,8 +14,41 @@ import {useTranslation} from 'react-i18next';
 
 function Guestsignupscreen({navigation}) {
   const {t} = useTranslation();
+  const [Username, setUsername] = useState('');
+  const [contact, setContact] = useState('');
+  const [address, setaddress] = useState('');
+  const [mailID, setmailID] = useState('');
+  const [profession, setprofession] = useState('');
+  const [password, setpassword] = useState('');
+
   const handleButtonPress = () => {
-    navigation.navigate('Guestformscreen');
+    const formData = new FormData();
+    formData.append('Username', Username);
+    formData.append('ContactNumber', contact);
+    formData.append('Address', address);
+    formData.append('Mail', mailID);
+    formData.append('Profession', profession);
+    formData.append('Password', password);
+
+    axios
+      .post('http://ajayapi.sp-consultants.in/Guestsignup.php', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then(response => {
+        const responseJson = response.data;
+        if (responseJson.message === 'Registration successfully') {
+          alert('Registration successful!');
+          navigation.navigate('Guestformscreen');
+        } else {
+          alert('Data not saved: ' + responseJson.message);
+        }
+      })
+      .catch(error => {
+        console.error(error);
+        alert('An error occurred while submitting the data');
+      });
   };
 
   return (
@@ -40,7 +73,7 @@ function Guestsignupscreen({navigation}) {
         <View
           style={{
             width: 300,
-            height: 530,
+            height: 550,
             backgroundColor: 'white',
             left: 30,
             top: -60,
@@ -58,97 +91,139 @@ function Guestsignupscreen({navigation}) {
             }}>
             Sign Up
           </Text>
-          <TextInput
+          <View
             style={{
-              height: 40,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left: 10,
+              paddingLeft: 10,
+              gap: 10,
               margin: 12,
               width: 250,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              borderColor: '#093624',
-              color: '#093624',
-            }}
-            placeholder="Username"
-            placeholderTextColor="#093624"
-          />
-          <TextInput
+              height: 45,
+            }}>
+            <Image source={require('../Assets/rescuerusernameicon.png')} />
+            <TextInput
+              placeholder="Username"
+              placeholderTextColor="#093624"
+              value={Username}
+              onChangeText={setUsername}
+            />
+          </View>
+       <View
             style={{
-              height: 40,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left: 10,
+              paddingLeft: 10,
+              gap: 10,
               margin: 12,
               width: 250,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              borderColor: '#093624',
-              color: '#093624',
-            }}
-            placeholder="mobile number"
-            placeholderTextColor="#093624"
-          />
-          <TextInput
+              height: 45,
+            }}>
+            <Image source={require('../Assets/contact.png')} />
+            <TextInput
+              placeholder="Mobile number"
+              placeholderTextColor="#093624"
+              value={contact}
+              onChangeText={setContact}
+            />
+          </View>
+          <View
             style={{
-              height: 40,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left: 10,
+              paddingLeft: 10,
+              gap: 10,
               margin: 12,
               width: 250,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              borderColor: '#093624',
-              color: '#093624',
-            }}
-            placeholder="Password"
-            placeholderTextColor="#093624"
-          />
+              height: 45,
+            }}>
+            <Image source={require('../Assets/releaselocationicon.png')} />
+            <TextInput
+              placeholder="Address"
+              placeholderTextColor="#093624"
+              value={address}
+              onChangeText={setaddress}
+            />
+          </View>
 
-          <TextInput
+          <View
             style={{
-              height: 40,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left: 10,
+              paddingLeft: 10,
+              gap: 10,
               margin: 12,
               width: 250,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              borderColor: '#093624',
-              color: '#093624',
-            }}
-            placeholder="address"
-            placeholderTextColor="#093624"
-          />
-          <TextInput
+              height: 45,
+            }}>
+            <Image source={require('../Assets/mail.png')} />
+            <TextInput
+              placeholder="mail ID"
+              placeholderTextColor="#093624"
+              value={mailID}
+              onChangeText={setmailID}
+            />
+          </View>
+          <View
             style={{
-              height: 40,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left: 10,
+              paddingLeft: 10,
+              gap: 10,
               margin: 12,
               width: 250,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              borderColor: '#093624',
-              color: '#093624',
-            }}
-            placeholder="mail ID"
-            placeholderTextColor="#093624"
-          />
-          <TextInput
+              height: 45,
+            }}>
+            <Image source={require('../Assets/education.png')} />
+            <TextInput
+              placeholder="expertise/profession"
+              placeholderTextColor="#093624"
+              value={profession}
+              onChangeText={setprofession}
+            />
+          </View>
+          <View
             style={{
-              height: 40,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left: 10,
+              paddingLeft: 10,
+              gap: 10,
               margin: 12,
               width: 250,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              borderColor: '#093624',
-              color: '#093624',
-            }}
-            placeholder="expertise/profession"
-            placeholderTextColor="#093624"
-          />
+              height: 45,
+            }}>
+            <Image source={require('../Assets/password.png')} />
+            <TextInput
+              placeholder="Password"
+              placeholderTextColor="#093624"
+              value={password}
+              onChangeText={setpassword}
+            />
+          </View>
           <TouchableOpacity
             onPress={() => handleButtonPress('Guestformscreen')}>
             <View

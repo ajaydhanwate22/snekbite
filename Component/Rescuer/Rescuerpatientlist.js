@@ -124,8 +124,6 @@ function Rescuerpatientlistscreen({ navigation }) {
         </View>
       </ScrollView>
       <View style={{backgroundColor:'white'}}>
-
-
       <View
         style={{
           height: 50,
@@ -157,39 +155,17 @@ function Rescuerpatientlistscreen({ navigation }) {
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleButtonPress('RescuerAboutscreen')}>
-            <View
-              style={{
-                height: 30,
-                width: 50,
-                backgroundColor: 'red',
-                top: 10,
-                borderRadius: 20,
-              }}
-            >
-              <Text style={{ color: 'white', textAlign: 'center', top: 5 }}>
-                About
-              </Text>
+            <View style={{justifyContent:'center', alignItems:'center',top:5}}>
+              <Image source={require('../Assets/about.png')}/>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => handleButtonPress('RescuerEditprofilescreen')}
-          >
-            <View
-              style={{
-                height: 30,
-                width: 50,
-                backgroundColor: 'red',
-                top: 10,
-                borderRadius: 20,
-              }}
-            >
-              <Text style={{ color: 'white', textAlign: 'center', top: 5 }}>
-                Edit
-              </Text>
+          <TouchableOpacity onPress={() => handleButtonPress('RescuerEditprofilescreen')}>
+          <View style={{justifyContent:'center', alignItems:'center', top:10}}>
+              <Image source={require('../Assets/edit.png')}/>
             </View>
           </TouchableOpacity>
         </View>
-      </View>     
+      </View>              
       </View>
     </>
   );

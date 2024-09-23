@@ -51,7 +51,7 @@ function Rescuerpatientprofilescreen({ navigation }) {
             backgroundColor: 'white',
             borderRadius: 7,
             marginLeft: 30,
-            height: 800,
+            height: 850,
             width: 300,
             top: -270,
             elevation: 5,
@@ -61,14 +61,20 @@ function Rescuerpatientprofilescreen({ navigation }) {
             style={{
               textAlign: 'center',
               color: '#093624',
-              margin: 40,
+              margin: 15,
+              top:20,
               fontSize: 20,
+              fontWeight:'bold'
             }}>
             {t('Patient Profile')}
           </Text>
+          <View style={{alignItems:'center',margin:10 }}>
+          <Image source={require('../Assets/patientprofileicon.png')}/>
+          </View>
+   
 
           {/* first box profile cntainer  */}
-          <Text style={{fontSize: 12, color: '#093624', marginLeft: 20}}>
+          <Text style={{fontSize: 12, color: '##093624',fontWeight:'bold',  marginLeft: 20}}>
             {t('Patient Details')}
           </Text>
           <View
@@ -99,7 +105,7 @@ function Rescuerpatientprofilescreen({ navigation }) {
           </View>
           {/* second box profile container */}
           <Text
-            style={{fontSize: 12, color: '#093624', marginLeft: 20, top: 30}}>
+            style={{fontSize: 12, color: '#093624', marginLeft: 20, top: 30, fontWeight:'bold'}}>
             {t('Snakebite Details')}
           </Text>
           <View
@@ -153,7 +159,7 @@ function Rescuerpatientprofilescreen({ navigation }) {
           </View>
           {/* third box profile conatiner */}
           <Text
-            style={{fontSize: 12, color: '#093624', marginLeft: 20, top: 70}}>
+            style={{fontSize: 12, color: '#093624', marginLeft: 20, top: 70, fontWeight:'bold'}}>
             {t('Discharge Details')}
           </Text>
           <View
@@ -213,40 +219,17 @@ function Rescuerpatientprofilescreen({ navigation }) {
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleButtonPress('RescuerAboutscreen')}>
-            <View
-              style={{
-                height: 30,
-                width: 50,
-                backgroundColor: 'red',
-                top: 10,
-                borderRadius: 20,
-              }}
-            >
-              <Text style={{ color: 'white', textAlign: 'center', top: 5 }}>
-                About
-              </Text>
+            <View style={{justifyContent:'center', alignItems:'center',top:5}}>
+              <Image source={require('../Assets/about.png')}/>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => handleButtonPress('RescuerEditprofilescreen')}
-          >
-            <View
-              style={{
-                height: 30,
-                width: 50,
-                backgroundColor: 'red',
-                top: 10,
-                borderRadius: 20,
-              }}
-            >
-              <Text style={{ color: 'white', textAlign: 'center', top: 5 }}>
-                Edit
-              </Text>
+          <TouchableOpacity onPress={() => handleButtonPress('RescuerEditprofilescreen')}>
+          <View style={{justifyContent:'center', alignItems:'center', top:10}}>
+              <Image source={require('../Assets/edit.png')}/>
             </View>
           </TouchableOpacity>
         </View>
-      </View>
-              
+      </View>              
       </View>
     </>
   );

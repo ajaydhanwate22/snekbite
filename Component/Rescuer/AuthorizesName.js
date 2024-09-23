@@ -248,7 +248,7 @@ function RescuerAuthorizesNamesreen({ navigation }) {
               <View
                 style={{justifyContent: 'space-around', flexDirection: 'row'}}>
             <Image
-                source={require('../Assets/availableASV.png')} style={{width:50,top:10}}
+                source={require('../Assets/avilabalASV.png')} style={{width:50,top:10}}
             />
                 <View style={{flexDirection: 'column', top: 25}}>
                   <Text
@@ -274,7 +274,7 @@ function RescuerAuthorizesNamesreen({ navigation }) {
           </TouchableOpacity>
         </View>
       </ScrollView>
- <ScrollView style={{backgroundColor:'white'}}>
+      <View style={{backgroundColor:'white'}}>
       <View
         style={{
           height: 50,
@@ -288,8 +288,9 @@ function RescuerAuthorizesNamesreen({ navigation }) {
           style={{
             flexDirection: 'row',
             justifyContent: 'space-around',
-          }}>
-          <TouchableOpacity onPress={() => handleButtonPress('RescuerAuthorizesNamesreen')} >
+          }}
+        >
+          <TouchableOpacity onPress={() => handleButtonPress('RescuerAuthorizesNamesreen')}>
             <View
               style={{
                 height: 30,
@@ -297,43 +298,26 @@ function RescuerAuthorizesNamesreen({ navigation }) {
                 backgroundColor: 'red',
                 top: 10,
                 borderRadius: 20,
-              }}>
-              <Text style={{color: 'white', textAlign: 'center', top: 5}}>
+              }}
+            >
+              <Text style={{ color: 'white', textAlign: 'center', top: 5 }}>
                 Profile
               </Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleButtonPress('RescuerAboutscreen')}>
-            <View
-              style={{
-                height: 30,
-                width: 50,
-                backgroundColor: 'red',
-                top: 10,
-                borderRadius: 20,
-              }}>
-              <Text style={{color: 'white', textAlign: 'center', top: 5}}>
-                About
-              </Text>
+            <View style={{justifyContent:'center', alignItems:'center',top:6}}>
+              <Image source={require('../Assets/about.png')}/>
             </View>
           </TouchableOpacity>
-         <TouchableOpacity onPress={() => handleButtonPress('RescuerEditprofilescreen')}>
-            <View
-              style={{
-                height: 30,
-                width: 50,
-                backgroundColor: 'red',
-                top: 10,
-                borderRadius: 20,
-              }}>
-              <Text style={{color: 'white', textAlign: 'center', top: 5}}>
-                Edit
-              </Text>
+          <TouchableOpacity onPress={() => handleButtonPress('RescuerEditprofilescreen')}>
+          <View style={{justifyContent:'center', alignItems:'center', top:10}}>
+              <Image source={require('../Assets/edit.png')}/>
             </View>
           </TouchableOpacity>
         </View>
+      </View>              
       </View>
-      </ScrollView>
     </>
   );
 }

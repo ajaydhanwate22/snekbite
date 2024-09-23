@@ -41,7 +41,7 @@ function Rescuerformscreen({ navigation }) {
           <View
             style={{
               width: 300,
-              height: 600,
+              height: 650,
               backgroundColor: 'white',
               left: 30,
               top: -60,
@@ -61,81 +61,121 @@ function Rescuerformscreen({ navigation }) {
             >
               Rescue Form
             </Text>
-            <TextInput
-              style={{
-                height: 40,
-                margin: 12,
-                width: 250,
-                left: 10,
-                borderWidth: 1,
-                paddingLeft: 30,
-                borderRadius: 10,
-                borderColor: '#093624',
-                color: '#093624',
-              }}
+            <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left:10,
+              paddingLeft:10,
+              gap:10,
+              margin: 12,
+              width: 250,
+              height: 45,
+            }}
+          >
+            <Image source={require('../Assets/speciesicon.png')} />
+            <TextInput 
               placeholder="Species"
               placeholderTextColor="#093624"
+              // value={age}
+              // onChangeText={setage}
             />
-            <TextInput
-              style={{
-                height: 40,
-                margin: 12,
-                width: 250,
-                left: 10,
-                borderWidth: 1,
-                paddingLeft: 30,
-                borderRadius: 10,
-                borderColor: '#093624',
-                color: '#093624',
-              }}
+          </View>
+            <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left:10,
+              paddingLeft:10,
+              gap:10,
+              margin: 12,
+              width: 250,
+              height: 45,
+            }}
+          >
+            <Image source={require('../Assets/location.png')} />
+            <TextInput 
               placeholder="Location of rescue"
               placeholderTextColor="#093624"
+              // value={age}
+              // onChangeText={setage}
             />
-            <TextInput
-              style={{
-                height: 40,
-                margin: 12,
-                width: 250,
-                left: 10,
-                borderWidth: 1,
-                paddingLeft: 30,
-                borderRadius: 10,
-                borderColor: '#093624',
-                color: '#093624',
-              }}
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left:10,
+              paddingLeft:10,
+              gap:10,
+              margin: 12,
+              width: 250,
+              height: 45,
+            }}
+          >
+            <Image source={require('../Assets/releaselocationicon.png')} />
+            <TextInput 
               placeholder="Release location"
               placeholderTextColor="#093624"
+              // value={age}
+              // onChangeText={setage}
             />
-            <TextInput
-              style={{
-                height: 40,
-                margin: 12,
-                width: 250,
-                left: 10,
-                borderWidth: 1,
-                paddingLeft: 30,
-                borderRadius: 10,
-                borderColor: '#093624',
-                color: '#093624',
-              }}
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left:10,
+              paddingLeft:10,
+              gap:10,
+              margin: 12,
+              width: 250,
+              height: 45,
+            }}
+          >
+            <Image source={require('../Assets/description.png')} />
+            <TextInput 
               placeholder="Description"
               placeholderTextColor="#093624"
+              // value={age}
+              // onChangeText={setage}
             />
-            <TextInput
-              style={{
-                height: 40,
-                margin: 12,
-                width: 250,
-                left: 10,
-                borderWidth: 1,
-                paddingLeft: 30,
-                borderRadius: 10,
-                borderColor: '#093624',
-                color: '#093624',
-              }}
+          </View>
+           <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left:10,
+              paddingLeft:10,
+              gap:10,
+              margin: 12,
+              width: 250,
+              height: 45,
+            }}
+          >
+            <Image source={require('../Assets/sizeofspecies.png')} />
+            <TextInput 
               placeholder="Size of the species"
               placeholderTextColor="#093624"
+              // value={age}
+              // onChangeText={setage}
             />
+          </View>
             <View
               style={{
                 width: 100,
@@ -219,40 +259,17 @@ function Rescuerformscreen({ navigation }) {
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleButtonPress('RescuerAboutscreen')}>
-            <View
-              style={{
-                height: 30,
-                width: 50,
-                backgroundColor: 'red',
-                top: 10,
-                borderRadius: 20,
-              }}
-            >
-              <Text style={{ color: 'white', textAlign: 'center', top: 5 }}>
-                About
-              </Text>
+            <View style={{justifyContent:'center', alignItems:'center',top:5}}>
+              <Image source={require('../Assets/about.png')}/>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => handleButtonPress('RescuerEditprofilescreen')}
-          >
-            <View
-              style={{
-                height: 30,
-                width: 50,
-                backgroundColor: 'red',
-                top: 10,
-                borderRadius: 20,
-              }}
-            >
-              <Text style={{ color: 'white', textAlign: 'center', top: 5 }}>
-                Edit
-              </Text>
+          <TouchableOpacity onPress={() => handleButtonPress('RescuerEditprofilescreen')}>
+          <View style={{justifyContent:'center', alignItems:'center', top:10}}>
+              <Image source={require('../Assets/edit.png')}/>
             </View>
           </TouchableOpacity>
         </View>
-      </View>
-              
+      </View>              
       </View>
     </>
   );

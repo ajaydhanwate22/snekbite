@@ -15,7 +15,6 @@ import { useTranslation } from 'react-i18next';
 function RescuersignupScreen({ navigation }) {
   const { t } = useTranslation();
 
-
   const [username, setusername] = useState('');
   const [age, setage] = useState('');
   const [gender, setgender] = useState('');
@@ -24,29 +23,30 @@ function RescuersignupScreen({ navigation }) {
   const [address, setaddress] = useState('');
   const [experience, setexperience] = useState('');
   const [education, seteducation] = useState('');
-  const [RescuerID, setRescuerID] = useState('');
   const [password, setpassword] = useState('');
   const [confirmPassword, setconfirmpassword] = useState('');
-  
+
   const handleButtonPress = () => {
-    const data = {
-      Username: username,
-      Age: age,
-      Gender: gender,
-      ContactNumber: Contactnumber,
-      Mail: mailID,
-      Address: address,
-      Experience: experience,
-      Education: education,
-      RescurId: RescuerID,
-      Password: password,
-      confirmPassword,
-    };
-  
+    const formData = new FormData();
+    formData.append('Username', username);
+    formData.append('Age', age);
+    formData.append('Gender', gender);
+    formData.append('ContactNumber', Contactnumber);
+    formData.append('Mail', mailID);
+    formData.append('Address', address);
+    formData.append('Experience', experience);
+    formData.append('Education', education);
+    formData.append('Password', password);
+    formData.append('ConfirmPassword', confirmPassword);
+
     axios
-      .post('http://192.168.0.104/snakebites/rescuesignup.php', data)
-      .then(response => {
-        console.log(responseJson);
+      .post('http://ajayapi.sp-consultants.in/Rescuesignup.php', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((response) => {
+        console.log(response);
         const responseJson = response.data;
         if (responseJson.message === 'Registration successfully') {
           alert('Registration successful!');
@@ -55,16 +55,16 @@ function RescuersignupScreen({ navigation }) {
           alert('Data not saved: ' + responseJson.message);
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
         alert('An error occurred while submitting the data');
       });
-    };
+  };
   return (
     <ScrollView>
       <View style={{ backgroundColor: 'white' }}>
         <ImageBackground
-        source={require('../Assets/background.png')}
+          source={require('../Assets/background.png')}
           style={{
             flex: 1,
             alignItems: 'center',
@@ -76,7 +76,7 @@ function RescuersignupScreen({ navigation }) {
           }}
         >
           <Image
-                  source={require('../Assets/logo.png')}
+            source={require('../Assets/logo.png')}
             style={{ resizeMode: 'contain', height: 200, width: 200 }}
           />
         </ImageBackground>
@@ -103,195 +103,236 @@ function RescuersignupScreen({ navigation }) {
           >
             Sign Up
           </Text>
-          <TextInput
+          <View
             style={{
-              height: 40,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left:10,
+              paddingLeft:10,
+              gap:10,
               margin: 12,
               width: 250,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              borderColor: '#093624',
-              color: '#093624',
+              height: 45,
             }}
-            placeholder="Username"
-            placeholderTextColor="#093624"
-            value={username}
-            onChangeText={setusername}
-          />
-          <TextInput
+          >
+            <Image source={require('../Assets/rescuerusernameicon.png')} />
+            <TextInput 
+              placeholder="Username"
+              placeholderTextColor="#093624"
+              value={username}
+              onChangeText={setusername}
+            />
+          </View>
+          <View
             style={{
-              height: 40,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left:10,
+              paddingLeft:10,
+              gap:10,
               margin: 12,
               width: 250,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              borderColor: '#093624',
-              color: '#093624',
+              height: 45,
             }}
-            placeholder="Age"
-            placeholderTextColor="#093624"
-            value={age}
-            onChangeText={setage}
-          />
-          <TextInput
+          >
+            <Image source={require('../Assets/age.png')} />
+            <TextInput 
+              placeholder="Age"
+              placeholderTextColor="#093624"
+              value={age}
+              onChangeText={setage}
+            />
+          </View>
+          <View
             style={{
-              height: 40,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left:10,
+              paddingLeft:10,
+              gap:10,
               margin: 12,
               width: 250,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              borderColor: '#093624',
-              color: '#093624',
+              height: 45,
             }}
-            placeholder="Gender"
-            placeholderTextColor="#093624"
-            value={gender}
-            onChangeText={setgender}
-          />
-          <TextInput
+          >
+            <Image source={require('../Assets/rescuerusernameicon.png')} />
+            <TextInput 
+              placeholder="Gender"
+              placeholderTextColor="#093624"
+              value={gender}
+              onChangeText={setgender}
+            />
+          </View>
+          <View
             style={{
-              height: 40,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left:10,
+              paddingLeft:10,
+              gap:10,
               margin: 12,
               width: 250,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              borderColor: '#093624',
-              color: '#093624',
+              height: 45,
             }}
-            placeholder="Contact number"
-            placeholderTextColor="#093624"
-            keyboardType="numeric" 
-            value={Contactnumber}
-            onChangeText={setContactnumber}
-          />
-          <TextInput
+          >
+            <Image source={require('../Assets/contact.png')} />
+            <TextInput 
+              placeholder="Contact number"
+              placeholderTextColor="#093624"
+              value={Contactnumber}
+              onChangeText={setContactnumber}
+            />
+          </View>
+          <View
             style={{
-              height: 40,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left:10,
+              paddingLeft:10,
+              gap:10,
               margin: 12,
               width: 250,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              borderColor: '#093624',
-              color: '#093624',
+              height: 45,
             }}
-            placeholder="mail ID"
-            placeholderTextColor="#093624"
-            value={mailID}
-            onChangeText={setmailID}
-          />
-          <TextInput
+          >
+            <Image source={require('../Assets/mail.png')} />
+            <TextInput 
+              placeholder="Mail ID"
+              placeholderTextColor="#093624"
+              value={mailID}
+              onChangeText={setmailID}
+            />
+          </View>
+          <View
             style={{
-              height: 40,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left:10,
+              paddingLeft:10,
+              gap:10,
               margin: 12,
               width: 250,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              borderColor: '#093624',
-              color: '#093624',
+              height: 45,
             }}
-            placeholder="location/address"
-            placeholderTextColor="#093624"
-            value={address}
-            onChangeText={setaddress}
-          />
-          <TextInput
+          >
+            <Image source={require('../Assets/location.png')} />
+            <TextInput 
+              placeholder="Location/Address"
+              placeholderTextColor="#093624"
+              value={address}
+              onChangeText={setaddress}
+            />
+          </View>
+          <View
             style={{
-              height: 40,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left:10,
+              paddingLeft:10,
+              gap:10,
               margin: 12,
               width: 250,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              borderColor: '#093624',
-              color: '#093624',
+              height: 45,
             }}
-            placeholder="years of experience"
-            placeholderTextColor="#093624"
-            value={experience}
-            onChangeText={setexperience}
-          />
-          <TextInput
+          >
+            <Image source={require('../Assets/exxperience.png')} />
+            <TextInput 
+              placeholder="Years Of Experience"
+              placeholderTextColor="#093624"
+              value={experience}
+              onChangeText={setexperience}
+            />
+          </View>
+          <View
             style={{
-              height: 40,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left:10,
+              paddingLeft:10,
+              gap:10,
               margin: 12,
               width: 250,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              borderColor: '#093624',
-              color: '#093624',
+              height: 45,
             }}
-            placeholder="education"
-            placeholderTextColor="#093624"
-            value={education}
-            onChangeText={seteducation}
-          />
-          <TextInput
+          >
+            <Image source={require('../Assets/education.png')} />
+            <TextInput 
+              placeholder="Education"
+              placeholderTextColor="#093624"
+              value={education}
+              onChangeText={seteducation}
+            />
+          </View>
+          <View
             style={{
-              height: 40,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left:10,
+              paddingLeft:10,
+              gap:10,
               margin: 12,
               width: 250,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              borderColor: '#093624',
-              color: '#093624',
+              height: 45,
             }}
-            placeholder="Rescuer ID (if any)"
-            placeholderTextColor="#093624"
-            keyboardType="numeric" 
-            value={RescuerID}
-            onChangeText={setRescuerID}
-          />
-              <TextInput
+          >
+            <Image source={require('../Assets/password.png')} />
+            <TextInput 
+              placeholder="Enter your Password"
+              placeholderTextColor="#093624"
+              value={password}
+              onChangeText={setpassword}
+            />
+          </View>
+          <View
             style={{
-              height: 40,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left:10,
+              paddingLeft:10,
+              gap:10,
               margin: 12,
               width: 250,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              borderColor: '#093624',
-              color: '#093624',
+              height: 45,
             }}
-            placeholder="Password"
-            placeholderTextColor="#093624"
-            value={password}
-            onChangeText={setpassword}
-          />
-                       <TextInput
-            style={{
-              height: 40,
-              margin: 12,
-              width: 250,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              borderColor: '#093624',
-              color: '#093624',
-            }}
-            placeholder="confirm Password"
-            placeholderTextColor="#093624"
-            value={confirmPassword}
-            onChangeText={setconfirmpassword}
-          />
+          >
+            <Image source={require('../Assets/password.png')} />
+            <TextInput 
+              placeholder="Confirm your Password"
+              placeholderTextColor="#093624"
+              value={confirmPassword}
+              onChangeText={setconfirmpassword}
+            />
+          </View>
           <View
             style={{
               width: 120,
@@ -303,22 +344,26 @@ function RescuersignupScreen({ navigation }) {
               marginLeft: 100,
               borderColor: '#093624',
               borderWidth: 1,
+              flexDirection:"column"
             }}
           >
             <Image
-                 source={require('../Assets/Gallery.jpg')}
+              source={require('../Assets/Gallery.jpg')}
               style={{
                 width: 40,
-                height: 30,
+                height: 40,
                 resizeMode: 'contain',
                 position: 'absolute',
-                top: '30%',
+                top: '10%',
                 left: '30%',
                 elevation: 10,
               }}
             />
+            <Text style={{color:"#093624", textAlign:'center', top:50, }}>Gov ID</Text>           
           </View>
-          <TouchableOpacity onPress={() => handleButtonPress('Rescuersentactivetionscreen')} >
+          <TouchableOpacity
+            onPress={() => handleButtonPress('Rescuersentactivetionscreen')}
+          >
             <View
               style={{
                 height: 40,

@@ -1,4 +1,4 @@
-import React from 'react'; import { View, Text, TouchableOpacity, ImageBackground, ScrollView } from 'react-native'; 
+import React from 'react'; import { View, Text, TouchableOpacity, ImageBackground, ScrollView, Image } from 'react-native'; 
 import { useTranslation } from 'react-i18next';
 
 function GuestEditscreen({ navigation }) {
@@ -46,23 +46,23 @@ return ( <>
       </TouchableOpacity>
     </View>
   </ScrollView>
-  <View style={{backgroundColor: 'white'}}>
-    <View style={{height: 50, width: 310, left: 25, backgroundColor: '#093624', marginBottom: 8, borderRadius: 15}}>
-      <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+  <View style={{ backgroundColor: 'white' }}>
+    <View style={{ height: 50, width: 310, left: 25, backgroundColor: '#093624', marginBottom: 8, borderRadius: 15 }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
         <TouchableOpacity onPress={() => handleButtonPress('Guestprofilescreen')}>
-          <View style={{height: 30, width: 50, backgroundColor: 'red', top: 10, borderRadius: 20}}>
-            <Text style={{color: 'white', textAlign: 'center', top: 5}}>Profile</Text>
+          <View style={{ height: 30, width: 50, backgroundColor: 'red', top: 10, borderRadius: 20 }}>
+            <Text style={{ color: 'white', textAlign: 'center', top: 5 }}>Profile</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleButtonPress('GuestAboutscreen')}>
-          <View style={{height: 30, width: 50, backgroundColor: 'red', top: 10, borderRadius: 20}}>
-            <Text style={{color: 'white', textAlign: 'center', top: 5}}>About</Text>
-          </View>
+        <View style={{justifyContent:'center', alignItems:'center',top:5}}>
+              <Image source={require('../Assets/about.png')}/>
+            </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleButtonPress('GuestEditscreen')}>
-          <View style={{height: 30, width: 50, backgroundColor: 'red', top: 10, borderRadius: 20}}>
-            <Text style={{color: 'white', textAlign: 'center', top: 5}}>Edit</Text>
-          </View>
+        <View style={{justifyContent:'center', alignItems:'center', top:10}}>
+              <Image source={require('../Assets/edit.png')}/>
+            </View>
         </TouchableOpacity>
       </View>
     </View>

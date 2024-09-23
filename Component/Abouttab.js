@@ -147,6 +147,7 @@ function Abouttabscreen({navigation}) {
           </View>
         </View>
       </ScrollView>
+      <View style={{backgroundColor:'white'}}>
       <View
         style={{
           height: 50,
@@ -160,7 +161,8 @@ function Abouttabscreen({navigation}) {
           style={{
             flexDirection: 'row',
             justifyContent: 'space-around',
-          }}>
+          }}
+        >
           <TouchableOpacity onPress={() => handleButtonPress('Profiletab')}>
             <View
               style={{
@@ -169,42 +171,25 @@ function Abouttabscreen({navigation}) {
                 backgroundColor: 'red',
                 top: 10,
                 borderRadius: 20,
-              }}>
-              <Text style={{color: 'white', textAlign: 'center', top: 5}}>
+              }}
+            >
+              <Text style={{ color: 'white', textAlign: 'center', top: 5 }}>
                 Profile
               </Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleButtonPress('Abouttabscreen')}>
-            <View
-              style={{
-                height: 30,
-                width: 50,
-                backgroundColor: 'red',
-                top: 10,
-                borderRadius: 20,
-              }}>
-              <Text style={{color: 'white', textAlign: 'center', top: 5}}>
-                About
-              </Text>
+            <View style={{justifyContent:'center', alignItems:'center',top:6}}>
+              <Image source={require('./Assets/about.png')}/>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => handleButtonPress('Editprofilescreen')}>
-            <View
-              style={{
-                height: 30,
-                width: 50,
-                backgroundColor: 'red',
-                top: 10,
-                borderRadius: 20,
-              }}>
-              <Text style={{color: 'white', textAlign: 'center', top: 5}}>
-                Edit
-              </Text>
+          <TouchableOpacity onPress={() => handleButtonPress('Editprofilescreen')}>
+          <View style={{justifyContent:'center', alignItems:'center', top:10}}>
+              <Image source={require('./Assets/edit.png')}/>
             </View>
           </TouchableOpacity>
         </View>
+      </View>              
       </View>
     </>
   );

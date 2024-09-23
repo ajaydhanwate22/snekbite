@@ -69,6 +69,7 @@ function Guestformscreen({navigation}) {
                 borderColor: '#000000',
                 borderWidth: 1,
               }}>
+
               <Image
                     source={require('../Assets/Gallery.jpg')}
                 style={{
@@ -81,6 +82,7 @@ function Guestformscreen({navigation}) {
                   elevation: 10,
                 }}
               />
+              
             </View>
             <TextInput
               style={{
@@ -95,7 +97,7 @@ function Guestformscreen({navigation}) {
                 borderColor: '#093624',
                 color: '#093624',
               }}
-              placeholder="current location"
+              placeholder="Current location"
               placeholderTextColor="#093624"
             />
             <TextInput
@@ -111,7 +113,7 @@ function Guestformscreen({navigation}) {
                 borderColor: '#093624',
                 color: '#093624',
               }}
-              placeholder="date of upload"
+              placeholder="Date of upload"
               placeholderTextColor="#093624"
             />
             <TextInput
@@ -127,7 +129,7 @@ function Guestformscreen({navigation}) {
                 borderColor: '#093624',
                 color: '#093624',
               }}
-              placeholder="manual location"
+              placeholder="Manual location"
               placeholderTextColor="#093624"
             />
             <TextInput
@@ -143,7 +145,7 @@ function Guestformscreen({navigation}) {
                 borderColor: '#093624',
                 color: '#093624',
               }}
-              placeholder="description/ ID"
+              placeholder="Description/ ID"
               placeholderTextColor="#093624"
             />
           </View>

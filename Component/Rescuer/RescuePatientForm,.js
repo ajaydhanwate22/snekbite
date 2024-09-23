@@ -133,7 +133,7 @@ function RescuePatientFormscren({ navigation }) {
                 borderColor: '#093624',
                 color: '#093624',
               }}
-              placeholder="address"
+              placeholder="Address"
               placeholderTextColor="#093624"
             />
             <Text style={{ left: 30, color: '#093624', fontWeight:'bold' }}>Snakebite Details</Text>
@@ -164,7 +164,7 @@ function RescuePatientFormscren({ navigation }) {
                 borderColor: '#093624',
                 color: '#093624',
               }}
-              placeholder="bite location(area)"
+              placeholder="Bite location(area)"
               placeholderTextColor="#093624"
             />
                 <TextInput
@@ -179,7 +179,7 @@ function RescuePatientFormscren({ navigation }) {
                 borderColor: '#093624',
                 color: '#093624',
               }}
-              placeholder="affected body part"
+              placeholder="Affected body part"
               placeholderTextColor="#093624"
             />
                 <TextInput
@@ -194,7 +194,7 @@ function RescuePatientFormscren({ navigation }) {
                 borderColor: '#093624',
                 color: '#093624',
               }}
-              placeholder="used ASV on the patient"
+              placeholder="Used ASV on the patient"
               placeholderTextColor="#093624"
             />
                 <TextInput
@@ -209,7 +209,7 @@ function RescuePatientFormscren({ navigation }) {
                 borderColor: '#093624',
                 color: '#093624',
               }}
-              placeholder="rescuer name"
+              placeholder="Rescuer name"
               placeholderTextColor="#093624"
             />
                 <View
@@ -267,7 +267,7 @@ function RescuePatientFormscren({ navigation }) {
                 borderColor: '#093624',
                 color: '#093624',
               }}
-              placeholder="bite location(area)"
+              placeholder="Bite location(area)"
               placeholderTextColor="#093624"
             />
             <TouchableOpacity onPress={() => handleButtonPress('RescuerAuthorizesNamesreen')} >
@@ -277,6 +277,7 @@ function RescuePatientFormscren({ navigation }) {
                  </TouchableOpacity>
           </View>     
       </ScrollView>
+      <View style={{backgroundColor:'white'}}>
       <View
         style={{
           height: 50,
@@ -290,8 +291,9 @@ function RescuePatientFormscren({ navigation }) {
           style={{
             flexDirection: 'row',
             justifyContent: 'space-around',
-          }}>
-          <TouchableOpacity onPress={() => handleButtonPress('RescuerAuthorizesNamesreen')} >
+          }}
+        >
+          <TouchableOpacity onPress={() => handleButtonPress('RescuerAuthorizesNamesreen')}>
             <View
               style={{
                 height: 30,
@@ -299,41 +301,25 @@ function RescuePatientFormscren({ navigation }) {
                 backgroundColor: 'red',
                 top: 10,
                 borderRadius: 20,
-              }}>
-              <Text style={{color: 'white', textAlign: 'center', top: 5}}>
+              }}
+            >
+              <Text style={{ color: 'white', textAlign: 'center', top: 5 }}>
                 Profile
               </Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleButtonPress('RescuerAboutscreen')}>
-            <View
-              style={{
-                height: 30,
-                width: 50,
-                backgroundColor: 'red',
-                top: 10,
-                borderRadius: 20,
-              }}>
-              <Text style={{color: 'white', textAlign: 'center', top: 5}}>
-                About
-              </Text>
+            <View style={{justifyContent:'center', alignItems:'center',top:5}}>
+              <Image source={require('../Assets/about.png')}/>
             </View>
           </TouchableOpacity>
-         <TouchableOpacity onPress={() => handleButtonPress('RescuerEditprofilescreen')}>
-            <View
-              style={{
-                height: 30,
-                width: 50,
-                backgroundColor: 'red',
-                top: 10,
-                borderRadius: 20,
-              }}>
-              <Text style={{color: 'white', textAlign: 'center', top: 5}}>
-                Edit
-              </Text>
+          <TouchableOpacity onPress={() => handleButtonPress('RescuerEditprofilescreen')}>
+          <View style={{justifyContent:'center', alignItems:'center', top:10}}>
+              <Image source={require('../Assets/edit.png')}/>
             </View>
           </TouchableOpacity>
         </View>
+      </View>              
       </View>
     </>
   );

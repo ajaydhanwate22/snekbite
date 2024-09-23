@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -7,16 +7,56 @@ import {
   ImageBackground,
   StyleSheet,
   Image,
+  Alert,
   ScrollView,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 
 function RescuerloginformScreen({ navigation }) {
   const { t } = useTranslation();
-  const handleButtonPress = screen => {
-    navigation.navigate(screen);
-  };
+  const [Username, setUsername] = useState('');
+  const [Password, setPassword] = useState('');
 
+  const handleButtonPress = (screenName) => {
+    if (screenName === 'Rescuerforgatepsscreen') {
+      navigation.navigate('Rescuerforgatepsscreen');
+    } else if (screenName === 'RescuersignupScreen') {
+      navigation.navigate('RescuersignupScreen');
+    } else if (!Username || !Password) {
+      Alert.alert('Error', 'Please fill out all fields');
+      return;
+    } else {
+      const formData = new FormData();
+      formData.append('Username', Username);
+      formData.append('Password', Password);
+
+      axios
+        .post('http://ajayapi.sp-consultants.in/Rescuesignin.php', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        .then(response => {
+          const responseJson = response.data;
+          if (responseJson.message === 'LoggedIn successfully') {
+            Alert.alert('Success', responseJson.message, [
+              {
+                text: 'OK',
+                onPress: () => navigation.navigate('RescuerAuthorizesNamesreen'),
+              },
+            ]);
+          } else {
+            Alert.alert('Error', responseJson.message);
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          Alert.alert('Error', 'An error occurred while submitting the data');
+        });
+    }
+  };
+  
   return (
     <>
       <ScrollView style={{backgroundColor:'white'}}>
@@ -61,36 +101,52 @@ function RescuerloginformScreen({ navigation }) {
             >
               Sign In
             </Text>
-            <TextInput
-              style={{
-                height: 40,
-                margin: 12,
-                width: 250,
-                left: 10,
-                borderWidth: 1,
-                paddingLeft: 30,
-                borderRadius: 10,
-                borderColor: '#093624',
-                color: '#093624',
-              }}
+            <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left:10,
+              paddingLeft:10,
+              gap:10,
+              margin: 12,
+              width: 250,
+              height: 45,
+            }}
+          >
+            <Image source={require('../Assets/signinusernameicon.png')} />
+            <TextInput 
               placeholder="Username"
               placeholderTextColor="#093624"
+              value={Username}
+              onChangeText={setUsername}
             />
-            <TextInput
-              style={{
-                height: 40,
-                margin: 12,
-                width: 250,
-                left: 10,
-                borderWidth: 1,
-                paddingLeft: 30,
-                borderRadius: 10,
-                borderColor: '#093624',
-                color: '#093624',
-              }}
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left:10,
+              paddingLeft:10,
+              gap:10,
+              margin: 12,
+              width: 250,
+              height: 45,
+            }}
+          >
+            <Image source={require('../Assets/password.png')} />
+            <TextInput 
               placeholder="Password"
               placeholderTextColor="#093624"
+              value={Password }
+              onChangeText={setPassword}
             />
+          </View>
             <View  style={{gap:40}}>
             <TouchableOpacity onPress={() => handleButtonPress('Rescuerforgatepsscreen')}>
               <Text
@@ -128,13 +184,18 @@ function RescuerloginformScreen({ navigation }) {
               style={{
                 textAlign: 'center',
                 color: '#000000',
-                fontSize: 12,
-                top:20
+                fontSize: 10,
+                top:-30
               }}
             >
               New here? Create an account
             </Text>
             </TouchableOpacity>
+            </View>
+            <Text style={{textAlign:"center", color:'#000000', top:-15}}>Or</Text>
+            <View style={{flexDirection:'row', justifyContent:"center", gap:10, top:10}}>
+            <Image source={require('../Assets/linkdein.png')}/>
+            <Image source={require('../Assets/goggle.png')}/>
             </View>
           
           </View>

@@ -27,70 +27,77 @@ function GuestLanguage({navigation}) {
 
   return (
     <View style={styles.container}>
-      {/* Background Image */}
       <View style={styles.upperContainer}>
         <ImageBackground
-          source={require('../Assets/background.png')}
-          style={styles.backgroundImage}>
-          {/* Logo in the center of the background */}
-          <Image source={require('../Assets/logo.png')} style={styles.logo} />
+              source={require('../Assets/background.png')}
+          style={styles.backgroundImage}
+        >
+          
+                   <Image
+                  source={require('../Assets/logo.png')}
+            style={styles.logo}
+          />
         </ImageBackground>
       </View>
-
-      {/* Language Selection Container */}
       <View style={styles.languageContainer}>
         <Text style={styles.languageText}>{t('chooseLanguage')}</Text>
 
-        {/* Button to open modal */}
         <TouchableOpacity
           style={styles.languageButton}
-          onPress={() => setModalVisible(true)}>
-          <Text style={styles.languageButtonText}>
+          onPress={() => setModalVisible(true)}
+        >
+          <View style={{flexDirection:'row', gap:80}}>
+          <Text>
             {selectedLanguage ? selectedLanguage : t('selectLanguage')}
           </Text>
+          <Image
+                  source={require('../Assets/language.png')} style={{top:4}}
+          />
+          </View>
+       
         </TouchableOpacity>
-
-        {/* Modal for language selection */}
         <Modal
           transparent={true}
           visible={isModalVisible}
-          animationType="slide">
+          animationType="slide"
+        >
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
               <Text style={styles.modalTitle}>{t('selectLanguage')}</Text>
 
               <TouchableOpacity
                 style={styles.modalButton}
-                onPress={() => handleLanguageSelect('english')}>
+                onPress={() => handleLanguageSelect('english')}
+              >
                 <Text style={styles.modalButtonText}>{t('english')}</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
                 style={styles.modalButton}
-                onPress={() => handleLanguageSelect('marathi')}>
+                onPress={() => handleLanguageSelect('marathi')}
+              >
                 <Text style={styles.modalButtonText}>{t('marathi')}</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
                 style={styles.modalButton}
-                onPress={() => handleLanguageSelect('hindi')}>
+                onPress={() => handleLanguageSelect('hindi')}
+              >
                 <Text style={styles.modalButtonText}>{t('hindi')}</Text>
               </TouchableOpacity>
-
-              {/* Close Button */}
               <TouchableOpacity
                 style={styles.closeButton}
-                onPress={() => setModalVisible(false)}>
+                onPress={() => setModalVisible(false)}
+              >
                 <Text style={styles.closeButtonText}>{t('close')}</Text>
               </TouchableOpacity>
             </View>
           </View>
         </Modal>
-
-        {/* Continue Button */}
         <TouchableOpacity
           style={styles.continueButton}
-          onPress={handleButtonPress}>
+          onPress={handleButtonPress}
+        >
           <Text style={styles.continueText}>{t('continue')}</Text>
         </TouchableOpacity>
       </View>
