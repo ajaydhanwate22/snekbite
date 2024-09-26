@@ -143,7 +143,7 @@ function TreatmentAvailableASVscreen({ navigation }) {
           <Text style={{ padding: 14, left: 10 }}>Year</Text>
         </View>
       </View>
-      <TouchableOpacity onPress={() => handleButtonPress('RescuerAuthorizesNamesreen')}>
+      <TouchableOpacity onPress={() => handleButtonPress('Profiletab')}>
         <View
           style={{
             height: 50,

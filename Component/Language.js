@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {View,Text,TouchableOpacity,ImageBackground,Image,Modal,StyleSheet
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ImageBackground,
+  Image,
+  Modal,
+  StyleSheet,
 } from 'react-native';
 import {useTranslation} from 'react-i18next';
 
@@ -19,17 +26,13 @@ function LanguageScreen({navigation}) {
   };
 
   return (
-<View style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.upperContainer}>
         <ImageBackground
-              source={require('./Assets/background.png')}
-          style={styles.backgroundImage}
-        >
-          
-                   <Image
-                  source={require('./Assets/logo.png')}
-            style={styles.logo}
-          />
+          source={require('./Assets/background.png')}
+          style={styles.backgroundImage}>
+     
+          <Image source={require('./Assets/logo.png')} style={styles.logo} />
         </ImageBackground>
       </View>
       <View style={styles.languageContainer}>
@@ -37,51 +40,42 @@ function LanguageScreen({navigation}) {
 
         <TouchableOpacity
           style={styles.languageButton}
-          onPress={() => setModalVisible(true)}
-        >
-          <View style={{flexDirection:'row', gap:80}}>
-          <Text>
-            {selectedLanguage ? selectedLanguage : t('selectLanguage')}
-          </Text>
-          <Image
-                  source={require('./Assets/language.png')} style={{top:4}}
-          />
-          </View> 
-       
+          onPress={() => setModalVisible(true)}>
+          <View style={{flexDirection: 'row', gap: 80}}>
+            <Text>
+              {selectedLanguage ? selectedLanguage : t('selectLanguage')}
+            </Text>
+            <Image source={require('./Assets/language.png')} style={{top: 4}} />
+          </View>
         </TouchableOpacity>
         <Modal
           transparent={true}
           visible={isModalVisible}
-          animationType="slide"
-        >
+          animationType="slide">
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
               <Text style={styles.modalTitle}>{t('selectLanguage')}</Text>
 
               <TouchableOpacity
                 style={styles.modalButton}
-                onPress={() => handleLanguageSelect('english')}
-              >
+                onPress={() => handleLanguageSelect('English')}>
                 <Text style={styles.modalButtonText}>{t('english')}</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
                 style={styles.modalButton}
-                onPress={() => handleLanguageSelect('marathi')}
-              >
+                onPress={() => handleLanguageSelect('Marathi')}>
                 <Text style={styles.modalButtonText}>{t('marathi')}</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
                 style={styles.modalButton}
-                onPress={() => handleLanguageSelect('hindi')}
-              >
+                onPress={() => handleLanguageSelect('Hindi')}>
                 <Text style={styles.modalButtonText}>{t('hindi')}</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.closeButton}
-                onPress={() => setModalVisible(false)}
-              >
+                onPress={() => setModalVisible(false)}>
                 <Text style={styles.closeButtonText}>{t('close')}</Text>
               </TouchableOpacity>
             </View>
@@ -89,8 +83,7 @@ function LanguageScreen({navigation}) {
         </Modal>
         <TouchableOpacity
           style={styles.continueButton}
-          onPress={handleButtonPress}
-        >
+          onPress={handleButtonPress}>
           <Text style={styles.continueText}>{t('continue')}</Text>
         </TouchableOpacity>
       </View>
@@ -124,9 +117,9 @@ const styles = StyleSheet.create({
     top: 30,
   },
   languageContainer: {
-    width: 300,
+    width: 320,
     backgroundColor: 'white',
-    height: 300,
+    height: 320,
     left: 30,
     top: -90,
     elevation: 10,
@@ -186,14 +179,16 @@ const styles = StyleSheet.create({
   closeButtonText: {
     color: '#093624',
     fontSize: 14,
+    marginHorizontal: 100,
   },
   continueButton: {
     backgroundColor: '#093624',
-    marginTop: 100,
-    left: 90,
-    padding: 8,
+    marginTop: 120,
+    left: 100,
+    padding: 12,
     borderRadius: 10,
     width: '40%',
+    height: '15%',
     alignItems: 'center',
   },
   continueText: {

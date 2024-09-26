@@ -44,16 +44,16 @@ function GuestLoginScreen({navigation}) {
     </View>
 
     {/* Language Selection Container */}
-    <View style={{width: 300,backgroundColor: 'white', height: 300,left: 30,top: -90,elevation: 10,borderRadius: 30,}}>
+    <View style={{width: 320,backgroundColor: 'white', height: 300,left: 30,top: -90,elevation: 10,borderRadius: 30,}}>
       <View style={{gap:15,top:100}}>
         <TouchableOpacity onPress={() => handleButtonPress('Guestsignupscreen')} >
-          <View style={{height:50, width:250, backgroundColor:'#093624', borderRadius:10, left:25}}>
-            <Text style={{justifyContent:'center',padding:15, color:'white',  textAlign:"center"}}>Sign Up</Text>
+          <View style={{height:50, width:250, backgroundColor:'#093624', borderRadius:10, left:35}}>
+            <Text style={{justifyContent:'center',padding:15, color:'white',  textAlign:"center"}}>{t('Sign Up')}</Text>
           </View>             
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleButtonPress('GuestLoginform')}  >
-          <View style={{height:50, width:250, backgroundColor:'#093624', borderRadius:10, left:25}}>
-            <Text style={{justifyContent:'center',padding:15, color:'white',  textAlign:"center"}}>Sign In</Text>
+          <View style={{height:50, width:250, backgroundColor:'#093624', borderRadius:10, left:35}}>
+            <Text style={{justifyContent:'center',padding:15, color:'white',  textAlign:"center"}}>{t('Sign In')}</Text>
           </View>                   
         </TouchableOpacity>            
       </View>

@@ -7,8 +7,10 @@ import {
   ImageBackground,
   Image,
 } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 function HomeScreen({navigation}) {
+  const { t } = useTranslation();
   return (
     <ImageBackground
       source={require('./Assets/background.png')}
@@ -18,14 +20,14 @@ function HomeScreen({navigation}) {
           <Image source={require('./Assets/logo.png')} style={styles.logo} />
           <TouchableOpacity onPress={() => navigation.navigate('WeloCome')}>
             <Image
-            source={require('./Assets/Arroww.png')}
+              source={require('./Assets/Arroww.png')}
               style={styles.arrow}
             />
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate('WeloCome')}>
-            <Text style={styles.getStartedText}>Get Started</Text>
+            <Text style={styles.getStartedText}>{t('Get Started')}</Text>
           </TouchableOpacity>
           <Text
             style={{
@@ -35,7 +37,7 @@ function HomeScreen({navigation}) {
               fontWeight: 'bold',
               top: 220,
             }}>
-            COPYRIGHT © 2024 WFN, ALL RIGHTS RESERVED
+            {t('COPYRIGHT © 2024 WFN, ALL RIGHTS RESERVED')}
           </Text>
           <Text
             style={{
@@ -45,7 +47,7 @@ function HomeScreen({navigation}) {
               fontWeight: 'bold',
               top: 225,
             }}>
-            Developed by KodSoft
+            {t('Developed by KodSoft')}
           </Text>
         </View>
       </View>
@@ -66,16 +68,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logo: {
-    width: 180, 
-    height: 180, 
+    width: 180,
+    height: 180,
     resizeMode: 'contain',
     marginBottom: 20,
   },
   arrow: {
-    width: 30, 
-    height: 30, 
+    width: 30,
+    height: 30,
     resizeMode: 'contain',
-    marginBottom: 5, 
+    marginBottom: 5,
   },
   getStartedText: {
     fontSize: 15,

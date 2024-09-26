@@ -40,7 +40,7 @@ function Rescuerverifymobilescreen({ navigation }) {
           </ImageBackground>
           <View
             style={{
-              width: 300,
+              width: 320,
               height: 450,
               backgroundColor: 'white',
               left: 30,
@@ -59,12 +59,12 @@ function Rescuerverifymobilescreen({ navigation }) {
                 fontWeight: 'bold',
               }}
             >
-              Verify Your Mobile No.
+              {t('Verify Your Mobile No.')}
             </Text>
             <Text
               style={{ textAlign: 'center', padding: 10, color: '#093624' }}
             >
-              Please Enter The 4 Digit Code Sent To 9********7
+              {t('Please Enter The 4 Digit Code Sent To 9********7')}
             </Text>
             <TextInput
               style={{
@@ -72,7 +72,7 @@ function Rescuerverifymobilescreen({ navigation }) {
                 margin: 12,
                 width: 250,
                 top: 30,
-                left: 10,
+                left: 20,
                 borderWidth: 1,
                 paddingLeft: 30,
                 borderRadius: 10,
@@ -91,25 +91,25 @@ function Rescuerverifymobilescreen({ navigation }) {
                 fontSize: 16,
               }}
             >
-              Resend Code
+              {t('Resend Code')}
             </Text>
             <TouchableOpacity
               onPress={() => handleButtonPress('RescuerCreateNewPassword')}
             >
               <View
                 style={{
-                  height: 40,
+                  height: 50,
                   margin: 12,
                   top: 120,
-                  width: 100,
-                  left: 90,
+                  width: 150,
+                  left: 75,
                   borderWidth: 1,
                   borderRadius: 10,
                   backgroundColor: '#093624',
                 }}
               >
-                <Text style={{ color: 'white', padding: 8, left: 25 }}>
-                  Verify
+                <Text style={{ color: 'white', padding: 15, left: 45 }}>
+                  {t('Verify')}
                 </Text>
               </View>
             </TouchableOpacity>

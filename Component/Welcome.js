@@ -60,10 +60,10 @@ const WelcomeScreen = ({ navigation }) => {
         style={{ marginTop: 50, width: 100, height: 100, resizeMode: 'contain', marginBottom: 20 }}
       />
       <Text style={{ color: 'white', textAlign: 'center', fontSize: 8, fontWeight: 'bold', top: 60 }}>
-        COPYRIGHT © 2024 WFN, ALL RIGHTS RESERVED
+       { t('COPYRIGHT © 2024 WFN, ALL RIGHTS RESERVED')}
       </Text>
       <Text style={{ color: 'white', textAlign: 'center', fontSize: 6, fontWeight: 'bold', top: 65 }}>
-        Developed by KodSoft
+        {t('Developed by KodSoft')}
       </Text>
     </ImageBackground>
   );

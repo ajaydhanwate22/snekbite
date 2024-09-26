@@ -71,7 +71,7 @@ function Rescuersentactivetionscreen({ navigation }) {
                 fontWeight: 'bold',
               }}
             >
-              Send Admin Request for Activation
+              {t('Send Admin Request for Activation')}
             </Text>
             <View  style={{left:20, gap:30, top:100}}>
             <TouchableOpacity
@@ -93,7 +93,7 @@ function Rescuersentactivetionscreen({ navigation }) {
                     padding: 8,
                   }}
                 >
-                  Request
+                  {t('Request')}
                 </Text>
               </View>
             </TouchableOpacity>
@@ -113,7 +113,7 @@ function Rescuersentactivetionscreen({ navigation }) {
                     padding: 8,
                   }}
                 >
-                  Save and Exit
+                  {t('Save and Exit')}
                 </Text>
               </View>
             </TouchableOpacity>

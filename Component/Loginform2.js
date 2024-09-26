@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Loginform2Screen({ navigation }) {
   const { t } = useTranslation();
@@ -31,18 +32,36 @@ function Loginform2Screen({ navigation }) {
       formData.append('Password', Password);
 
       axios
-        .post('http://ajayapi.sp-consultants.in/Tratmentslogin.php', formData, {
+        .post('https://realrate.store/ajayApi/Tratmentslogin.php', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         })
-        .then(response => {
+        .then(async response => {
           const responseJson = response.data;
           if (responseJson.message === 'LoggedIn successfully') {
+            const userData = responseJson.user;
+            try {
+              await AsyncStorage.setItem('userData', JSON.stringify({
+                authorizesName: userData.AuthorizesName,
+                email: userData.EmailID,
+                contactNumber: userData.ContactNumber,
+                centerLocation: userData.CenterLocation,
+                centerName: userData.CenterName
+              }));
+            } catch (error) {
+              console.error('Error storing data', error);
+            }
             Alert.alert('Success', responseJson.message, [
               {
                 text: 'OK',
-                onPress: () => navigation.navigate('Profiletab'),
+                onPress: () => navigation.navigate('Profiletab',{
+                  authorizesName: userData.AuthorizesName, 
+                  email: userData.EmailID,
+                  contactNumber: userData.ContactNumber,
+                  centerLocation: userData.CenterLocation,
+                  centerName: userData.CenterName
+                }),
               },
             ]);
           } else {
@@ -79,10 +98,10 @@ function Loginform2Screen({ navigation }) {
           </ImageBackground>
           <View
             style={{
-              width: 300,
+              width: 330,
               height: 450,
               backgroundColor: 'white',
-              left: 30,
+              left: 25,
               top: -60,
               borderRadius: 30,
               marginBottom: -30,
@@ -93,12 +112,12 @@ function Loginform2Screen({ navigation }) {
               style={{
                 textAlign: 'center',
                 color: '#093624',
-                fontSize: 20,
+                fontSize: 25,
                 margin: 30,
                 fontWeight: 'bold',
               }}
             >
-              Sign In
+              {t('Sign In')}
             </Text>
             <View
               style={{
@@ -109,15 +128,15 @@ function Loginform2Screen({ navigation }) {
                 borderRadius: 10,
                 left: 10,
                 paddingLeft: 10,
-                gap: 10,
+                gap: 20,
                 margin: 12,
-                width: 250,
-                height: 45,
+                width: 290,
+                height: 50,
               }}
             >
               <Image source={require('./Assets/signinusernameicon.png')} />
               <TextInput
-                placeholder="Authorizes Name"
+                placeholder={t("Authorizes name")}
                 placeholderTextColor="#093624"
                 value={AuthorizesName}
                 onChangeText={setAuthorizesName}
@@ -131,16 +150,16 @@ function Loginform2Screen({ navigation }) {
                 borderColor: '#093624',
                 borderRadius: 10,
                 left: 10,
-                paddingLeft: 10,
-                gap: 10,
+                paddingLeft: 20,
+                gap: 20,
                 margin: 12,
-                width: 250,
-                height: 45,
+                width: 290,
+                height: 50,
               }}
             >
               <Image source={require('./Assets/password.png')} />
               <TextInput
-                placeholder="Password"
+                placeholder={t("Password")}
                 placeholderTextColor="#093624"
                 value={Password}
                 onChangeText={setPassword}
@@ -159,16 +178,16 @@ function Loginform2Screen({ navigation }) {
                     textDecorationLine: 'underline',
                   }}
                 >
-                  Forgot Password?
+                  {t('Forgot Password?')}
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => handleButtonPress('Profiletab')}>
                 <View
                   style={{
-                    height: 40,
-                    width: 140,
+                    height: 50,
+                    width: 200,
                     borderWidth: 1,
-                    left: 80,
+                    left: 60,
                     borderRadius: 10,
                     backgroundColor: '#093624',
                   }}
@@ -176,11 +195,11 @@ function Loginform2Screen({ navigation }) {
                   <Text
                     style={{
                       color: 'white',
-                      padding: 8,
+                      padding: 15,
                       textAlign: 'center',
                     }}
                   >
-                    Log In
+                    {t('Log In')}
                   </Text>
                 </View>
               </TouchableOpacity>
@@ -191,17 +210,14 @@ function Loginform2Screen({ navigation }) {
                   style={{
                     textAlign: 'center',
                     color: '#000000',
-                    fontSize: 10,
-                    top: -30,
+                    fontSize: 8,
+                    top: -25,
                   }}
                 >
-                  New here? Create an account
+                 {t('New here? Create an account')}
                 </Text>
               </TouchableOpacity>
             </View>
-            <Text style={{ textAlign: 'center', color: '#000000', top: -15 }}>
-              Or
-            </Text>
             <View
               style={{
                 flexDirection: 'row',
@@ -210,8 +226,6 @@ function Loginform2Screen({ navigation }) {
                 top: 10,
               }}
             >
-              <Image source={require('./Assets/linkdein.png')} />
-              <Image source={require('./Assets/goggle.png')} />
             </View>
           </View>
         </View>

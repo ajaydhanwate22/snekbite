@@ -42,7 +42,7 @@ function LoginScreen({navigation}) {
       </View>
       <View
         style={{
-          width: 300,
+          width: 320,
           backgroundColor: 'white',
           height: 300,
           left: 30,
@@ -58,7 +58,7 @@ function LoginScreen({navigation}) {
                 width: 250,
                 backgroundColor: '#093624',
                 borderRadius: 10,
-                left: 25,
+                left: 35,
               }}>
               <Text
                 style={{
@@ -67,7 +67,7 @@ function LoginScreen({navigation}) {
                   color: 'white',
                   textAlign: 'center',
                 }}>
-                Sign Up
+                {t('Sign Up')}
               </Text>
             </View>
           </TouchableOpacity>
@@ -79,7 +79,7 @@ function LoginScreen({navigation}) {
                 width: 250,
                 backgroundColor: '#093624',
                 borderRadius: 10,
-                left: 25,
+                left: 35,
               }}>
               <Text
                 style={{
@@ -88,7 +88,7 @@ function LoginScreen({navigation}) {
                   color: 'white',
                   textAlign: 'center',
                 }}>
-                Sign In
+                {t('Sign In')}
               </Text>
             </View>
           </TouchableOpacity>

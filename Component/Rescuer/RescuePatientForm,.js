@@ -280,9 +280,9 @@ function RescuePatientFormscren({ navigation }) {
       <View style={{backgroundColor:'white'}}>
       <View
         style={{
-          height: 50,
-          width: 310,
-          left: 25,
+          height: 60,
+          width: 350,
+          left: 17,
           backgroundColor: '#093624',
           marginBottom: 8,
           borderRadius: 15,
@@ -299,7 +299,7 @@ function RescuePatientFormscren({ navigation }) {
                 height: 30,
                 width: 50,
                 backgroundColor: 'red',
-                top: 10,
+                top: 15,
                 borderRadius: 20,
               }}
             >
@@ -309,12 +309,12 @@ function RescuePatientFormscren({ navigation }) {
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleButtonPress('RescuerAboutscreen')}>
-            <View style={{justifyContent:'center', alignItems:'center',top:5}}>
+            <View style={{justifyContent:'center', alignItems:'center',top:10}}>
               <Image source={require('../Assets/about.png')}/>
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleButtonPress('RescuerEditprofilescreen')}>
-          <View style={{justifyContent:'center', alignItems:'center', top:10}}>
+          <View style={{justifyContent:'center', alignItems:'center', top:15}}>
               <Image source={require('../Assets/edit.png')}/>
             </View>
           </TouchableOpacity>

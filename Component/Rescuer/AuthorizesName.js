@@ -19,7 +19,7 @@ function RescuerAuthorizesNamesreen({ navigation }) {
 
   return (
     <>
-      <ScrollView style={{backgroundColor:'white'}}>
+      <ScrollView style={{backgroundColor:'white',}}>
         <View style={{ backgroundColor: 'white',marginBottom:80 }}>
           <ImageBackground
            source={require('../Assets/background.png')}
@@ -46,18 +46,18 @@ function RescuerAuthorizesNamesreen({ navigation }) {
           </ImageBackground>
           <View
             style={{
-              width: 300,
+              width: 350,
               height: 130,
               backgroundColor: 'white',
-              left: 30,
+              left: 18,
               top: -150,
               borderRadius: 20,
               elevation: 10,
               flexDirection: 'row',
             }}
           >
-            <View style={{flexDirection:'row', gap:50, justifyContent:"space-around"}}>
-            <View style={{ top: 20, gap: 8,left:20 }}>
+            <View style={{flexDirection:'row', gap:120, justifyContent:"space-around"}}>
+            <View style={{ top: 20, gap: 5,left:40 }}>
               <Text style={{ color: '#093624', fontSize: 16 }}>
                 Authorizes Name
               </Text>
@@ -72,19 +72,19 @@ function RescuerAuthorizesNamesreen({ navigation }) {
               </Text>
             </View>
             <Image
-                source={require('../Assets/MaleUser.png')} style={{height: 110,width: 100,top: 10,
+                source={require('../Assets/MaleUser.png')} style={{height: 120,width: 100,top: 5,
               }}
             />
             </View>
           </View>
-          <Text style={{ left: 40, top: -120, color: '#093624', fontSize: 16 }}>
+          <Text style={{ left: 30, top: -110, color: '#093624', fontSize: 16 }}>
             Rescue Details
           </Text>
           <View
             style={{
               flexDirection: 'row',
-              gap: 15,
-              left: 35,
+              gap: 10,
+              left: 18,
               bottom: 20,
               top: -100,
             }}
@@ -95,7 +95,7 @@ function RescuerAuthorizesNamesreen({ navigation }) {
               <View
                 style={{
                   height: 140,
-                  width: 140,
+                  width: 170,
                   backgroundColor: '#093624',
                   elevation: 10,
                   borderRadius: 20,
@@ -118,7 +118,7 @@ function RescuerAuthorizesNamesreen({ navigation }) {
               <View
                 style={{
                   height: 140,
-                  width: 140,
+                  width: 170,
                   backgroundColor: '#093624',
                   elevation: 10,
                   borderRadius: 20,
@@ -136,14 +136,14 @@ function RescuerAuthorizesNamesreen({ navigation }) {
               </View>
             </TouchableOpacity>
           </View>
-          <Text style={{ left: 40, top: -80, color: '#093624', fontSize: 16 }}>
+          <Text style={{ left: 30, top: -80, color: '#093624', fontSize: 16 }}>
             Patient Details
           </Text>
           <View
             style={{
               flexDirection: 'row',
-              gap: 15,
-              left: 35,
+              gap: 10,
+              left: 18,
               bottom: 20,
               top: -70,
             }}
@@ -154,7 +154,7 @@ function RescuerAuthorizesNamesreen({ navigation }) {
               <View
                 style={{
                   height: 140,
-                  width: 140,
+                  width: 170,
                   backgroundColor: '#093624',
                   elevation: 10,
                   borderRadius: 20,
@@ -177,7 +177,7 @@ function RescuerAuthorizesNamesreen({ navigation }) {
               <View
                 style={{
                   height: 140,
-                  width: 140,
+                  width: 170,
                   backgroundColor: '#093624',
                   elevation: 10,
                   borderRadius: 20,
@@ -196,26 +196,26 @@ function RescuerAuthorizesNamesreen({ navigation }) {
             </TouchableOpacity>
           </View>
 
-          <Text style={{ left: 40, top: -50, color: '#093624', fontSize: 16 }}>
+          <Text style={{ left: 30, top: -50, color: '#093624', fontSize: 16 }}>
             Anti Snake Venom
           </Text>
           <TouchableOpacity
             onPress={() => handleButtonPress('UsedASVscreen')}>
             <View
               style={{
-                height: 80,
-                width: 310,
+                height: 100,
+                width: 350,
                 backgroundColor: '#093624',
-                left: 25,
+                left: 18,
                 top: -40,
                 borderRadius: 15,
               }}>
               <View
                 style={{justifyContent: 'space-around', flexDirection: 'row'}}>
                <Image
-                source={require('../Assets/usedASV.png')} style={{height:60,width:50,top:10}}
+                source={require('../Assets/usedASV.png')} style={{height:50,width:50,top:25}}
             />
-                <View style={{flexDirection: 'column', top: 25}}>
+                <View style={{flexDirection: 'column', top: 35}}>
                   <Text style={{color: 'white', fontSize: 12}}>Used ASV</Text>
                   <Text style={{color: 'white', fontSize: 8}}>
                     Last used on 2 March
@@ -224,8 +224,8 @@ function RescuerAuthorizesNamesreen({ navigation }) {
                 <Text
                   style={{
                     color: 'white',
-                    fontSize: 35,
-                    top: 10,
+                    fontSize: 50,
+                    top: 15,
                     fontWeight: 'bold',
                   }}>
                   2
@@ -237,20 +237,21 @@ function RescuerAuthorizesNamesreen({ navigation }) {
             onPress={() => handleButtonPress('StockASVScreen')}>
             <View
               style={{
-                height: 80,
-                width: 310,
+                height: 100,
+                width: 350,
                 backgroundColor: '#093624',
-                left: 25,
+                left: 18,
                 top: -20,
                 borderRadius: 15,
-                marginBottom:-200
+                marginBottom:-80
+                
               }}>
               <View
                 style={{justifyContent: 'space-around', flexDirection: 'row'}}>
             <Image
-                source={require('../Assets/avilabalASV.png')} style={{width:50,top:10}}
+                source={require('../Assets/avilabalASV.png')} style={{width:50,top:20}}
             />
-                <View style={{flexDirection: 'column', top: 25}}>
+                <View style={{flexDirection: 'column', top: 35}}>
                   <Text
                     style={{color: 'white', textAlign: 'center', fontSize: 12}}>
                     Stock Availability of ASV
@@ -263,8 +264,8 @@ function RescuerAuthorizesNamesreen({ navigation }) {
                 <Text
                   style={{
                     color: 'white',
-                    fontSize: 35,
-                    top: 10,
+                    fontSize: 50,
+                    top: 15,
                     fontWeight: 'bold',
                   }}>
                   7
@@ -277,9 +278,9 @@ function RescuerAuthorizesNamesreen({ navigation }) {
       <View style={{backgroundColor:'white'}}>
       <View
         style={{
-          height: 50,
-          width: 310,
-          left: 25,
+          height: 60,
+          width: 350,
+          left: 17,
           backgroundColor: '#093624',
           marginBottom: 8,
           borderRadius: 15,
@@ -296,7 +297,7 @@ function RescuerAuthorizesNamesreen({ navigation }) {
                 height: 30,
                 width: 50,
                 backgroundColor: 'red',
-                top: 10,
+                top: 15,
                 borderRadius: 20,
               }}
             >
@@ -306,12 +307,12 @@ function RescuerAuthorizesNamesreen({ navigation }) {
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleButtonPress('RescuerAboutscreen')}>
-            <View style={{justifyContent:'center', alignItems:'center',top:6}}>
+            <View style={{justifyContent:'center', alignItems:'center',top:10}}>
               <Image source={require('../Assets/about.png')}/>
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleButtonPress('RescuerEditprofilescreen')}>
-          <View style={{justifyContent:'center', alignItems:'center', top:10}}>
+          <View style={{justifyContent:'center', alignItems:'center', top:15}}>
               <Image source={require('../Assets/edit.png')}/>
             </View>
           </TouchableOpacity>

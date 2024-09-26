@@ -32,7 +32,7 @@ function RescuerloginformScreen({ navigation }) {
       formData.append('Password', Password);
 
       axios
-        .post('http://ajayapi.sp-consultants.in/Rescuesignin.php', formData, {
+        .post('https://realrate.store/ajayApi/Rescuesignin.php', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -80,10 +80,10 @@ function RescuerloginformScreen({ navigation }) {
           </ImageBackground>
           <View
             style={{
-              width: 300,
+              width: 330,
               height: 450,
               backgroundColor: 'white',
-              left: 30,
+              left: 25,
               top: -60,
               borderRadius: 30,
               marginBottom: -30,
@@ -94,12 +94,12 @@ function RescuerloginformScreen({ navigation }) {
               style={{
                 textAlign: 'center',
                 color: '#093624',
-                fontSize: 20,
+                fontSize: 25,
                 margin: 30,
                 fontWeight: 'bold',
               }}
             >
-              Sign In
+              {t('Sign In')}
             </Text>
             <View
             style={{
@@ -108,17 +108,17 @@ function RescuerloginformScreen({ navigation }) {
               borderWidth: 1,
               borderColor: '#093624',
               borderRadius: 10,
-              left:10,
-              paddingLeft:10,
-              gap:10,
+              left: 10,
+              paddingLeft: 10,
+              gap: 20,
               margin: 12,
-              width: 250,
-              height: 45,
+              width: 290,
+              height: 50,
             }}
           >
             <Image source={require('../Assets/signinusernameicon.png')} />
             <TextInput 
-              placeholder="Username"
+              placeholder={t("Username")}
               placeholderTextColor="#093624"
               value={Username}
               onChangeText={setUsername}
@@ -131,17 +131,17 @@ function RescuerloginformScreen({ navigation }) {
               borderWidth: 1,
               borderColor: '#093624',
               borderRadius: 10,
-              left:10,
-              paddingLeft:10,
-              gap:10,
+              left: 10,
+              paddingLeft: 20,
+              gap: 20,
               margin: 12,
-              width: 250,
-              height: 45,
+              width: 290,
+              height: 50,
             }}
           >
             <Image source={require('../Assets/password.png')} />
             <TextInput 
-              placeholder="Password"
+              placeholder={t("Password")}
               placeholderTextColor="#093624"
               value={Password }
               onChangeText={setPassword}
@@ -158,7 +158,7 @@ function RescuerloginformScreen({ navigation }) {
                   textDecorationLine: 'underline',
                 }}
               >
-                Forgot Password ?
+                  {t('Forgot Password?')}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -166,16 +166,19 @@ function RescuerloginformScreen({ navigation }) {
             >
               <View
                 style={{
-                  height: 40,
-                  width: 140,
+                  height: 50,
+                  width: 200,
                   borderWidth: 1,
-                  left:80,
+                  left: 60,
                   borderRadius: 10,
                   backgroundColor: '#093624',
                 }}
               >
-                <Text style={{ color: 'white', padding: 8, textAlign:'center' }}>
-                  Log In
+                <Text style={{             
+                    color: 'white',
+                      padding: 15,
+                      textAlign: 'center',}}>
+                  {t('Log In')}
                 </Text>
               </View>
             </TouchableOpacity>
@@ -184,18 +187,13 @@ function RescuerloginformScreen({ navigation }) {
               style={{
                 textAlign: 'center',
                 color: '#000000',
-                fontSize: 10,
-                top:-30
+                fontSize: 8,
+                top: -25,
               }}
             >
-              New here? Create an account
+              {t('New here? Create an account')}
             </Text>
             </TouchableOpacity>
-            </View>
-            <Text style={{textAlign:"center", color:'#000000', top:-15}}>Or</Text>
-            <View style={{flexDirection:'row', justifyContent:"center", gap:10, top:10}}>
-            <Image source={require('../Assets/linkdein.png')}/>
-            <Image source={require('../Assets/goggle.png')}/>
             </View>
           
           </View>

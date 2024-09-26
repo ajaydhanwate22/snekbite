@@ -2,10 +2,8 @@ import React from 'react';
 import {
   View,
   Text,
-  TextInput,
   TouchableOpacity,
   ImageBackground,
-  StyleSheet,
   Image,
   ScrollView,
 } from 'react-native';
@@ -44,7 +42,7 @@ function Abouttabscreen({navigation}) {
                 fontSize: 20,
                 top: 15,
               }}>
-              About us
+              About Us
             </Text>
           </ImageBackground>
           <View>

@@ -7,7 +7,6 @@ import {
   ImageBackground,
   Image,
   ScrollView,
-  TextInputComponent,
 } from 'react-native';
 import axios from 'axios';
 import {useTranslation} from 'react-i18next';
@@ -31,7 +30,7 @@ function Guestsignupscreen({navigation}) {
     formData.append('Password', password);
 
     axios
-      .post('http://ajayapi.sp-consultants.in/Guestsignup.php', formData, {
+      .post('https://realrate.store/ajayApi/Guestsignup.php', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -72,10 +71,10 @@ function Guestsignupscreen({navigation}) {
         </ImageBackground>
         <View
           style={{
-            width: 300,
-            height: 550,
+            width: 340,
+            height: 650,
             backgroundColor: 'white',
-            left: 30,
+            left: 20,
             top: -60,
             borderRadius: 30,
             marginBottom: -30,
@@ -85,11 +84,11 @@ function Guestsignupscreen({navigation}) {
             style={{
               textAlign: 'center',
               color: '#093624',
-              fontSize: 20,
-              margin: 20,
+              fontSize: 25,
+              margin: 30,
               fontWeight: 'bold',
             }}>
-            Sign Up
+            {t('Sign Up')}
           </Text>
           <View
             style={{
@@ -99,15 +98,15 @@ function Guestsignupscreen({navigation}) {
               borderColor: '#093624',
               borderRadius: 10,
               left: 10,
-              paddingLeft: 10,
-              gap: 10,
+              paddingLeft: 20,
+              gap: 20,
               margin: 12,
-              width: 250,
-              height: 45,
+              width: 300,
+              height: 50,
             }}>
             <Image source={require('../Assets/rescuerusernameicon.png')} />
             <TextInput
-              placeholder="Username"
+              placeholder={t("Username")}
               placeholderTextColor="#093624"
               value={Username}
               onChangeText={setUsername}
@@ -121,15 +120,15 @@ function Guestsignupscreen({navigation}) {
               borderColor: '#093624',
               borderRadius: 10,
               left: 10,
-              paddingLeft: 10,
-              gap: 10,
+              paddingLeft: 15,
+              gap: 20,
               margin: 12,
-              width: 250,
-              height: 45,
+              width: 300,
+              height: 50,
             }}>
             <Image source={require('../Assets/contact.png')} />
             <TextInput
-              placeholder="Mobile number"
+              placeholder={t("Contact number")}
               placeholderTextColor="#093624"
               value={contact}
               onChangeText={setContact}
@@ -143,15 +142,15 @@ function Guestsignupscreen({navigation}) {
               borderColor: '#093624',
               borderRadius: 10,
               left: 10,
-              paddingLeft: 10,
-              gap: 10,
+              paddingLeft: 15,
+              gap: 20,
               margin: 12,
-              width: 250,
-              height: 45,
+              width: 300,
+              height: 50,
             }}>
             <Image source={require('../Assets/releaselocationicon.png')} />
             <TextInput
-              placeholder="Address"
+              placeholder={t("Address")}
               placeholderTextColor="#093624"
               value={address}
               onChangeText={setaddress}
@@ -166,15 +165,15 @@ function Guestsignupscreen({navigation}) {
               borderColor: '#093624',
               borderRadius: 10,
               left: 10,
-              paddingLeft: 10,
-              gap: 10,
+              paddingLeft: 15,
+              gap: 20,
               margin: 12,
-              width: 250,
-              height: 45,
+              width: 300,
+              height: 50,
             }}>
             <Image source={require('../Assets/mail.png')} />
             <TextInput
-              placeholder="mail ID"
+                placeholder={t("Email ID (Optional)")}
               placeholderTextColor="#093624"
               value={mailID}
               onChangeText={setmailID}
@@ -188,15 +187,15 @@ function Guestsignupscreen({navigation}) {
               borderColor: '#093624',
               borderRadius: 10,
               left: 10,
-              paddingLeft: 10,
-              gap: 10,
+              paddingLeft: 15,
+              gap: 20,
               margin: 12,
-              width: 250,
-              height: 45,
+              width: 300,
+              height: 50,
             }}>
             <Image source={require('../Assets/education.png')} />
             <TextInput
-              placeholder="expertise/profession"
+              placeholder={t("expertise/profession")}
               placeholderTextColor="#093624"
               value={profession}
               onChangeText={setprofession}
@@ -210,15 +209,15 @@ function Guestsignupscreen({navigation}) {
               borderColor: '#093624',
               borderRadius: 10,
               left: 10,
-              paddingLeft: 10,
-              gap: 10,
+              paddingLeft: 25,
+              gap: 20,
               margin: 12,
-              width: 250,
-              height: 45,
+              width: 300,
+              height: 50,
             }}>
             <Image source={require('../Assets/password.png')} />
             <TextInput
-              placeholder="Password"
+              placeholder={t("Password")}
               placeholderTextColor="#093624"
               value={password}
               onChangeText={setpassword}
@@ -228,15 +227,16 @@ function Guestsignupscreen({navigation}) {
             onPress={() => handleButtonPress('Guestformscreen')}>
             <View
               style={{
-                height: 40,
+                height: 50,
                 margin: 12,
-                width: 100,
-                left: 90,
+                width: 300,
+                left: 10,
                 borderWidth: 1,
                 borderRadius: 10,
                 backgroundColor: '#093624',
+                top: 20,
               }}>
-              <Text style={{color: 'white', padding: 8, left: 25}}>Next</Text>
+              <Text style={{color: 'white', padding: 15,textAlign:"center"}}>{t('Next')}</Text>
             </View>
           </TouchableOpacity>
         </View>

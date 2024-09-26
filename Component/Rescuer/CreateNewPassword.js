@@ -40,7 +40,7 @@ function RescuerCreateNewPassword({ navigation }) {
           </ImageBackground>
           <View
             style={{
-              width: 300,
+              width: 320,
               height: 450,
               backgroundColor: 'white',
               left: 30,
@@ -59,10 +59,10 @@ function RescuerCreateNewPassword({ navigation }) {
                 fontWeight: 'bold',
               }}
             >
-              Create New Password
+              {t('Create New Password')}
             </Text>
-            <Text style={{ color: '#A3A3A3', top: 30, left: 20 }}>
-              Enter New Password
+            <Text style={{ color: '#A3A3A3', top: 30, left: 30 }}>
+              {t('Enter New Password')}
             </Text>
             <TextInput
               style={{
@@ -70,7 +70,7 @@ function RescuerCreateNewPassword({ navigation }) {
                 margin: 12,
                 width: 250,
                 top: 30,
-                left: 10,
+                left: 20,
                 borderWidth: 1,
                 paddingLeft: 30,
                 borderRadius: 10,
@@ -80,8 +80,8 @@ function RescuerCreateNewPassword({ navigation }) {
               placeholder=""
               placeholderTextColor="#093624"
             />
-            <Text style={{ color: '#A3A3A3', top: 30, left: 20 }}>
-              Confirm Password
+            <Text style={{ color: '#A3A3A3', top: 30, left: 30 }}>
+              {t('Confirm Password')}
             </Text>
             <TextInput
               style={{
@@ -89,7 +89,7 @@ function RescuerCreateNewPassword({ navigation }) {
                 margin: 12,
                 width: 250,
                 top: 30,
-                left: 10,
+                left: 20,
                 borderWidth: 1,
                 paddingLeft: 30,
                 borderRadius: 10,
@@ -107,25 +107,25 @@ function RescuerCreateNewPassword({ navigation }) {
                 fontSize: 12,
               }}
             >
-              Change Password
+              {t('Change Password')}
             </Text>
             <TouchableOpacity
               onPress={() => handleButtonPress('RescuerloginformScreen')}
             >
               <View
                 style={{
-                  height: 40,
+                  height: 50,
                   margin: 12,
                   top: 100,
-                  width: 100,
-                  left: 90,
+                  width: 150,
+                  left: 75,
                   borderWidth: 1,
                   borderRadius: 10,
                   backgroundColor: '#093624',
                 }}
               >
-                <Text style={{ color: 'white', padding: 8, left: 25 }}>
-                  Save
+                <Text style={{ color: 'white', padding: 15, left: 45 }}>
+                  {t('Save')}
                 </Text>
               </View>
             </TouchableOpacity>

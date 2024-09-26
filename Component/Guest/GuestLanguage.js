@@ -67,21 +67,21 @@ function GuestLanguage({navigation}) {
 
               <TouchableOpacity
                 style={styles.modalButton}
-                onPress={() => handleLanguageSelect('english')}
+                onPress={() => handleLanguageSelect('English')}
               >
                 <Text style={styles.modalButtonText}>{t('english')}</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
                 style={styles.modalButton}
-                onPress={() => handleLanguageSelect('marathi')}
+                onPress={() => handleLanguageSelect('Marathi')}
               >
                 <Text style={styles.modalButtonText}>{t('marathi')}</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
                 style={styles.modalButton}
-                onPress={() => handleLanguageSelect('hindi')}
+                onPress={() => handleLanguageSelect('Hindi')}
               >
                 <Text style={styles.modalButtonText}>{t('hindi')}</Text>
               </TouchableOpacity>
@@ -131,9 +131,9 @@ const styles = StyleSheet.create({
     top: 30,
   },
   languageContainer: {
-    width: 300,
+    width: 320,
     backgroundColor: 'white',
-    height: 300,
+    height: 320,
     left: 30,
     top: -90,
     elevation: 10,
@@ -193,14 +193,16 @@ const styles = StyleSheet.create({
   closeButtonText: {
     color: '#093624',
     fontSize: 14,
+    marginHorizontal:100,
   },
   continueButton: {
     backgroundColor: '#093624',
-    marginTop: 100,
-    left: 90,
-    padding: 8,
+    marginTop: 120,
+    left: 100,
+    padding: 12,
     borderRadius: 10,
     width: '40%',
+    height:"15%",
     alignItems: 'center',
   },
   continueText: {

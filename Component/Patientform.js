@@ -237,7 +237,7 @@ function Patientgform({navigation}) {
           </View>
           <Text
             style={{left: 30, color: '#093624', fontWeight: 'bold', top: 30}}>
-            Snakebite Details
+            Discharge Details 
           </Text>
           <TextInput
             style={{
@@ -252,7 +252,7 @@ function Patientgform({navigation}) {
               borderColor: '#093624',
               color: '#093624',
             }}
-            placeholder="Snake ID(if available)"
+            placeholder="Patient Status"
             placeholderTextColor="#093624"
           />
           <TextInput
@@ -268,7 +268,7 @@ function Patientgform({navigation}) {
               borderColor: '#093624',
               color: '#093624',
             }}
-            placeholder="Bite location(area)"
+            placeholder="Any Disability Caused"
             placeholderTextColor="#093624"
           />
           <TouchableOpacity onPress={() => handleButtonPress('Profiletab')}>

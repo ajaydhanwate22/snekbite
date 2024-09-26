@@ -40,10 +40,10 @@ function Rescuerformscreen({ navigation }) {
           </ImageBackground>
           <View
             style={{
-              width: 300,
-              height: 650,
+              width: 340,
+              height: 680,
               backgroundColor: 'white',
-              left: 30,
+              left: 20,
               top: -60,
               borderRadius: 30,
               marginBottom: -30,
@@ -54,7 +54,7 @@ function Rescuerformscreen({ navigation }) {
               style={{
                 textAlign: 'center',
                 color: '#093624',
-                fontSize: 20,
+                fontSize: 25,
                 margin: 30,
                 fontWeight: 'bold',
               }}
@@ -68,12 +68,12 @@ function Rescuerformscreen({ navigation }) {
               borderWidth: 1,
               borderColor: '#093624',
               borderRadius: 10,
-              left:10,
-              paddingLeft:10,
-              gap:10,
+              left: 10,
+              paddingLeft: 10,
+              gap: 20,
               margin: 12,
-              width: 250,
-              height: 45,
+              width: 300,
+              height: 50,
             }}
           >
             <Image source={require('../Assets/speciesicon.png')} />
@@ -91,12 +91,12 @@ function Rescuerformscreen({ navigation }) {
               borderWidth: 1,
               borderColor: '#093624',
               borderRadius: 10,
-              left:10,
-              paddingLeft:10,
-              gap:10,
+              left: 10,
+              paddingLeft: 10,
+              gap: 20,
               margin: 12,
-              width: 250,
-              height: 45,
+              width: 300,
+              height: 50,
             }}
           >
             <Image source={require('../Assets/location.png')} />
@@ -114,12 +114,12 @@ function Rescuerformscreen({ navigation }) {
               borderWidth: 1,
               borderColor: '#093624',
               borderRadius: 10,
-              left:10,
-              paddingLeft:10,
-              gap:10,
+              left: 10,
+              paddingLeft: 10,
+              gap: 20,
               margin: 12,
-              width: 250,
-              height: 45,
+              width: 300,
+              height: 50,
             }}
           >
             <Image source={require('../Assets/releaselocationicon.png')} />
@@ -137,12 +137,12 @@ function Rescuerformscreen({ navigation }) {
               borderWidth: 1,
               borderColor: '#093624',
               borderRadius: 10,
-              left:10,
-              paddingLeft:10,
-              gap:10,
+              left: 10,
+              paddingLeft: 10,
+              gap: 20,
               margin: 12,
-              width: 250,
-              height: 45,
+              width: 300,
+              height: 50,
             }}
           >
             <Image source={require('../Assets/description.png')} />
@@ -160,12 +160,12 @@ function Rescuerformscreen({ navigation }) {
               borderWidth: 1,
               borderColor: '#093624',
               borderRadius: 10,
-              left:10,
-              paddingLeft:10,
-              gap:10,
+              left: 10,
+              paddingLeft: 10,
+              gap: 20,
               margin: 12,
-              width: 250,
-              height: 45,
+              width: 300,
+              height: 50,
             }}
           >
             <Image source={require('../Assets/sizeofspecies.png')} />
@@ -178,9 +178,9 @@ function Rescuerformscreen({ navigation }) {
           </View>
             <View
               style={{
-                width: 100,
+                width: 130,
                 height: 90,
-                top: 10,
+                top: 20,
                 backgroundColor: '#FFFFFF',
                 borderRadius: 10,
                 elevation: 10,
@@ -193,32 +193,34 @@ function Rescuerformscreen({ navigation }) {
               source={require('../Assets/Gallery.jpg')}
                 style={{
                   width: 40,
-                  height: 30,
+                  height: 40,
                   resizeMode: 'contain',
                   position: 'absolute',
-                  top: '30%',
-                  left: '30%',
+                  top: '10%',
+                  left: '35%',
                   elevation: 10,
                 }}
+                
               />
+                 <Text style={{color:"#093624", textAlign:'center', top:60, }}>{t('photo of the animal')}</Text>     
             </View>
             <TouchableOpacity
               onPress={() => handleButtonPress('RescuerAuthorizesNamesreen')}
             >
               <View
                 style={{
-                  height: 40,
+                  height: 50,
                   margin: 12,
-                  top: 20,
-                  width: 250,
+                  width: 300,
                   left: 10,
                   borderWidth: 1,
                   borderRadius: 10,
                   backgroundColor: '#093624',
+                  top: 40,
                 }}
               >
                 <Text
-                  style={{ color: 'white', padding: 8, textAlign: 'center' }}
+                  style={{ color: 'white', padding: 15, textAlign: 'center' }}
                 >
                   Save
                 </Text>
@@ -230,9 +232,9 @@ function Rescuerformscreen({ navigation }) {
       <View style={{backgroundColor:'white'}}>
       <View
         style={{
-          height: 50,
-          width: 310,
-          left: 25,
+          height: 60,
+          width: 350,
+          left: 17,
           backgroundColor: '#093624',
           marginBottom: 8,
           borderRadius: 15,
@@ -249,7 +251,7 @@ function Rescuerformscreen({ navigation }) {
                 height: 30,
                 width: 50,
                 backgroundColor: 'red',
-                top: 10,
+                top: 15,
                 borderRadius: 20,
               }}
             >
@@ -259,12 +261,12 @@ function Rescuerformscreen({ navigation }) {
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleButtonPress('RescuerAboutscreen')}>
-            <View style={{justifyContent:'center', alignItems:'center',top:5}}>
+            <View style={{justifyContent:'center', alignItems:'center',top:10}}>
               <Image source={require('../Assets/about.png')}/>
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleButtonPress('RescuerEditprofilescreen')}>
-          <View style={{justifyContent:'center', alignItems:'center', top:10}}>
+          <View style={{justifyContent:'center', alignItems:'center', top:15}}>
               <Image source={require('../Assets/edit.png')}/>
             </View>
           </TouchableOpacity>

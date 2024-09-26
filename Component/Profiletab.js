@@ -1,17 +1,43 @@
-import React from 'react';
-import {View,Text,StyleSheet,Image,Dimensions,ImageBackground,TouchableOpacity,ScrollView,} from 'react-native';
-import {useTranslation} from 'react-i18next';
+import React, { useEffect, useState } from 'react';
+import { View, Text, ImageBackground, ScrollView, TouchableOpacity , Image } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useTranslation } from 'react-i18next';
 
-function Profiletab({navigation}) {
-  const {t} = useTranslation();
-  const handleButtonPress = screen => {
+function Profiletab({ navigation }) {
+  const { t } = useTranslation();
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const data = await AsyncStorage.getItem('userData');
+        if (data) {
+          setUserData(JSON.parse(data)); // Parse the JSON string back into an object
+        }
+      } catch (error) {
+        console.error('Failed to load user data', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  const handleButtonPress = (screen) => {
     navigation.navigate(screen);
   };
+
+  if (!userData) {
+    return <Text>Loading...</Text>; // or some loading indicator
+  }
+
+  const { authorizesName, email, centerLocation, contactNumber } = userData;
+
   return (
     <>
-      <ScrollView style={{backgroundColor:'white'}}>
-        <View style={{backgroundColor: 'white'}}>
-          <ImageBackground source={require('./Assets/background.png')}
+      <ScrollView style={{ backgroundColor: 'white' }}>
+        <View style={{ backgroundColor: 'white' }}>
+          <ImageBackground 
+            source={require('./Assets/background.png')}
             style={{
               flex: 1,
               alignItems: 'center',
@@ -21,7 +47,8 @@ function Profiletab({navigation}) {
               borderBottomLeftRadius: 40,
               borderBottomRightRadius: 40,
               top: -150,
-            }}></ImageBackground>
+            }} 
+          />
           <View
             style={{
               width: 300,
@@ -34,25 +61,25 @@ function Profiletab({navigation}) {
               flexDirection: 'row',
               justifyContent: 'space-around',
             }}>
-            <View style={{top: 15, gap: 7}}>
-              <Text style={{color: '#093624', fontSize: 16}}>
-                Authorizes Name
+            <View style={{ top: 15, gap: 7 }}>
+              <Text style={{ color: '#093624', fontSize: 16 }}>
+                {authorizesName}
               </Text>
-              <Text style={{color: '#093624', fontSize: 10}}>
-                @authorizesname.com
+              <Text style={{ color: '#093624', fontSize: 10 }}>
+                {email}
               </Text>
-              <Text style={{color: '#093624', fontSize: 10}}>
-                Center Location
+              <Text style={{ color: '#093624', fontSize: 10 }}>
+                {centerLocation}
               </Text>
-              <Text style={{color: '#093624', fontSize: 10}}>
-                +91 0000000000
+              <Text style={{ color: '#093624', fontSize: 10 }}>
+                {contactNumber}
               </Text>
             </View>
             <View>
-           <Image source={require('./Assets/MaleUser.png')}/>
+              <Image source={require('./Assets/MaleUser.png')} />
             </View>
           </View>
-          <Text style={{left: 40, top: -190, color: '#093624', fontSize: 12}}>
+          <Text style={{ left: 40, top: -190, color: '#093624', fontSize: 12 }}>
             Patient Details
           </Text>
           <View
@@ -72,14 +99,11 @@ function Profiletab({navigation}) {
                   elevation: 10,
                   borderRadius: 15,
                 }}>
-                <View style={{flexDirection:'column', alignItems:'center',top:10, gap:10}}>
-                <Image
-                source={require('./Assets/rescuraddnewpatient.png')} style={{}}
-            />
-             
-                <Text style={{ color: 'white', textAlign: 'center', }}>
-                Add new patient 
-                </Text>
+                <View style={{ flexDirection: 'column', alignItems: 'center', top: 10, gap: 10 }}>
+                  <Image source={require('./Assets/rescuraddnewpatient.png')} />
+                  <Text style={{ color: 'white', textAlign: 'center' }}>
+                    Add new patient 
+                  </Text>
                 </View>
               </View>
             </TouchableOpacity>
@@ -92,24 +116,20 @@ function Profiletab({navigation}) {
                   elevation: 10,
                   borderRadius: 15,
                 }}>
-               <View style={{flexDirection:'column', alignItems:'center',top:10, gap:10}}>
-                <Image
-                source={require('./Assets/rescuanimal.png')} style={{}}
-            />
-             
-                <Text style={{ color: 'white', textAlign: 'center', }}>
-                Patient List
-                </Text>
+                <View style={{ flexDirection: 'column', alignItems: 'center', top: 10, gap: 10 }}>
+                  <Image source={require('./Assets/rescuanimal.png')} />
+                  <Text style={{ color: 'white', textAlign: 'center' }}>
+                    Patient List
+                  </Text>
                 </View>
               </View>
             </TouchableOpacity>
           </View>
 
-          <Text style={{left: 40, top: -170, color: '#093624', fontSize: 12}}>
+          <Text style={{ left: 40, top: -170, color: '#093624', fontSize: 12 }}>
             Anti Snake Venom
           </Text>
-          <TouchableOpacity
-            onPress={() => handleButtonPress('TreatmentUsedASVscreen')}>
+          <TouchableOpacity onPress={() => handleButtonPress('TreatmentUsedASVscreen')}>
             <View
               style={{
                 height: 80,
@@ -119,14 +139,11 @@ function Profiletab({navigation}) {
                 top: -160,
                 borderRadius: 15,
               }}>
-                <View
-                style={{justifyContent: 'space-around', flexDirection: 'row'}}>
-               <Image
-                source={require('./Assets/usedASV.png')} style={{height:60,width:50,top:10}}
-            />
-                <View style={{flexDirection: 'column', top: 25}}>
-                  <Text style={{color: 'white', fontSize: 12}}>Used ASV</Text>
-                  <Text style={{color: 'white', fontSize: 8}}>
+              <View style={{ justifyContent: 'space-around', flexDirection: 'row' }}>
+                <Image source={require('./Assets/usedASV.png')} style={{ height: 60, width: 50, top: 10 }} />
+                <View style={{ flexDirection: 'column', top: 25 }}>
+                  <Text style={{ color: 'white', fontSize: 12 }}>Used ASV</Text>
+                  <Text style={{ color: 'white', fontSize: 8 }}>
                     Last used on 2 March
                   </Text>
                 </View>
@@ -142,8 +159,7 @@ function Profiletab({navigation}) {
               </View>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => handleButtonPress('TreatmentAvailableASVscreen')}>
+          <TouchableOpacity onPress={() => handleButtonPress('TreatmentAvailableASVscreen')}>
             <View
               style={{
                 height: 80,
@@ -152,20 +168,15 @@ function Profiletab({navigation}) {
                 left: 25,
                 top: -145,
                 borderRadius: 15,
-                marginBottom:-100
+                marginBottom: -100
               }}>
-          <View
-                style={{justifyContent: 'space-around', flexDirection: 'row'}}>
-            <Image
-                source={require('./Assets/avilabalASV.png')} style={{width:50,top:10,}}
-            />
-                <View style={{flexDirection: 'column', top: 25}}>
-                  <Text
-                    style={{color: 'white', textAlign: 'center', fontSize: 12}}>
+              <View style={{ justifyContent: 'space-around', flexDirection: 'row' }}>
+                <Image source={require('./Assets/avilabalASV.png')} style={{ width: 50, top: 10 }} />
+                <View style={{ flexDirection: 'column', top: 25 }}>
+                  <Text style={{ color: 'white', textAlign: 'center', fontSize: 12 }}>
                     Stock Availability of ASV
                   </Text>
-                  <Text
-                    style={{color: 'white', fontSize: 8, textAlign: 'center'}}>
+                  <Text style={{ color: 'white', fontSize: 8, textAlign: 'center' }}>
                     Last stocked on 8 February
                   </Text>
                 </View>
@@ -183,49 +194,36 @@ function Profiletab({navigation}) {
           </TouchableOpacity>
         </View>
       </ScrollView>
-      <View style={{backgroundColor:'white'}}>
-      <View
-        style={{
-          height: 50,
-          width: 310,
-          left: 25,
-          backgroundColor: '#093624',
-          marginBottom: 8,
-          borderRadius: 15,
-        }}>
+      <View style={{ backgroundColor: 'white' }}>
         <View
           style={{
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-          }}
-        >
-          <TouchableOpacity onPress={() => handleButtonPress('Profiletab')}>
-            <View
-              style={{
-                height: 30,
-                width: 50,
-                backgroundColor: 'red',
-                top: 10,
-                borderRadius: 20,
-              }}
-            >
-              <Text style={{ color: 'white', textAlign: 'center', top: 5 }}>
-                Profile
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleButtonPress('Abouttabscreen')}>
-            <View style={{justifyContent:'center', alignItems:'center',top:6}}>
-              <Image source={require('./Assets/about.png')}/>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleButtonPress('Editprofilescreen')}>
-          <View style={{justifyContent:'center', alignItems:'center', top:10}}>
-              <Image source={require('./Assets/edit.png')}/>
-            </View>
-          </TouchableOpacity>
+            height: 50,
+            width: 310,
+            left: 25,
+            backgroundColor: '#093624',
+            marginBottom: 8,
+            borderRadius: 15,
+          }}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+            <TouchableOpacity onPress={() => handleButtonPress('Profiletab')}>
+              <View style={{ height: 30, width: 50, backgroundColor: 'red', top: 10, borderRadius: 20 }}>
+                <Text style={{ color: 'white', textAlign: 'center', top: 5 }}>
+                  Profile
+                </Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => handleButtonPress('Abouttabscreen')}>
+              <View style={{ justifyContent: 'center', alignItems: 'center', top: 6 }}>
+                <Image source={require('./Assets/about.png')} />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => handleButtonPress('Editprofilescreen')}>
+              <View style={{ justifyContent: 'center', alignItems: 'center', top: 10 }}>
+                <Image source={require('./Assets/edit.png')} />
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>              
       </View>
     </>
   );
