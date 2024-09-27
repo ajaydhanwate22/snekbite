@@ -1,18 +1,79 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
   TextInput,
   TouchableOpacity,
+  Alert,
   ImageBackground,
   Image,
   ScrollView,
 } from 'react-native';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
+import axios from 'axios';
+import FooterNavigationcenter from './FooterNavigationcenter';
 
-function Patientgform({navigation}) {
-  const {t} = useTranslation();
-  const handleButtonPress = () => navigation.navigate('Profiletab');
+function Patientgform({ navigation }) {
+  const { t } = useTranslation();
+  const [fullname, setFullname] = useState('');
+  const [age, setAge] = useState('');
+  const [gender, setGender] = useState('');
+  const [contactNumber, setContactNumber] = useState('');
+  const [address, setAddress] = useState('');
+  const [snakeID, setSnakeID] = useState('');
+  const [biteLocation, setBiteLocation] = useState('');
+  const [affectedbodypart, setAffectedbodypart] = useState('');
+  const [usedASV, setUsedASV] = useState('');
+  const [rescuername, setRescuername] = useState('');
+  const [patientstatus, setPatientstatus] = useState('');
+  const [anyDisablity, setAnyDisablity] = useState('');
+
+  const handleButtonPress = async () => {
+    // Validation
+    if (!fullname || !age || !gender || !contactNumber || !address || !biteLocation || !affectedbodypart || !usedASV || !rescuername || !patientstatus || !anyDisablity) {
+      Alert.alert('Error', 'Please fill all fields.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('FullName', fullname);
+    formData.append('Age', age);
+    formData.append('Gender', gender);
+    formData.append('ContactNumber', contactNumber);
+    formData.append('Address', address);
+    formData.append('SnakeID', snakeID);
+    formData.append('BiteLocation', biteLocation);
+    formData.append('AffectedBodypart', affectedbodypart);
+    formData.append('UsedASV', usedASV);
+    formData.append('Rescuername', rescuername);
+    formData.append('Patientstatus', patientstatus);
+    formData.append('AnyDisablity', anyDisablity);
+
+    try {
+      const response = await axios.post('https://realrate.store/ajayApi/Patientdata.php', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      const responseJson = response.data;
+      if (responseJson.message === 'Registration successfully') {
+        Alert.alert('Success', 'Registration successful!', [
+          {
+            text: 'OK',
+            onPress: () => navigation.navigate('Profiletab'), // Navigate here
+          },
+        ]);
+      } else {
+        Alert.alert('Error', 'Data not saved: ' + responseJson.message);
+      }
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Error', 'An error occurred while submitting the data');
+    }
+  };
+
+
 
   return (
     <>
@@ -69,8 +130,10 @@ function Patientgform({navigation}) {
               borderColor: '#093624',
               color: '#093624',
             }}
-            placeholder="Name "
+            placeholder="FullName"
             placeholderTextColor="#093624"
+            value={fullname}
+            onChangeText={setFullname}
           />
           <TextInput
             style={{
@@ -86,6 +149,8 @@ function Patientgform({navigation}) {
             }}
             placeholder="Age"
             placeholderTextColor="#093624"
+            value={age}
+            onChangeText={setAge}
           />
           <TextInput
             style={{
@@ -101,6 +166,8 @@ function Patientgform({navigation}) {
             }}
             placeholder="Gender"
             placeholderTextColor="#093624"
+            value={gender}
+            onChangeText={setGender}
           />
           <TextInput
             style={{
@@ -116,6 +183,8 @@ function Patientgform({navigation}) {
             }}
             placeholder="Contact details of patient"
             placeholderTextColor="#093624"
+            value={contactNumber}
+            onChangeText={setContactNumber}
           />
           <TextInput
             style={{
@@ -131,6 +200,8 @@ function Patientgform({navigation}) {
             }}
             placeholder="Address"
             placeholderTextColor="#093624"
+            value={address}
+            onChangeText={setAddress}
           />
           <Text style={{left: 30, color: '#093624', fontWeight: 'bold'}}>
             Snakebite Details
@@ -149,6 +220,8 @@ function Patientgform({navigation}) {
             }}
             placeholder="Snake ID(if available)"
             placeholderTextColor="#093624"
+            value={snakeID}
+            onChangeText={setSnakeID}
           />
           <TextInput
             style={{
@@ -164,6 +237,8 @@ function Patientgform({navigation}) {
             }}
             placeholder="Bite location(area)"
             placeholderTextColor="#093624"
+            value={biteLocation}
+            onChangeText={setBiteLocation}
           />
           <TextInput
             style={{
@@ -179,6 +254,8 @@ function Patientgform({navigation}) {
             }}
             placeholder="Affected body part"
             placeholderTextColor="#093624"
+            value={affectedbodypart}
+            onChangeText={setAffectedbodypart}
           />
           <TextInput
             style={{
@@ -194,6 +271,8 @@ function Patientgform({navigation}) {
             }}
             placeholder="Used ASV on the patient"
             placeholderTextColor="#093624"
+            value={usedASV}
+            onChangeText={setUsedASV}
           />
           <TextInput
             style={{
@@ -209,6 +288,8 @@ function Patientgform({navigation}) {
             }}
             placeholder="Rescuer name"
             placeholderTextColor="#093624"
+            value={rescuername}
+            onChangeText={setRescuername}
           />
           <View
             style={{
@@ -254,6 +335,8 @@ function Patientgform({navigation}) {
             }}
             placeholder="Patient Status"
             placeholderTextColor="#093624"
+            value={patientstatus}
+            onChangeText={setPatientstatus}
           />
           <TextInput
             style={{
@@ -270,8 +353,10 @@ function Patientgform({navigation}) {
             }}
             placeholder="Any Disability Caused"
             placeholderTextColor="#093624"
+            value={anyDisablity}
+            onChangeText={setAnyDisablity}
           />
-          <TouchableOpacity onPress={() => handleButtonPress('Profiletab')}>
+          <TouchableOpacity onPress={handleButtonPress}>
             <View
               style={{
                 height: 40,
@@ -282,57 +367,13 @@ function Patientgform({navigation}) {
                 borderRadius: 10,
               }}>
               <Text style={{color: 'white', padding: 10, textAlign: 'center'}}>
-                {' '}
-                Save{' '}
+                Save
               </Text>
             </View>
           </TouchableOpacity>
         </View>
       </ScrollView>
-      <View style={{backgroundColor:'white'}}>
-      <View
-        style={{
-          height: 50,
-          width: 310,
-          left: 25,
-          backgroundColor: '#093624',
-          marginBottom: 8,
-          borderRadius: 15,
-        }}>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-          }}
-        >
-          <TouchableOpacity onPress={() => handleButtonPress('Profiletab')}>
-            <View
-              style={{
-                height: 30,
-                width: 50,
-                backgroundColor: 'red',
-                top: 10,
-                borderRadius: 20,
-              }}
-            >
-              <Text style={{ color: 'white', textAlign: 'center', top: 5 }}>
-                Profile
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleButtonPress('Abouttabscreen')}>
-            <View style={{justifyContent:'center', alignItems:'center',top:6}}>
-              <Image source={require('./Assets/about.png')}/>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleButtonPress('Editprofilescreen')}>
-          <View style={{justifyContent:'center', alignItems:'center', top:10}}>
-              <Image source={require('./Assets/edit.png')}/>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </View>              
-      </View>
+ <FooterNavigationcenter navigation={navigation}/>
     </>
   );
 }

@@ -1,12 +1,56 @@
-import React from 'react';
-import {ImageBackground, View, Image, Text, ScrollView,TouchableOpacity} from 'react-native';
-import {useTranslation} from 'react-i18next';
+import React, { useEffect, useState } from 'react';
+import {
+  ImageBackground,
+  View,
+  Image,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  Alert
+} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import { useTranslation } from 'react-i18next';
+import FooterNavigationcenter from './FooterNavigationcenter';
 
-function Patientprofile({navigation}) {
-  const {t} = useTranslation();
-  const handleButtonPress = screen => {
-    navigation.navigate(screen);
+function Patientprofile({ navigation }) {
+  const { t } = useTranslation();
+  const [patientDetails, setPatientDetails] = useState(null);
+
+  // Fetch patient details from AsyncStorage
+  const fetchPatientId = async () => {
+    try {
+      const patientId = await AsyncStorage.getItem('patientId');
+      if (patientId) {
+        fetchPatientDetails(patientId);
+      } else {
+        Alert.alert('Error', 'No patient ID found.');
+      }
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Error', 'Could not retrieve patient ID.');
+    }
   };
+
+  // Fetch patient details from the server
+  const fetchPatientDetails = async (id) => {
+    try {
+      const response = await axios.get(`https://realrate.store/ajayApi/GetPatientDetails.php?id=${id}`);
+      if (response.data.message === 'Patient details fetched successfully') {
+        setPatientDetails(response.data.data);
+      } else {
+        Alert.alert('Info', response.data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Error', 'Could not fetch patient details');
+    }
+  };
+
+  useEffect(() => {
+    fetchPatientId(); // Fetch patient ID and details when the component mounts
+  }, []);
+
 
   return (
     <>
@@ -83,7 +127,7 @@ function Patientprofile({navigation}) {
               backgroundColor: 'white',
               elevation: 5,
             }}>
-            <View
+                  <View
               style={{
                 top: 10,
                 marginLeft: 20,
@@ -92,11 +136,15 @@ function Patientprofile({navigation}) {
                 gap: 5,
                 color: '#A3A3A3',
               }}>
-              <Text>{t('Name')}</Text>
-              <Text>{t('Age')}</Text>
-              <Text>{t('Gender')}</Text>
-              <Text>{t('Contact details of patient')}</Text>
-              <Text>{t('address')}</Text>
+              {patientDetails && (
+                <>
+                  <Text>Name: {patientDetails.FullName}</Text>
+                  <Text>Age: {patientDetails.Age}</Text>
+                  <Text>Gender: {patientDetails.Gender}</Text>
+                  <Text>Contact: {patientDetails.ContactNumber}</Text>
+                  <Text>Address: {patientDetails.Address}</Text>
+                </>
+              )}
             </View>
           </View>
           {/* second box profile container */}
@@ -130,11 +178,15 @@ function Patientprofile({navigation}) {
                 gap: 5,
                 color: '#A3A3A3',
               }}>
-              <Text>{t('Snake ID(if available)')}</Text>
-              <Text>{t('bite location(area)')}</Text>
-              <Text>{t('affected body part')}</Text>
-              <Text>{t('used ASV on the patient')}</Text>
-              <Text>{t('rescuer name')}</Text>
+          {patientDetails && (
+                <>
+                  <Text>Snake ID: {patientDetails.SnakeID}</Text>
+                  <Text>Bite Location: {patientDetails.BiteLocation}</Text>
+                  <Text>Affected Part: {patientDetails.AffectedBodypart}</Text>
+                  <Text>ASV Used: {patientDetails.UsedASV}</Text>
+                  <Text>Rescuer Name: {patientDetails.Rescuername}</Text>
+                </>
+              )}
               <View
                 style={{
                   width: 100,
@@ -189,66 +241,17 @@ function Patientprofile({navigation}) {
                 gap: 20,
                 color: '#C0C0C0',
               }}>
-              <Text>{t('Patient Status ')}</Text>
-              <Text>{t('Any Disability Caused')}</Text>
+           {patientDetails && (
+                <>
+                  <Text>Patient Status: {patientDetails.Patientstatus}</Text>
+                  <Text>Disability: {patientDetails.AnyDisablity}</Text>
+                </>
+              )}
             </View>
           </View>
         </View>
       </ScrollView>
-      <View style={{backgroundColor: 'white'}}>
-        <View
-          style={{
-            height: 50,
-            width: 310,
-            left: 25,
-            backgroundColor: '#093624',
-            marginBottom: 8,
-            borderRadius: 15,
-          }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-            }}>
-            <TouchableOpacity onPress={() => handleButtonPress('Profiletab')}>
-              <View
-                style={{
-                  height: 30,
-                  width: 50,
-                  backgroundColor: 'red',
-                  top: 10,
-                  borderRadius: 20,
-                }}>
-                <Text style={{color: 'white', textAlign: 'center', top: 5}}>
-                  Profile
-                </Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => handleButtonPress('Abouttabscreen')}>
-              <View
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  top: 6,
-                }}>
-                <Image source={require('./Assets/about.png')} />
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => handleButtonPress('Editprofilescreen')}>
-              <View
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  top: 10,
-                }}>
-                <Image source={require('./Assets/edit.png')} />
-              </View>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
+<FooterNavigationcenter navigation={navigation}/>
     </>
   );
 }
