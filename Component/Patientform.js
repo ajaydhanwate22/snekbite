@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Alert,
-  ImageBackground,
-  Image,
-  ScrollView,
-} from 'react-native';
+import {View,Text,TextInput, TouchableOpacity, Alert, ImageBackground, Image,ScrollView,} from 'react-native';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import FooterNavigationcenter from './FooterNavigationcenter';
@@ -29,7 +20,6 @@ function Patientgform({ navigation }) {
   const [anyDisablity, setAnyDisablity] = useState('');
 
   const handleButtonPress = async () => {
-    // Validation
     if (!fullname || !age || !gender || !contactNumber || !address || !biteLocation || !affectedbodypart || !usedASV || !rescuername || !patientstatus || !anyDisablity) {
       Alert.alert('Error', 'Please fill all fields.');
       return;
@@ -61,7 +51,7 @@ function Patientgform({ navigation }) {
         Alert.alert('Success', 'Registration successful!', [
           {
             text: 'OK',
-            onPress: () => navigation.navigate('Profiletab'), // Navigate here
+            onPress: () => navigation.navigate('Profiletab'),
           },
         ]);
       } else {
@@ -78,29 +68,29 @@ function Patientgform({ navigation }) {
   return (
     <>
       <ScrollView style={{backgroundColor: 'white'}}>
-        <ImageBackground
-          source={require('./Assets/background.png')}
-          style={{
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-            overflow: 'hidden',
-            height: 200,
-            borderBottomLeftRadius: 40,
-            borderBottomRightRadius: 40,
-          }}>
-          <Image
-            source={require('./Assets/logo.png')}
-            style={{resizeMode: 'contain', height: 100, width: 100}}
-          />
-        </ImageBackground>
+      <ImageBackground
+        source={require('./Assets/background.png')}
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',
+          height: 300,
+          borderBottomLeftRadius: 40,
+          borderBottomRightRadius: 40,
+        }}>
+        <Image
+          source={require('./Assets/logo.png')}
+          style={{resizeMode: 'contain', height: 200, width: 200}}
+        />
+      </ImageBackground>
         <View
           style={{
-            width: 300,
-            height: 1100,
+            width: 340,
+            height: 1250,
             backgroundColor: 'white',
-            left: 30,
-            top: -50,
+            left: 20,
+            top: -60,
             borderRadius: 30,
             marginBottom: -30,
             elevation: 10,
@@ -109,7 +99,7 @@ function Patientgform({ navigation }) {
             style={{
               textAlign: 'center',
               color: '#093624',
-              fontSize: 20,
+              fontSize: 25,
               margin: 30,
               fontWeight: 'bold',
             }}>
@@ -120,32 +110,32 @@ function Patientgform({ navigation }) {
           </Text>
           <TextInput
             style={{
-              height: 40,
+              height: 50,
               margin: 12,
-              width: 250,
+              width: 300,
               left: 10,
               borderWidth: 1,
               paddingLeft: 30,
               borderRadius: 10,
+              margin: 12,
               borderColor: '#093624',
-              color: '#093624',
             }}
-            placeholder="FullName"
+            placeholder="Full Name"
             placeholderTextColor="#093624"
             value={fullname}
             onChangeText={setFullname}
           />
           <TextInput
             style={{
-              height: 40,
+              height: 50,
               margin: 12,
-              width: 250,
+              width: 300,
               left: 10,
               borderWidth: 1,
               paddingLeft: 30,
               borderRadius: 10,
+              margin: 12,
               borderColor: '#093624',
-              color: '#093624',
             }}
             placeholder="Age"
             placeholderTextColor="#093624"
@@ -154,15 +144,15 @@ function Patientgform({ navigation }) {
           />
           <TextInput
             style={{
-              height: 40,
+              height: 50,
               margin: 12,
-              width: 250,
+              width: 300,
               left: 10,
               borderWidth: 1,
               paddingLeft: 30,
               borderRadius: 10,
+              margin: 12,
               borderColor: '#093624',
-              color: '#093624',
             }}
             placeholder="Gender"
             placeholderTextColor="#093624"
@@ -171,15 +161,15 @@ function Patientgform({ navigation }) {
           />
           <TextInput
             style={{
-              height: 40,
+              height: 50,
               margin: 12,
-              width: 250,
+              width: 300,
               left: 10,
               borderWidth: 1,
               paddingLeft: 30,
               borderRadius: 10,
+              margin: 12,
               borderColor: '#093624',
-              color: '#093624',
             }}
             placeholder="Contact details of patient"
             placeholderTextColor="#093624"
@@ -188,15 +178,15 @@ function Patientgform({ navigation }) {
           />
           <TextInput
             style={{
-              height: 40,
+              height: 50,
               margin: 12,
-              width: 250,
+              width: 300,
               left: 10,
               borderWidth: 1,
               paddingLeft: 30,
               borderRadius: 10,
+              margin: 12,
               borderColor: '#093624',
-              color: '#093624',
             }}
             placeholder="Address"
             placeholderTextColor="#093624"
@@ -208,15 +198,15 @@ function Patientgform({ navigation }) {
           </Text>
           <TextInput
             style={{
-              height: 40,
+              height: 50,
               margin: 12,
-              width: 250,
+              width: 300,
               left: 10,
               borderWidth: 1,
               paddingLeft: 30,
               borderRadius: 10,
+              margin: 12,
               borderColor: '#093624',
-              color: '#093624',
             }}
             placeholder="Snake ID(if available)"
             placeholderTextColor="#093624"
@@ -225,15 +215,15 @@ function Patientgform({ navigation }) {
           />
           <TextInput
             style={{
-              height: 40,
+              height: 50,
               margin: 12,
-              width: 250,
+              width: 300,
               left: 10,
               borderWidth: 1,
               paddingLeft: 30,
               borderRadius: 10,
+              margin: 12,
               borderColor: '#093624',
-              color: '#093624',
             }}
             placeholder="Bite location(area)"
             placeholderTextColor="#093624"
@@ -242,15 +232,15 @@ function Patientgform({ navigation }) {
           />
           <TextInput
             style={{
-              height: 40,
+              height: 50,
               margin: 12,
-              width: 250,
+              width: 300,
               left: 10,
               borderWidth: 1,
               paddingLeft: 30,
               borderRadius: 10,
+              margin: 12,
               borderColor: '#093624',
-              color: '#093624',
             }}
             placeholder="Affected body part"
             placeholderTextColor="#093624"
@@ -259,15 +249,15 @@ function Patientgform({ navigation }) {
           />
           <TextInput
             style={{
-              height: 40,
+              height: 50,
               margin: 12,
-              width: 250,
+              width: 300,
               left: 10,
               borderWidth: 1,
               paddingLeft: 30,
               borderRadius: 10,
+              margin: 12,
               borderColor: '#093624',
-              color: '#093624',
             }}
             placeholder="Used ASV on the patient"
             placeholderTextColor="#093624"
@@ -276,15 +266,15 @@ function Patientgform({ navigation }) {
           />
           <TextInput
             style={{
-              height: 40,
+              height: 50,
               margin: 12,
-              width: 250,
+              width: 300,
               left: 10,
               borderWidth: 1,
               paddingLeft: 30,
               borderRadius: 10,
+              margin: 12,
               borderColor: '#093624',
-              color: '#093624',
             }}
             placeholder="Rescuer name"
             placeholderTextColor="#093624"
@@ -299,9 +289,9 @@ function Patientgform({ navigation }) {
               backgroundColor: '#FFFFFF',
               borderRadius: 10,
               elevation: 10,
-              marginLeft: 100,
+              marginLeft: 120,
               borderColor: '#000000',
-              borderWidth: 2,
+              borderWidth: 1,
             }}>
             <Image
               source={require('./Assets/Gallery.jpg')}
@@ -322,16 +312,16 @@ function Patientgform({ navigation }) {
           </Text>
           <TextInput
             style={{
-              height: 40,
+              height: 50,
               margin: 12,
-              width: 250,
+              top:30,
+              width: 300,
               left: 10,
-              top: 30,
               borderWidth: 1,
               paddingLeft: 30,
               borderRadius: 10,
+              margin: 12,
               borderColor: '#093624',
-              color: '#093624',
             }}
             placeholder="Patient Status"
             placeholderTextColor="#093624"
@@ -340,16 +330,16 @@ function Patientgform({ navigation }) {
           />
           <TextInput
             style={{
-              height: 40,
+              height: 50,
               margin: 12,
-              width: 250,
+              width: 300,
+              top:30,
               left: 10,
-              top: 30,
               borderWidth: 1,
               paddingLeft: 30,
               borderRadius: 10,
+              margin: 12,
               borderColor: '#093624',
-              color: '#093624',
             }}
             placeholder="Any Disability Caused"
             placeholderTextColor="#093624"
@@ -359,14 +349,16 @@ function Patientgform({ navigation }) {
           <TouchableOpacity onPress={handleButtonPress}>
             <View
               style={{
-                height: 40,
-                width: 150,
-                backgroundColor: '#093624',
-                marginLeft: 75,
-                top: 40,
+                height: 50,
+                margin: 12,
+                width: 300,
+                left: 10,
+                borderWidth: 1,
                 borderRadius: 10,
+                backgroundColor: '#093624',
+                top: 40,
               }}>
-              <Text style={{color: 'white', padding: 10, textAlign: 'center'}}>
+              <Text style={{color: 'white', padding: 15, textAlign: 'center'}}>
                 Save
               </Text>
             </View>

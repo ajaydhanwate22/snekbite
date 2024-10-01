@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ImageBackground,
   View,
@@ -6,15 +6,15 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
-  Alert
+  Alert,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import FooterNavigationcenter from './FooterNavigationcenter';
 
-function Patientprofile({ navigation }) {
-  const { t } = useTranslation();
+function Patientprofile({navigation}) {
+  const {t} = useTranslation();
   const [patientDetails, setPatientDetails] = useState(null);
 
   // Fetch patient details from AsyncStorage
@@ -33,9 +33,11 @@ function Patientprofile({ navigation }) {
   };
 
   // Fetch patient details from the server
-  const fetchPatientDetails = async (id) => {
+  const fetchPatientDetails = async id => {
     try {
-      const response = await axios.get(`https://realrate.store/ajayApi/GetPatientDetails.php?id=${id}`);
+      const response = await axios.get(
+        `https://realrate.store/ajayApi/GetPatientDetails.php?id=${id}`,
+      );
       if (response.data.message === 'Patient details fetched successfully') {
         setPatientDetails(response.data.data);
       } else {
@@ -51,54 +53,56 @@ function Patientprofile({ navigation }) {
     fetchPatientId(); // Fetch patient ID and details when the component mounts
   }, []);
 
+  const handleEdit = () => {
+    navigation.navigate('Patientedit', { patientDetails });
+  };
+  
 
   return (
     <>
-      <ScrollView style={{backgroundColor: 'white'}}>
+      <ScrollView
+        contentContainerStyle={{flexGrow: 1, backgroundColor: 'white'}}>
         {/* backgound image and logo */}
         <ImageBackground
           source={require('./Assets/background.png')}
           style={{
-            height: 421,
-            top: -200,
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            overflow: 'hidden',
+            height: 300,
             borderBottomLeftRadius: 40,
             borderBottomRightRadius: 40,
-            overflow: 'hidden',
-            resizeMode: 'cover',
-            opacity: 1,
-            position: 'relative',
           }}>
-          <Image
+            <TouchableOpacity      onPress={handleEdit} >
+            <Image
+            source={require('./Assets/pencil.png')}
+            style={{resizeMode: 'contain',left:130, top:-30}}
+          />
+          </TouchableOpacity>
+              <Image
             source={require('./Assets/logo.png')}
-            style={{
-              width: 110,
-              height: 140,
-              resizeMode: 'contain',
-              position: 'absolute',
-              top: '50%',
-              left: '30%',
-            }}
+            style={{resizeMode: 'contain', height: 200, width: 200}}
           />
         </ImageBackground>
         {/* profile container */}
         <View
           style={{
-            backgroundColor: 'white',
-            borderRadius: 7,
-            marginLeft: 30,
+            width: 340,
             height: 850,
-            width: 300,
-            top: -270,
+            backgroundColor: 'white',
+            left: 20,
+            top: -60,
+            borderRadius: 30,
+            marginBottom: -30,
             elevation: 5,
-            marginBottom: -250,
           }}>
           <Text
             style={{
               textAlign: 'center',
               color: '#093624',
-              margin: 15,
-              top: 20,
-              fontSize: 20,
+              fontSize: 25,
+              marginTop: 30,
               fontWeight: 'bold',
             }}>
             {t('Patient Profile')}
@@ -110,16 +114,16 @@ function Patientprofile({ navigation }) {
           {/* first box profile cntainer  */}
           <Text
             style={{
-              fontSize: 12,
               color: '##093624',
               fontWeight: 'bold',
               marginLeft: 20,
+              left: 10,
             }}>
             {t('Patient Details')}
           </Text>
           <View
             style={{
-              width: 250,
+              width: 290,
               height: 140,
               top: 10,
               borderRadius: 10,
@@ -127,7 +131,7 @@ function Patientprofile({ navigation }) {
               backgroundColor: 'white',
               elevation: 5,
             }}>
-                  <View
+            <View
               style={{
                 top: 10,
                 marginLeft: 20,
@@ -154,13 +158,14 @@ function Patientprofile({ navigation }) {
               color: '#093624',
               marginLeft: 20,
               top: 30,
+              left: 10,
               fontWeight: 'bold',
             }}>
             {t('Snakebite Details')}
           </Text>
           <View
             style={{
-              width: 250,
+              width: 290,
               height: 250,
               top: 40,
               borderRadius: 10,
@@ -178,7 +183,7 @@ function Patientprofile({ navigation }) {
                 gap: 5,
                 color: '#A3A3A3',
               }}>
-          {patientDetails && (
+              {patientDetails && (
                 <>
                   <Text>Snake ID: {patientDetails.SnakeID}</Text>
                   <Text>Bite Location: {patientDetails.BiteLocation}</Text>
@@ -219,12 +224,13 @@ function Patientprofile({ navigation }) {
               marginLeft: 20,
               top: 70,
               fontWeight: 'bold',
+              left: 10,
             }}>
             {t('Discharge Details')}
           </Text>
           <View
             style={{
-              width: 250,
+              width: 290,
               height: 120,
               top: 90,
               borderRadius: 10,
@@ -241,7 +247,7 @@ function Patientprofile({ navigation }) {
                 gap: 20,
                 color: '#C0C0C0',
               }}>
-           {patientDetails && (
+              {patientDetails && (
                 <>
                   <Text>Patient Status: {patientDetails.Patientstatus}</Text>
                   <Text>Disability: {patientDetails.AnyDisablity}</Text>
@@ -251,7 +257,7 @@ function Patientprofile({ navigation }) {
           </View>
         </View>
       </ScrollView>
-<FooterNavigationcenter navigation={navigation}/>
+      <FooterNavigationcenter navigation={navigation} />
     </>
   );
 }

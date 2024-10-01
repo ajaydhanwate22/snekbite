@@ -36,26 +36,17 @@ function Editprofilescreen({navigation}) {
               color: 'white',
               fontWeight: 'bold',
               fontSize: 20,
-              right: 100,
+              right: 130,
             }}>
             profile
           </Text>
         </ImageBackground>
-        <View
-          style={{
-            height: 100,
-            width: 100,
-            backgroundColor: '#093624',
-            justifyContent: 'center',
-            alignItems: 'center',
-            left: 130,
-            top: 30,
-            borderRadius: 50,
-          }}>
-          <Text style={{color: 'white'}}>Profile photo</Text>
-        </View>
-        <View style={{top:35}}>
-        <Text
+
+        <Image
+          source={require('./Assets/MaleUser.png')}
+          style={{left:120, width:150, height:150}}
+        />
+           <Text
           style={{
             justifyContent: 'center',
             alignItems: 'center',
@@ -66,31 +57,30 @@ function Editprofilescreen({navigation}) {
           }}>
           Name
         </Text>
+
+    
+        <View  style={{flexDirection:'column',gap:25,left:17, top:20,}}>
+        <View style={{height:60, width:350, backgroundColor:'#093624', borderRadius:10,}}>
+        <Text style={{color:'white',left:40, margin:15,fontSize:20, fontWeight:'bold'}}>Edit Profile </Text>
         </View>
-        <View  style={{flexDirection:'column',gap:25,left:25, top:90,}}>
-           <TouchableOpacity onPress={() => handleButtonPress('Patientprofile')} >
-        <View style={{height:50, width:310, backgroundColor:'#093624', borderRadius:10,}}>
-        <Text style={{color:'white',left:60, margin:15,}}>Edit Profile </Text>
-        </View>
-        </TouchableOpacity>
         <TouchableOpacity>
-        <View style={{height:50, width:310, backgroundColor:'#093624', borderRadius:10,}}>
-        <Text style={{color:'white',left:60, margin:15,}}>Setting</Text>
+        <View style={{height:60, width:350, backgroundColor:'#093624', borderRadius:10,}}>
+        <Text style={{color:'white',left:40, margin:15,fontSize:20, fontWeight:'bold'}}>Setting</Text>
         </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleButtonPress('Abouttabscreen')} >
-        <View style={{height:50, width:310, backgroundColor:'#093624', borderRadius:10,}}>
-        <Text style={{color:'white',left:60, margin:15,}}>About Us</Text>
+        <View style={{height:60, width:350, backgroundColor:'#093624', borderRadius:10,}}>
+        <Text style={{color:'white',left:40, margin:15,fontSize:20, fontWeight:'bold'}}>About Us</Text>
         </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleButtonPress('Privancypolicyscreen')} >
-        <View style={{height:50, width:310, backgroundColor:'#093624', borderRadius:10,}}>
-        <Text style={{color:'white',left:60, margin:15,}}>Privacy Policy</Text>
+        <View style={{height:60, width:350, backgroundColor:'#093624', borderRadius:10,}}>
+        <Text style={{color:'white',left:40, margin:15,fontSize:20, fontWeight:'bold'}}>Privacy Policy</Text>
         </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleButtonPress('Home')} >
-        <View style={{height:50, width:310, backgroundColor:'#093624', borderRadius:10,}}>
-        <Text style={{color:'white',left:60, margin:15,}}>Logout</Text>
+        <View style={{height:60, width:350, backgroundColor:'#093624', borderRadius:10,marginBottom:50}}>
+        <Text style={{color:'white',left:40, margin:15,fontSize:20, fontWeight:'bold'}}>Logout</Text>
         </View>
         </TouchableOpacity>
         </View>  

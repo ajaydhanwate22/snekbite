@@ -103,7 +103,7 @@ function RescuerAuthorizesNamesreen({ navigation }) {
               >
                 <View style={{flexDirection:'column', alignItems:'center',top:20, gap:10}}>
                 <Image
-                source={require('../Assets/snake.png')} style={{}}
+                source={require('../Assets/snake.png')}
             />
              
                 <Text style={{ color: 'white', textAlign: 'center', }}>

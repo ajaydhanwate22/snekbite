@@ -18,11 +18,11 @@ function PatientList({ navigation }) {
   const { t } = useTranslation();
   const [patients, setPatients] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(''); 
 
   const fetchPatients = async () => {
     try {
-      const response = await axios.get('https://realrate.store/ajayApi/FetchPatients.php');
+      const response = await axios.get('https://realrate.store/ajayApi/FetchPatients.php'); 
       if (response.data.message === 'Patients fetched successfully') {
         setPatients(response.data.data);
       } else {
@@ -45,78 +45,76 @@ function PatientList({ navigation }) {
           [{ text: 'OK' }],
         );
       }
-    }, 5000); // Show alert after 5 seconds if still loading
+    }, 5000);
 
-    fetchPatients(); // Fetch patients when the component mounts
+    fetchPatients();
 
-    return () => clearTimeout(timeoutId); // Cleanup the timeout on unmount
+    return () => clearTimeout(timeoutId);
   }, [loading]);
-
-  const handleButtonPress = screen => navigation.navigate(screen);
 
   const filteredPatients = patients.filter(patient =>
     patient.fullname.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const handleSearch = () => {
+    // This function can be expanded if needed
+    console.log(`Searching for: ${searchTerm}`);
+  };
 
   return (
     <>
       <ScrollView style={{ backgroundColor: 'white' }}>
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <Image
-            source={require('./Assets/logo.png')}
+            source={require('./Assets/patietlistlogo.png')}
             style={{ width: 90, height: 50, top: 15, margin: 10 }}
           />
         </View>
 
-        <Text
-          style={{
-            textAlign: 'center',
-            top: 15,
-            color: '#093624',
-            fontWeight: 'bold',
-            fontSize: 16,
-          }}>
-          {t('Patient List')}
-        </Text>
-
-        <View style={{ margin: 25, top: 10,borderRadiusL:10, backgroundColor:"#093624" }}>
+        <View style={{ height: 45, width: 320, backgroundColor: "#093624", alignItems: "center", borderRadius: 20, marginVertical: 15, top: 20, left: 35, flexDirection: 'row' }}>
+          {searchTerm.length === 0 && (
+            <Image
+              source={require('./Assets/Search.png')}
+              style={{ width: 20, height: 20, marginLeft: 10 }}
+            />
+          )}
           <TextInput
-            placeholder={t('Search')}
+            placeholder="Search..."
+            placeholderTextColor="#ffffff"
+            style={{
+              flex: 1,
+              color: 'white',
+              marginLeft: 10,
+            }}
             value={searchTerm}
             onChangeText={setSearchTerm}
-            style={{
-              height: 40,
-              borderColor: '#093624',
-              borderWidth: 1,
-              borderRadius: 20,
-              paddingHorizontal: 15,
-            }}
-              placeholderTextColor="#FFFFFF"
           />
-
+          {searchTerm.length > 0 && (
+            <TouchableOpacity onPress={handleSearch} style={{ marginRight: 10 }}>
+              <Text style={{ color: 'white' }}>Search</Text>
+            </TouchableOpacity>
+          )}
         </View>
 
         {loading ? (
           <ActivityIndicator size="large" color="#093624" />
         ) : (
-          <View style={{ gap: 25, top: 30, marginBottom: 200 }}>
+          <View style={{ gap: 20, top: 30, marginBottom:60 }}>
             {filteredPatients.length > 0 ? (
               filteredPatients.map((patient, index) => (
                 <View
                   key={index}
                   style={{
                     height: 80,
-                    width: 250,
+                    width: 300,
                     borderWidth: 2,
                     borderColor: '#000000',
-                    left: 50,
+                    left: 45,
                     borderRadius: 20,
                   }}>
                   <TouchableOpacity
                     onPress={async () => {
-                      // Save patientId to AsyncStorage
                       await AsyncStorage.setItem('patientId', patient.id.toString());
-                      // Navigate to PatientProfile
                       navigation.navigate('Patientprofile');
                     }}>
                     <View style={{ padding: 10 }}>
@@ -141,8 +139,7 @@ function PatientList({ navigation }) {
           </View>
         )}
       </ScrollView>
-
-    <FooterNavigationcenter navigation={navigation}/>
+      <FooterNavigationcenter navigation={navigation} />
     </>
   );
 }

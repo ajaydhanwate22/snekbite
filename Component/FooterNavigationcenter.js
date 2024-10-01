@@ -1,40 +1,46 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 
 const FooterNavigationcenter = ({ navigation }) => {
+  const handleButtonPress = (screen) => {
+    navigation.navigate(screen);
+  };
+
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate('Profiletab')}>
-        <Text style={styles.buttonText}>Profile</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Abouttabscreen')}>
-        <Image source={require('./Assets/about.png')} style={styles.icon} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Editprofilescreen')}>
-        <Image source={require('./Assets/edit.png')} style={styles.icon} />
-      </TouchableOpacity>
+    <View style={{ backgroundColor: 'white' }}>
+      <View
+        style={{
+          height: 60,
+          width: 350,
+          left: 17,
+          backgroundColor: '#093624',
+          marginBottom: 8,
+          borderRadius: 15,
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+        }}
+      >
+        <TouchableOpacity onPress={() => handleButtonPress('Profiletab')}>
+          <Text style={{ color: 'white', fontSize: 20, fontWeight:'bold' }}>
+            Profile
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleButtonPress('Abouttabscreen')}>
+          <Image
+            source={require('./Assets/about.png')}
+            style={{ width: 30, height: 30, resizeMode: 'contain' }}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleButtonPress('Editprofilescreen')}>
+          <Image
+            source={require('./Assets/edit.png')}
+            style={{ width: 30, height: 30, resizeMode: 'contain' }}
+          />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#093624',
-    borderRadius: 15,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    height: 50,
-    paddingHorizontal: 20,
-  },
-  buttonText: {
-    color: 'white', // Make sure this is set to white
-  },
-  icon: {
-    width: 30,
-    height: 30,
-    resizeMode: 'contain',
-  },
-});
 
 export default FooterNavigationcenter;

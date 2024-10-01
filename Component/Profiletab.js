@@ -1,35 +1,59 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ImageBackground, ScrollView, TouchableOpacity , Image } from 'react-native';
+import { View, Text, ImageBackground, ScrollView, TouchableOpacity, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTranslation } from 'react-i18next';
-import Mobilenavigationcomponent from './Mobilenavigationcomponent';
 import FooterNavigationcenter from './FooterNavigationcenter';
 
 function Profiletab({ navigation }) {
   const { t } = useTranslation();
   const [userData, setUserData] = useState(null);
+  const [usedASV, setUsedASV] = useState(0);
+  const [lastUsedDate, setLastUsedDate] = useState('');
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const data = await AsyncStorage.getItem('userData');
         if (data) {
-          setUserData(JSON.parse(data)); // Parse the JSON string back into an object
+          setUserData(JSON.parse(data));
         }
       } catch (error) {
         console.error('Failed to load user data', error);
       }
     };
 
+    const fetchASVData = async () => {
+      try {
+        const storedUsedASV = await AsyncStorage.getItem('usedASV');
+        const storedDate = await AsyncStorage.getItem('lastUsedDate');
+        
+        if (storedUsedASV) {
+          setUsedASV(parseInt(storedUsedASV));
+        }
+        if (storedDate) {
+          setLastUsedDate(formatDate(storedDate));
+        }
+      } catch (error) {
+        console.error('Failed to load ASV data', error);
+      }
+    };
+
     fetchUserData();
+    fetchASVData();
   }, []);
+
+  const formatDate = (dateString) => {
+    const [day, month, year] = dateString.split('-');
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    return `${day} ${months[parseInt(month) - 1]} ${year}`; 
+  };
 
   const handleButtonPress = (screen) => {
     navigation.navigate(screen);
   };
 
   if (!userData) {
-    return <Text>Loading...</Text>; // or some loading indicator
+    return <Text>Loading...</Text>; 
   }
 
   const { authorizesName, email, centerLocation, contactNumber } = userData;
@@ -146,7 +170,7 @@ function Profiletab({ navigation }) {
                 <View style={{ flexDirection: 'column', top: 25 }}>
                   <Text style={{ color: 'white', fontSize: 12 }}>Used ASV</Text>
                   <Text style={{ color: 'white', fontSize: 8 }}>
-                    Last used on 2 March
+                    Last used on {lastUsedDate || 'Not available'}
                   </Text>
                 </View>
                 <Text
@@ -156,7 +180,7 @@ function Profiletab({ navigation }) {
                     top: 10,
                     fontWeight: 'bold',
                   }}>
-                  2
+                  {usedASV || 0}
                 </Text>
               </View>
             </View>
@@ -196,7 +220,7 @@ function Profiletab({ navigation }) {
           </TouchableOpacity>
         </View>
       </ScrollView>
-<FooterNavigationcenter navigation={navigation}/>
+      <FooterNavigationcenter navigation={navigation}/>
     </>
   );
 }
