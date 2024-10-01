@@ -100,7 +100,7 @@ function TreatmentUsedASVscreen({ navigation }) {
         [
           { text: t('Cancel'), onPress: () => {}, style: 'cancel' },
           { text: t('Update'), onPress: async () => {
-              // If user chooses to proceed with the current state
+    
               await updateData(formattedDate);
           }},
         ]
@@ -108,7 +108,6 @@ function TreatmentUsedASVscreen({ navigation }) {
       return;
     }
   
-    // Proceed with the update if both values are changed correctly
     await updateData(formattedDate);
   };
   

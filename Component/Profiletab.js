@@ -9,6 +9,8 @@ function Profiletab({ navigation }) {
   const [userData, setUserData] = useState(null);
   const [usedASV, setUsedASV] = useState(0);
   const [lastUsedDate, setLastUsedDate] = useState('');
+  const [availableASV, setAvailableASV] = useState(0);
+  const [lastStockedDate, setLastStockedDate] = useState('');
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -26,12 +28,20 @@ function Profiletab({ navigation }) {
       try {
         const storedUsedASV = await AsyncStorage.getItem('usedASV');
         const storedDate = await AsyncStorage.getItem('lastUsedDate');
-        
+        const storedAvailableASV = await AsyncStorage.getItem('availableASV');
+        const storedLastStockedDate = await AsyncStorage.getItem('lastStockedDate');
+
         if (storedUsedASV) {
           setUsedASV(parseInt(storedUsedASV));
         }
         if (storedDate) {
           setLastUsedDate(formatDate(storedDate));
+        }
+        if (storedAvailableASV) {
+          setAvailableASV(parseInt(storedAvailableASV));
+        }
+        if (storedLastStockedDate) {
+          setLastStockedDate(formatDate(storedLastStockedDate));
         }
       } catch (error) {
         console.error('Failed to load ASV data', error);
@@ -45,7 +55,7 @@ function Profiletab({ navigation }) {
   const formatDate = (dateString) => {
     const [day, month, year] = dateString.split('-');
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    return `${day} ${months[parseInt(month) - 1]} ${year}`; 
+    return `${day} ${months[parseInt(month) - 1]} ${year}`;
   };
 
   const handleButtonPress = (screen) => {
@@ -53,7 +63,7 @@ function Profiletab({ navigation }) {
   };
 
   if (!userData) {
-    return <Text>Loading...</Text>; 
+    return <Text>Loading...</Text>;
   }
 
   const { authorizesName, email, centerLocation, contactNumber } = userData;
@@ -203,7 +213,7 @@ function Profiletab({ navigation }) {
                     Stock Availability of ASV
                   </Text>
                   <Text style={{ color: 'white', fontSize: 8, textAlign: 'center' }}>
-                    Last stocked on 8 February
+                    Last stocked on {lastStockedDate || 'Not available'}
                   </Text>
                 </View>
                 <Text
@@ -213,7 +223,7 @@ function Profiletab({ navigation }) {
                     top: 10,
                     fontWeight: 'bold',
                   }}>
-                  7
+                  {availableASV || 0}
                 </Text>
               </View>
             </View>
