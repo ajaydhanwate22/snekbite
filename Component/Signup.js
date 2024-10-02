@@ -52,25 +52,35 @@ const SignupScreen = ({navigation}) => {
         },
       });
 
+      
+
       const responseJson = response.data;
       if (responseJson.message === 'Registration successfully') {
         await AsyncStorage.setItem('userData', JSON.stringify({
+          userId: responseJson.id, 
           authorizesName,
           email,
           centerLocation,
           contactNumber,
           centerName,
+          currentStockASV,
+          availabilityOfASV,
+          description,
         }));
 
         Alert.alert('Success', 'Registration successful!', [
           {
             text: 'OK',
             onPress: () => navigation.navigate('Profiletab', {
+              userId: responseJson.id, 
               authorizesName,
               email,
               centerLocation,
               contactNumber,
-              centerName
+              centerName,
+              currentStockASV,
+              availabilityOfASV,
+              description,
             }),
           },
         ]);

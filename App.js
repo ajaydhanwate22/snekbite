@@ -52,6 +52,7 @@ import Guestforgatpsscreen from './Component/Guest/Guestforgatps';
 import Guestverifynoscreen from './Component/Guest/Guestverifyno';
 import Guestnewpsscreen from './Component/Guest/Guestnewps';
 import Patientedit from './Component/Patientedit';
+import AuthorEditscreen from './Component/AuthorEditscreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -70,6 +71,7 @@ function App() {
         <Stack.Screen name="Patientlist" component={Patientlist} options={{ headerShown: false }} />
         <Stack.Screen name="Patientprofile" component={Patientprofile} options={{ headerShown: false }} />
         <Stack.Screen name="Patientedit" component={Patientedit} options={{ headerShown: false }} />
+        <Stack.Screen name="AuthorEditscreen" component={AuthorEditscreen} options={{ headerShown: false }} />
         <Stack.Screen name="GuestLogin" component={GuestLoginScreen} options={{ headerShown: false }} />
         <Stack.Screen name="GuestLoginform" component={GuestLoginform} options={{ headerShown: false }} />
         <Stack.Screen name="GuestLanguage" component={GuestLanguage} options={{ headerShown: false }} />

@@ -39,6 +39,7 @@ function Loginform2Screen({ navigation }) {
         })
         .then(async response => {
           const responseJson = response.data;
+          console.log('Response Data:', responseJson);
           if (responseJson.message === 'LoggedIn successfully') {
             const userData = responseJson.user;
             try {
@@ -47,7 +48,11 @@ function Loginform2Screen({ navigation }) {
                 email: userData.EmailID,
                 contactNumber: userData.ContactNumber,
                 centerLocation: userData.CenterLocation,
-                centerName: userData.CenterName
+                centerName: userData.CenterName,
+                currentStockASV: userData.CurrentstockASV,
+                availabilityOfASV: userData.AvailabilityofASV,
+                description: userData.Description ,
+                userId: userData.id     
               }));
             } catch (error) {
               console.error('Error storing data', error);
@@ -60,7 +65,11 @@ function Loginform2Screen({ navigation }) {
                   email: userData.EmailID,
                   contactNumber: userData.ContactNumber,
                   centerLocation: userData.CenterLocation,
-                  centerName: userData.CenterName
+                  centerName: userData.CenterName,
+                  currentStockASV: userData.CurrentstockASV,
+                  availabilityOfASV: userData.AvailabilityofASV,
+                  description: userData.Description,
+                  userId: userData.id 
                 }),
               },
             ]);
@@ -69,7 +78,6 @@ function Loginform2Screen({ navigation }) {
           }
         })
         .catch(error => {
-          console.error(error);
           Alert.alert('Error', 'An error occurred while submitting the data');
         });
     }
