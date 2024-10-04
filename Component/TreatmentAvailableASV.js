@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -8,13 +8,14 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import FooterNavigationcenter from './FooterNavigationcenter';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 
-function TreatmentAvailableASVscreen({ navigation }) {
-  const { t } = useTranslation();
+function TreatmentAvailableASVscreen({navigation}) {
+  const {t} = useTranslation();
   const [availableASV, setAvailableASV] = useState(0);
   const [day, setDay] = useState('');
   const [month, setMonth] = useState('');
@@ -62,61 +63,71 @@ function TreatmentAvailableASVscreen({ navigation }) {
 
   const handleButtonPress = async () => {
     if (!userData) return;
-  
+
     const formattedDate = `${year}-${month}-${day}`;
-  
+
     // Check for no updates
     if (!dateChanged && !stockChanged) {
       Alert.alert(t('No Update'), t('No Available ASV changes!'));
       navigation.navigate('Profiletab');
       return;
     }
-  
+
     // Check for missing date when stock is updated
     if (stockChanged && (day === '' || month === '' || year === '')) {
       Alert.alert(t('Error'), t('Please fill in the date before saving.'));
       return;
     }
-  
+
     // Check for missing stock when date is updated
     if (dateChanged && initialAvailableASV === availableASV) {
       Alert.alert(
         t('Warning'),
-        t('You have changed the date, but not the Available ASV. Would you like to update the Available ASV?'),
+        t(
+          'You have changed the date, but not the Available ASV. Would you like to update the Available ASV?',
+        ),
         [
-          { text: t('Cancel'), onPress: () => {}, style: 'cancel' },
-          { text: t('Update'), onPress: async () => {
+          {text: t('Cancel'), onPress: () => {}, style: 'cancel'},
+          {
+            text: t('Update'),
+            onPress: async () => {
               await updateData(formattedDate);
-          }},
-        ]
+            },
+          },
+        ],
       );
       return;
     }
-  
+
     // ** New Check: Prompt to update date if stock changed but date unchanged **
     if (stockChanged && (day === '' || month === '' || year === '')) {
       Alert.alert(
         t('Warning'),
-        t('You have changed the Available ASV, but not the date. Would you like to update the date?'),
+        t(
+          'You have changed the Available ASV, but not the date. Would you like to update the date?',
+        ),
         [
-          { text: t('Cancel'), onPress: () => {}, style: 'cancel' },
-          { text: t('Update'), onPress: async () => {
+          {text: t('Cancel'), onPress: () => {}, style: 'cancel'},
+          {
+            text: t('Update'),
+            onPress: async () => {
               // Here, we can prompt them to set the date or set it to today's date
               const today = new Date();
               setDay(today.getDate().toString());
               setMonth((today.getMonth() + 1).toString());
               setYear(today.getFullYear().toString());
               await updateData(formattedDate);
-          }},
-        ]
+            },
+          },
+        ],
       );
       return;
     }
-  
+
     // If both values are changed correctly
     await updateData(formattedDate);
   };
-  const updateData = async (formattedDate) => {
+  const updateData = async formattedDate => {
     const formData = new FormData();
     formData.append('AuthorizesName', userData.authorizesName);
     formData.append('CenterName', userData.centerName);
@@ -124,16 +135,23 @@ function TreatmentAvailableASVscreen({ navigation }) {
     formData.append('Date', formattedDate);
 
     try {
-      const response = await axios.post('https://realrate.store/ajayApi/AvailableASVtretmentcenter.php', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
+      const response = await axios.post(
+        'https://realrate.store/ajayApi/AvailableASVtretmentcenter.php',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
         },
-      });
+      );
 
-      if (response.data.message === "updated successfully") {
+      if (response.data.message === 'updated successfully') {
         // Save the availableASV and date to AsyncStorage
         await AsyncStorage.setItem('availableASV', availableASV.toString());
-        await AsyncStorage.setItem('lastStockedDate', `${day}-${month}-${year}`);
+        await AsyncStorage.setItem(
+          'lastStockedDate',
+          `${day}-${month}-${year}`,
+        );
 
         Alert.alert(t('Success'), response.data.message);
         navigation.navigate('Profiletab');
@@ -142,7 +160,10 @@ function TreatmentAvailableASVscreen({ navigation }) {
       }
     } catch (error) {
       console.error('API call error:', error);
-      Alert.alert(t('Error'), t('Could not submit data. Please try again later.'));
+      Alert.alert(
+        t('Error'),
+        t('Could not submit data. Please try again later.'),
+      );
     }
   };
 
@@ -164,65 +185,104 @@ function TreatmentAvailableASVscreen({ navigation }) {
     return <Text>Loading...</Text>;
   }
 
-  const { authorizesName, centerName } = userData;
+  const {authorizesName, centerName} = userData;
 
   return (
     <>
-      <ScrollView style={{ backgroundColor: 'white' }}>
-        <View style={{ backgroundColor: 'white' }}>
+      <ScrollView style={{backgroundColor: 'white'}}>
+        <View style={{backgroundColor: 'white'}}>
           <ImageBackground
             source={require('./Assets/background.png')}
             style={{
               flex: 1,
               alignItems: 'center',
               justifyContent: 'center',
+              overflow: 'hidden',
               height: 200,
               borderBottomLeftRadius: 40,
               borderBottomRightRadius: 40,
-              top: -100,
-            }} 
-          />
+            }}></ImageBackground>
           <View
             style={{
-              width: 300,
-              height: 100,
+              width: 360,
+              height: 134,
               backgroundColor: '#093624',
-              left: 30,
-              top: -150,
+              left: 13,
+              top: -50,
               borderRadius: 20,
               elevation: 10,
             }}>
-            <View style={{ flexDirection: 'row' }}>
-              <View
-                style={{
-                  height: 50,
-                  width: 50,
-                  left: 50,
-                  top: 20,
-                  backgroundColor: 'white',
-                  borderRadius: 50,
-                }}>
-                <Text style={{ textAlign: 'center', top: 10 }}>Profile</Text>
+            <View style={{flexDirection: 'row', gap: 30}}>
+              <View style={{top: 30, left: 35}}>
+                <FontAwesome6 name="circle-user" size={70} color="white" />
               </View>
-              <View style={{ textAlign: 'center', left: 80, top: 20 }}>
-                <Text style={{ color: 'white', fontSize: 16 }}>{authorizesName}</Text>
-                <Text style={{ color: 'white', fontSize: 10 }}>{centerName}</Text>
+              <View style={{textAlign: 'center', left: 80, top: 20}}>
+                <Text
+                  style={{
+                    color: 'white',
+                    fontSize: 16,
+                    fontWeight: '500',
+                    lineHeight: 24.2,
+                  }}>
+                  Authorizer Name: {'\n'}
+                  <Text style={{fontSize: 10, fontWeight: '400'}}>
+                    {authorizesName}
+                  </Text>
+                </Text>
+                <Text
+                  style={{
+                    color: 'white',
+                    fontSize: 16,
+                    fontWeight: '500',
+                    lineHeight: 24.2,
+                  }}>
+                  Center Name: {'\n'}
+                  <Text style={{fontSize: 10, fontWeight: '400'}}>
+                    {centerName}
+                  </Text>
+                </Text>
               </View>
             </View>
           </View>
-          <Text style={{ textAlign: 'center', top: -120, color: '#093624', fontWeight: 'bold', fontSize: 16 }}>
+          <Text
+            style={{
+              textAlign: 'center',
+              // top: -120,
+              color: '#093624',
+              fontWeight: '500',
+              fontSize: 24,
+              lineHeight: 29.05,
+            }}>
             Stock Availability of ASV
           </Text>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-around', top: -50 }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              // justifyContent: 'space-around',
+              justifyContent: 'center',
+              top: 20,
+              gap: 50,
+            }}>
             <TouchableOpacity onPress={decrementASV}>
-              <Text style={{ fontSize: 50, color: '#093624' }}>-</Text>
+              <Text
+                style={{
+                  fontSize: 64,
+                  color: '#093624',
+                  fontWeight: 400,
+                  lineHeight: 77.45,
+                  top: 30,
+                }}>
+                -
+              </Text>
             </TouchableOpacity>
             <TextInput
               style={{
-                fontSize: 30,
+                fontSize: 96,
                 color: '#093624',
                 width: 100,
                 textAlign: 'center',
+                fontWeight: '700',
+                lineHeight: 116.18,
               }}
               placeholder="Update stock"
               keyboardType="numeric"
@@ -236,13 +296,35 @@ function TreatmentAvailableASVscreen({ navigation }) {
               }}
             />
             <TouchableOpacity onPress={incrementASV}>
-              <Text style={{ fontSize: 50, color: '#093624' }}>+</Text>
+              <Text
+                style={{
+                  fontSize: 64,
+                  color: '#093624',
+                  fontWeight: 400,
+                  lineHeight: 77.45,
+                  top: 30,
+                }}>
+                +
+              </Text>
             </TouchableOpacity>
           </View>
-          <Text style={{ textAlign: 'center', color: '#093624', top: -10, fontWeight: 'bold' }}>
+          <Text
+            style={{
+              textAlign: 'center',
+              color: '#093624',
+              top: 30,
+              fontWeight: '500',
+              fontSize: 24,
+            }}>
             Last Stocked on
           </Text>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-around', top: 20 }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              top: 60,
+              marginBottom:100
+            }}>
             <TextInput
               style={{
                 height: 50,
@@ -301,22 +383,20 @@ function TreatmentAvailableASVscreen({ navigation }) {
           <TouchableOpacity onPress={handleButtonPress}>
             <View
               style={{
-                height: 50,
+                height: 60,
                 width: 150,
-                left: 110,
-                top: 60,
+                left: 120,
                 backgroundColor: '#093624',
                 borderRadius: 10,
-                marginBottom: 100,
+           
               }}>
-              <Text style={{ textAlign: 'center', color: 'white', margin: 15 }}>
+              <Text style={{textAlign: 'center', color: 'white', margin: 18}}>
                 Save
               </Text>
             </View>
           </TouchableOpacity>
         </View>
       </ScrollView>
-      <FooterNavigationcenter navigation={navigation} />
     </>
   );
 }

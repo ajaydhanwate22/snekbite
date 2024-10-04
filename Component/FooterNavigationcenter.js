@@ -1,5 +1,8 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon2 from 'react-native-vector-icons/MaterialIcons';
+import Icon3 from 'react-native-vector-icons/FontAwesome5';
 
 const FooterNavigationcenter = ({ navigation }) => {
   const handleButtonPress = (screen) => {
@@ -8,35 +11,41 @@ const FooterNavigationcenter = ({ navigation }) => {
 
   return (
     <View style={{ backgroundColor: 'white' }}>
+
       <View
         style={{
-          height: 60,
-          width: 350,
-          left: 17,
-          backgroundColor: '#093624',
-          marginBottom: 8,
-          borderRadius: 15,
+          height: 90,
+          // width: 200,
+          // left: 10,
+          backgroundColor: '#192e26',
+          // marginBottom: 2,
+        // borderRadius:10,
           flexDirection: 'row',
-          justifyContent: 'space-around',
+          borderWidth:1,
+          // borderColor:'white',
+          justifyContent: 'space-between',
           alignItems: 'center',
+          paddingLeft:40, 
+          paddingRight:40,
+          borderTopWidth:1,
+          borderTopColor:'white',
+
+
+
         }}
       >
         <TouchableOpacity onPress={() => handleButtonPress('Profiletab')}>
-          <Text style={{ color: 'white', fontSize: 20, fontWeight:'bold' }}>
-            Profile
-          </Text>
+        
+        <Icon name="home" size={40} color="white" />
+        <Text style={{color:'white', marginBottom:7, fontSize:12, textAlign:"center",fontWeight:400}}>Home</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleButtonPress('Abouttabscreen')}>
-          <Image
-            source={require('./Assets/about.png')}
-            style={{ width: 30, height: 30, resizeMode: 'contain' }}
-          />
+        <Icon2 name="explore" size={40} color="white" />
+        <Text style={{color:'white', marginBottom:7, fontSize:12, textAlign:"center"}}>Explore</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleButtonPress('Editprofilescreen')}>
-          <Image
-            source={require('./Assets/edit.png')}
-            style={{ width: 30, height: 30, resizeMode: 'contain' }}
-          />
+        <Icon3 name="user-circle" size={40} color="white" />
+        <Text style={{color:'white', marginBottom:7, fontSize:12, textAlign:"center"}}>Profile</Text>
         </TouchableOpacity>
       </View>
     </View>

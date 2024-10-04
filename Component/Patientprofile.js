@@ -77,7 +77,7 @@ function Patientprofile({navigation}) {
             <TouchableOpacity      onPress={handleEdit} >
             <Image
             source={require('./Assets/pencil.png')}
-            style={{resizeMode: 'contain',left:130, top:-30}}
+            style={{resizeMode: 'contain',left:140}}
           />
           </TouchableOpacity>
               <Image
@@ -114,10 +114,12 @@ function Patientprofile({navigation}) {
           {/* first box profile cntainer  */}
           <Text
             style={{
-              color: '##093624',
-              fontWeight: 'bold',
+              fontSize: 12,
+              color: '#093624',
               marginLeft: 20,
+              // top: 30,
               left: 10,
+              fontWeight: 'bold',
             }}>
             {t('Patient Details')}
           </Text>
@@ -222,7 +224,7 @@ function Patientprofile({navigation}) {
               fontSize: 12,
               color: '#093624',
               marginLeft: 20,
-              top: 70,
+              top: 60,
               fontWeight: 'bold',
               left: 10,
             }}>
@@ -232,7 +234,7 @@ function Patientprofile({navigation}) {
             style={{
               width: 290,
               height: 120,
-              top: 90,
+              top: 70,
               borderRadius: 10,
               marginLeft: 20,
               backgroundColor: 'white',

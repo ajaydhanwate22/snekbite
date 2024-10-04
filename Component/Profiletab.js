@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ImageBackground, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { View, Text, ImageBackground, ScrollView, TouchableOpacity, Image,Modal  } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTranslation } from 'react-i18next';
 import FooterNavigationcenter from './FooterNavigationcenter';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'; 
+import Icon2 from 'react-native-vector-icons/MaterialIcons'; 
+import Icon3 from 'react-native-vector-icons/Fontisto'; 
+import Ionicons from 'react-native-vector-icons/Ionicons'; 
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6'; 
+
 
 function Profiletab({ navigation }) {
   const { t } = useTranslation();
@@ -11,6 +17,8 @@ function Profiletab({ navigation }) {
   const [lastUsedDate, setLastUsedDate] = useState('');
   const [availableASV, setAvailableASV] = useState(0);
   const [lastStockedDate, setLastStockedDate] = useState('');
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false); 
+  const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -62,6 +70,20 @@ function Profiletab({ navigation }) {
     navigation.navigate(screen);
   };
 
+  const toggleEditModal = (item) => {
+    setSelectedItem(item);
+    setIsEditModalVisible(!isEditModalVisible);
+  };
+
+  const handleEditAction = () => {
+    setIsEditModalVisible(false);
+    if (selectedItem === 'asv') {
+      handleButtonPress('TreatmentAvailableASVscreen');
+    } else if (selectedItem === 'usedAsv') {
+      handleButtonPress('TreatmentUsedASVscreen');  // Navigate to "TreatmentUsedASVscreen" when 'usedAsv' is selected
+    }
+  };
+
   if (!userData) {
     return <Text>Loading...</Text>;
   }
@@ -72,72 +94,77 @@ function Profiletab({ navigation }) {
     <>
       <ScrollView style={{ backgroundColor: 'white' }}>
         <View style={{ backgroundColor: 'white' }}>
-          <ImageBackground 
-            source={require('./Assets/background.png')}
-            style={{
-              flex: 1,
-              alignItems: 'center',
-              justifyContent: 'center',
-              overflow: 'hidden',
-              height: 250,
-              borderBottomLeftRadius: 40,
-              borderBottomRightRadius: 40,
-              top: -150,
-            }} 
-          />
+        <ImageBackground
+        source={require('./Assets/background.png')}
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',
+          height: 200,
+          borderBottomLeftRadius: 40,
+          borderBottomRightRadius: 40,
+        }}>
+        <Image
+          source={require('./Assets/logo.png')}
+          style={{resizeMode: 'contain', height: 60, width: 130,top:-10}}
+        />
+      </ImageBackground>
           <View
             style={{
-              width: 300,
-              height: 110,
-              backgroundColor: 'white',
-              left: 30,
-              top: -200,
-              borderRadius: 20,
-              elevation: 10,
+              width: 360,
+              height: 143,
+              backgroundColor: '#ffffff',
+              left: 13,
+              top: -40,
+              borderRadius: 10,
+              elevation: 15,
               flexDirection: 'row',
               justifyContent: 'space-around',
             }}>
-            <View style={{ top: 15, gap: 7 }}>
-              <Text style={{ color: '#093624', fontSize: 16 }}>
+            <View style={{ top: 25, gap: 10 }}>
+              <Text style={{ color: '#093624', fontSize: 20, fontWeight:'500' ,  lineHeight: 24.02,}}>
                 {authorizesName}
               </Text>
-              <Text style={{ color: '#093624', fontSize: 10 }}>
+              <Text style={{ color: '#093624', fontSize: 13, fontWeight:'500' ,  lineHeight: 15.73,}}>
                 {email}
               </Text>
-              <Text style={{ color: '#093624', fontSize: 10 }}>
+              <Text style={{ color: '#093624', fontSize: 13,fontWeight:'500' ,  lineHeight: 15.73, }}>
                 {centerLocation}
               </Text>
-              <Text style={{ color: '#093624', fontSize: 10 }}>
+              <Text style={{ color: '#093624', fontSize: 13,fontWeight:'500' ,  lineHeight: 15.73, }}>
                 {contactNumber}
               </Text>
             </View>
             <View>
-              <Image source={require('./Assets/MaleUser.png')} />
+              <Image source={require('./Assets/MaleUser.png')}  style={{height:120, width:120, top:12}}/>
             </View>
           </View>
-          <Text style={{ left: 40, top: -190, color: '#093624', fontSize: 12 }}>
+          <Text style={{ left: 20, top: -5,  fontWeight: '600',    // 600 weight
+    fontSize: 14,         // Font size 14px
+    lineHeight: 17.23,   }}>
             Patient Details
           </Text>
           <View
             style={{
               flexDirection: 'row',
-              gap: 13,
-              left: 25,
+              gap: 10,
+              left: 10,
               bottom: 20,
-              top: -180,
+              top: 5,
             }}>
             <TouchableOpacity onPress={() => handleButtonPress('patientform')}>
               <View
                 style={{
-                  height: 110,
-                  width: 145,
-                  backgroundColor: '#093624',
-                  elevation: 10,
+                  height: 160,
+                  width: 177,
+                  backgroundColor:  '#093624',
+                  elevation: 15,
                   borderRadius: 15,
                 }}>
-                <View style={{ flexDirection: 'column', alignItems: 'center', top: 10, gap: 10 }}>
-                  <Image source={require('./Assets/rescuraddnewpatient.png')} />
-                  <Text style={{ color: 'white', textAlign: 'center' }}>
+                <View style={{ flexDirection: 'column', alignItems: 'center', top: 40, gap: 10 }}>
+                <FontAwesome6 name="user-plus" size={55} color="white" />
+                  <Text style={{ color: 'white', textAlign: 'center', fontSize:12, fontWeight:"500" , lineHeight: 14.77,top:13}}>
                     Add new patient 
                   </Text>
                 </View>
@@ -146,15 +173,15 @@ function Profiletab({ navigation }) {
             <TouchableOpacity onPress={() => handleButtonPress('Patientlist')}>
               <View
                 style={{
-                  height: 110,
-                  width: 145,
+                  height: 160,
+                  width: 177,
                   backgroundColor: '#093624',
-                  elevation: 10,
+                  elevation: 15,
                   borderRadius: 15,
                 }}>
-                <View style={{ flexDirection: 'column', alignItems: 'center', top: 10, gap: 10 }}>
-                  <Image source={require('./Assets/rescuanimal.png')} />
-                  <Text style={{ color: 'white', textAlign: 'center' }}>
+                <View style={{ flexDirection: 'column', alignItems: 'center', top: 40, gap: 10 }}>
+                <Icon2 name="format-list-bulleted-add" size={55} color="white" />
+                  <Text style={{ color: 'white', textAlign: 'center', fontSize:12, fontWeight:"500" , lineHeight: 14.77,top:13 }}>
                     Patient List
                   </Text>
                 </View>
@@ -162,55 +189,59 @@ function Profiletab({ navigation }) {
             </TouchableOpacity>
           </View>
 
-          <Text style={{ left: 40, top: -170, color: '#093624', fontSize: 12 }}>
+          <Text style={{left: 20, top: 25,  fontWeight: '600',    // 600 weight
+    fontSize: 14,         // Font size 14px
+    lineHeight: 17.23, }}>
             Anti Snake Venom
           </Text>
-          <TouchableOpacity onPress={() => handleButtonPress('TreatmentUsedASVscreen')}>
             <View
               style={{
-                height: 80,
-                width: 310,
+                height: 109,
+                width: 360,
                 backgroundColor: '#093624',
-                left: 25,
-                top: -160,
+                left: 13,
+                top:35,
                 borderRadius: 15,
+                elevation:15
               }}>
               <View style={{ justifyContent: 'space-around', flexDirection: 'row' }}>
-                <Image source={require('./Assets/usedASV.png')} style={{ height: 60, width: 50, top: 10 }} />
-                <View style={{ flexDirection: 'column', top: 25 }}>
-                  <Text style={{ color: 'white', fontSize: 12 }}>Used ASV</Text>
-                  <Text style={{ color: 'white', fontSize: 8 }}>
+              <Icon3 name="injection-syringe" size={67} color="white" style={{top:20}}  />
+                <View style={{ flexDirection: 'column', top: 35 }}>
+                  <Text style={{ color: 'white', fontSize: 16, fontWeight:"600", textAlign:'left' ,   lineHeight: 19.36,}}>Used ASV</Text>
+                  <Text style={{ color: 'white', fontSize: 10 , fontWeight:"400",lineHeight: 12.01,}}>
                     Last used on {lastUsedDate || 'Not available'}
                   </Text>
                 </View>
                 <Text
                   style={{
                     color: 'white',
-                    fontSize: 35,
-                    top: 10,
-                    fontWeight: 'bold',
+                    fontSize: 48,
+                    top: 25,
+                    fontWeight: '700',lineHeight: 58.09,
                   }}>
                   {usedASV || 0}
                 </Text>
-              </View>
+                <TouchableOpacity onPress={() => toggleEditModal('usedAsv')}>
+                <MaterialCommunityIcons name="dots-vertical" size={15} color="white"  style={{top:15}} />
+                </TouchableOpacity>
+                              </View>
             </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleButtonPress('TreatmentAvailableASVscreen')}>
             <View
               style={{
-                height: 80,
-                width: 310,
+                height: 109,
+                width: 360,
                 backgroundColor: '#093624',
-                left: 25,
-                top: -145,
+                left: 13,
+                top: 50,
                 borderRadius: 15,
-                marginBottom: -100
+                marginBottom: 70,
+                elevation:15
               }}>
               <View style={{ justifyContent: 'space-around', flexDirection: 'row' }}>
-                <Image source={require('./Assets/avilabalASV.png')} style={{ width: 50, top: 10 }} />
-                <View style={{ flexDirection: 'column', top: 25 }}>
-                  <Text style={{ color: 'white', textAlign: 'center', fontSize: 12 }}>
-                    Stock Availability of ASV
+              <Ionicons name="cart-sharp" size={67} color="white"  style={{top:20}} />
+                <View style={{ flexDirection: 'column', top: 35 }}>
+                  <Text style={{ color: 'white', fontSize: 16, fontWeight:"600", textAlign:'left' ,   lineHeight: 19.36, }}>
+                    Stock Availability{'\n'} of ASV
                   </Text>
                   <Text style={{ color: 'white', fontSize: 8, textAlign: 'center' }}>
                     Last stocked on {lastStockedDate || 'Not available'}
@@ -219,15 +250,46 @@ function Profiletab({ navigation }) {
                 <Text
                   style={{
                     color: 'white',
-                    fontSize: 35,
-                    top: 10,
-                    fontWeight: 'bold',
+                    fontSize: 48,
+                    top: 25,
+                    fontWeight: '700',lineHeight: 58.09,
                   }}>
                   {availableASV || 0}
                 </Text>
+                <TouchableOpacity onPress={() => toggleEditModal('asv')}>
+                <MaterialCommunityIcons name="dots-vertical" size={15} color="white"  style={{top:15}} />
+                </TouchableOpacity>
+                <Modal
+            transparent={true}
+            animationType="slide"
+            visible={isEditModalVisible}
+            onRequestClose={() => setIsEditModalVisible(false)}
+          >
+            <View style={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: 'rgba(0,0,0,0.5)',
+            }}>
+              <View style={{
+                backgroundColor: 'white',
+                padding: 20,
+                borderRadius: 10,
+                width: 300,
+                alignItems: 'center',
+              }}>
+                <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 20 }}>Select Action</Text>
+                <TouchableOpacity onPress={handleEditAction}>
+                  <Text style={{ fontSize: 16, color: '#093624', padding: 10 }}>Edit ASV</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setIsEditModalVisible(false)}>
+                  <Text style={{ fontSize: 16, color: 'red', padding: 10 }}>Cancel</Text>
+                </TouchableOpacity>
               </View>
             </View>
-          </TouchableOpacity>
+          </Modal>
+              </View> 
+            </View>
         </View>
       </ScrollView>
       <FooterNavigationcenter navigation={navigation}/>

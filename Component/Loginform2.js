@@ -39,7 +39,6 @@ function Loginform2Screen({ navigation }) {
         })
         .then(async response => {
           const responseJson = response.data;
-          console.log('Response Data:', responseJson);
           if (responseJson.message === 'LoggedIn successfully') {
             const userData = responseJson.user;
             try {

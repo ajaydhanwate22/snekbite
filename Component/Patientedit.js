@@ -29,13 +29,36 @@ function Patientedit({ route, navigation }) {
   const handleUpdate = async () => {
     const id = patientDetails.id;
 
+    // Check for required fields
     if (!fullname || !age || !gender || !contactNumber || !address || !usedASV || !biteLocation || !affectedbodypart || !rescuername || !patientstatus || !anyDisablity) {
       Alert.alert('Missing Information', 'Please fill in all required fields before updating.');
       return;
     }
 
+    // Check if any field has changed
+    const hasChanges =
+      fullname !== patientDetails.FullName ||
+      age !== patientDetails.Age.toString() ||
+      gender !== patientDetails.Gender ||
+      contactNumber !== patientDetails.ContactNumber ||
+      address !== patientDetails.Address ||
+      snakeID !== patientDetails.SnakeID ||
+      biteLocation !== patientDetails.BiteLocation ||
+      affectedbodypart !== patientDetails.AffectedBodypart ||
+      usedASV !== patientDetails.UsedASV ||
+      rescuername !== patientDetails.Rescuername ||
+      patientstatus !== patientDetails.Patientstatus ||
+      anyDisablity !== patientDetails.AnyDisablity;
+
+    if (!hasChanges) {
+      Alert.alert('No Changes', 'No updates were made to the patient details.', [
+        { text: 'OK', onPress: () => navigation.goBack() },
+      ]);
+      return;
+    }
+
     const formData = new FormData();
-    formData.append('id', id); 
+    formData.append('id', id);
     formData.append('FullName', fullname);
     formData.append('Age', age);
     formData.append('Gender', gender);
@@ -70,7 +93,7 @@ function Patientedit({ route, navigation }) {
 
   return (
     <ScrollView style={{ backgroundColor: 'white' }}>
-      <ImageBackground
+     <ImageBackground
         source={require('./Assets/background.png')}
         style={{
           flex: 1,
@@ -83,30 +106,31 @@ function Patientedit({ route, navigation }) {
         }}>
         <Image
           source={require('./Assets/logo.png')}
-          style={{ resizeMode: 'contain', height: 200, width: 200 }}
+          style={{resizeMode: 'contain', height: 200, width: 200}}
         />
       </ImageBackground>
       <View
         style={{
           width: 340,
+          height: 1150,
           backgroundColor: 'white',
+          left: 20,
+          top: -60,
           borderRadius: 30,
-          elevation: 10,
-          marginHorizontal: 20,
-          marginTop: -60,
-          padding: 20,
+          marginBottom: -30,
+          elevation: 5,
         }}>
         <Text
           style={{
             textAlign: 'center',
             color: '#093624',
             fontSize: 25,
+            margin: 30,
             fontWeight: 'bold',
-            marginBottom: 20,
           }}>
           Update Form
         </Text>
-        <Text style={{ color: '#093624', fontWeight: 'bold', marginBottom: 10 }}>
+        <Text style={{ left: 30, color: '#093624', fontWeight: 'bold'}}>
           Patient Details
         </Text>
         <TextInput
@@ -145,7 +169,7 @@ function Patientedit({ route, navigation }) {
           value={address}
           onChangeText={setAddress}
         />
-        <Text style={{ color: '#093624', fontWeight: 'bold', marginBottom: 10 }}>
+        <Text style={{ left: 30, color: '#093624', fontWeight: 'bold'}}>
           Snakebite Details
         </Text>
         <TextInput
@@ -183,7 +207,7 @@ function Patientedit({ route, navigation }) {
           value={rescuername}
           onChangeText={setRescuername}
         />
-        <Text style={{ color: '#093624', fontWeight: 'bold', marginTop: 20 }}>
+        <Text style={{ left: 30, color: '#093624', fontWeight: 'bold' }}>
           Discharge Details
         </Text>
         <TextInput
@@ -204,13 +228,15 @@ function Patientedit({ route, navigation }) {
           <View
             style={{
               height: 50,
-              marginVertical: 20,
+              margin: 12,
+              width: 300,
+              left: 10,
+              borderWidth: 1,
               borderRadius: 10,
               backgroundColor: '#093624',
-              justifyContent: 'center',
-              alignItems: 'center',
+              top:30
             }}>
-            <Text style={{ color: 'white' }}>Save</Text>
+            <Text style={{color: 'white', padding: 15, textAlign: 'center' }}>Update</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -220,12 +246,17 @@ function Patientedit({ route, navigation }) {
 
 const styles = {
   input: {
-    height: 50,
-    marginVertical: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
     borderWidth: 1,
-    paddingLeft: 15,
-    borderRadius: 10,
     borderColor: '#093624',
+    borderRadius: 10,
+    left: 10,
+    paddingLeft: 10,
+    gap: 20,
+    margin: 12,
+    width: 300,
+    height: 50,
   },
 };
 

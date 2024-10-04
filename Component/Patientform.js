@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import {View,Text,TextInput, TouchableOpacity, Alert, ImageBackground, Image,ScrollView,} from 'react-native';
+import { 
+  View, 
+  Text, 
+  TextInput, 
+  TouchableOpacity, 
+  Alert, 
+  ImageBackground, 
+  Image, 
+  ScrollView, 
+  Modal 
+} from 'react-native';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import FooterNavigationcenter from './FooterNavigationcenter';
@@ -18,6 +28,13 @@ function Patientgform({ navigation }) {
   const [rescuername, setRescuername] = useState('');
   const [patientstatus, setPatientstatus] = useState('');
   const [anyDisablity, setAnyDisablity] = useState('');
+  const [genderModalVisible, setGenderModalVisible] = useState(false);
+  const [statusModalVisible, setStatusModalVisible] = useState(false);
+  const [disabilityModalVisible, setDisabilityModalVisible] = useState(false);
+
+  const genders = ['Male', 'Female', 'Other'];
+  const statuses = ['Stable', 'Critical', 'Under Observation', 'Discharged'];
+  const disabilities = ['None', 'Temporary', 'Permanent'];
 
   const handleButtonPress = async () => {
     if (!fullname || !age || !gender || !contactNumber || !address || !biteLocation || !affectedbodypart || !usedASV || !rescuername || !patientstatus || !anyDisablity) {
@@ -63,11 +80,9 @@ function Patientgform({ navigation }) {
     }
   };
 
-
-
   return (
     <>
-      <ScrollView style={{backgroundColor: 'white'}}>
+      <ScrollView style={{ backgroundColor: 'white' }}>
       <ImageBackground
         source={require('./Assets/background.png')}
         style={{
@@ -93,7 +108,7 @@ function Patientgform({ navigation }) {
             top: -60,
             borderRadius: 30,
             marginBottom: -30,
-            elevation: 10,
+            elevation: 5,
           }}>
           <Text
             style={{
@@ -105,71 +120,81 @@ function Patientgform({ navigation }) {
             }}>
             Patient Form
           </Text>
-          <Text style={{left: 30, color: '#093624', fontWeight: 'bold'}}>
+          <Text style={{ left: 30, color: '#093624', fontWeight: 'bold' }}>
             Patient Details
           </Text>
+          <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            borderWidth: 1,
+            borderColor: '#093624',
+            borderRadius: 10,
+            left: 10,
+            paddingLeft: 10,
+            gap: 20,
+            margin: 12,
+            width: 300,
+            height: 50,
+          }}>
           <TextInput
-            style={{
-              height: 50,
-              margin: 12,
-              width: 300,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              margin: 12,
-              borderColor: '#093624',
-            }}
-            placeholder="Full Name"
+            placeholder={t("Full name")}
             placeholderTextColor="#093624"
             value={fullname}
             onChangeText={setFullname}
           />
+        </View>
           <TextInput
             style={{
-              height: 50,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left: 10,
+              paddingLeft: 10,
+              gap: 20,
               margin: 12,
               width: 300,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              margin: 12,
-              borderColor: '#093624',
+              height: 50,
             }}
             placeholder="Age"
             placeholderTextColor="#093624"
             value={age}
             onChangeText={setAge}
           />
-          <TextInput
+          <TouchableOpacity 
             style={{
-              height: 50,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left: 10,
+              paddingLeft: 10,
+              gap: 20,
               margin: 12,
               width: 300,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              margin: 12,
-              borderColor: '#093624',
-            }}
-            placeholder="Gender"
-            placeholderTextColor="#093624"
-            value={gender}
-            onChangeText={setGender}
-          />
+              height: 50,
+            }} 
+            onPress={() => setGenderModalVisible(true)}>
+            <Text style={{color: gender ? '#000' : '#093624' }}>
+              {gender || "Gender"}
+            </Text>
+          </TouchableOpacity>
           <TextInput
             style={{
-              height: 50,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left: 10,
+              paddingLeft: 10,
+              gap: 20,
               margin: 12,
               width: 300,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              margin: 12,
-              borderColor: '#093624',
+              height: 50,
             }}
             placeholder="Contact details of patient"
             placeholderTextColor="#093624"
@@ -178,35 +203,39 @@ function Patientgform({ navigation }) {
           />
           <TextInput
             style={{
-              height: 50,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left: 10,
+              paddingLeft: 10,
+              gap: 20,
               margin: 12,
               width: 300,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              margin: 12,
-              borderColor: '#093624',
+              height: 50,
             }}
             placeholder="Address"
             placeholderTextColor="#093624"
             value={address}
             onChangeText={setAddress}
           />
-          <Text style={{left: 30, color: '#093624', fontWeight: 'bold'}}>
+          <Text style={{ left: 30, color: '#093624', fontWeight: 'bold' }}>
             Snakebite Details
           </Text>
           <TextInput
             style={{
-              height: 50,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left: 10,
+              paddingLeft: 10,
+              gap: 20,
               margin: 12,
               width: 300,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              margin: 12,
-              borderColor: '#093624',
+              height: 50,
             }}
             placeholder="Snake ID(if available)"
             placeholderTextColor="#093624"
@@ -215,15 +244,17 @@ function Patientgform({ navigation }) {
           />
           <TextInput
             style={{
-              height: 50,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left: 10,
+              paddingLeft: 10,
+              gap: 20,
               margin: 12,
               width: 300,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              margin: 12,
-              borderColor: '#093624',
+              height: 50,
             }}
             placeholder="Bite location(area)"
             placeholderTextColor="#093624"
@@ -232,15 +263,17 @@ function Patientgform({ navigation }) {
           />
           <TextInput
             style={{
-              height: 50,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left: 10,
+              paddingLeft: 10,
+              gap: 20,
               margin: 12,
               width: 300,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              margin: 12,
-              borderColor: '#093624',
+              height: 50,
             }}
             placeholder="Affected body part"
             placeholderTextColor="#093624"
@@ -249,15 +282,17 @@ function Patientgform({ navigation }) {
           />
           <TextInput
             style={{
-              height: 50,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left: 10,
+              paddingLeft: 10,
+              gap: 20,
               margin: 12,
               width: 300,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              margin: 12,
-              borderColor: '#093624',
+              height: 50,
             }}
             placeholder="Used ASV on the patient"
             placeholderTextColor="#093624"
@@ -266,22 +301,24 @@ function Patientgform({ navigation }) {
           />
           <TextInput
             style={{
-              height: 50,
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#093624',
+              borderRadius: 10,
+              left: 10,
+              paddingLeft: 10,
+              gap: 20,
               margin: 12,
               width: 300,
-              left: 10,
-              borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              margin: 12,
-              borderColor: '#093624',
+              height: 50,
             }}
             placeholder="Rescuer name"
             placeholderTextColor="#093624"
             value={rescuername}
             onChangeText={setRescuername}
           />
-          <View
+           <View
             style={{
               width: 100,
               height: 90,
@@ -306,46 +343,49 @@ function Patientgform({ navigation }) {
               }}
             />
           </View>
-          <Text
-            style={{left: 30, color: '#093624', fontWeight: 'bold', top: 30}}>
+          <Text style={{ left: 30, color: '#093624', fontWeight: 'bold', top:30 }}>
             Discharge Details 
           </Text>
-          <TextInput
+          <TouchableOpacity 
             style={{
-              height: 50,
-              margin: 12,
-              top:30,
-              width: 300,
-              left: 10,
+              flexDirection: 'row',
+              alignItems: 'center',
               borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              margin: 12,
               borderColor: '#093624',
-            }}
-            placeholder="Patient Status"
-            placeholderTextColor="#093624"
-            value={patientstatus}
-            onChangeText={setPatientstatus}
-          />
-          <TextInput
-            style={{
-              height: 50,
+              borderRadius: 10,
+              left: 10,
+              paddingLeft: 10,
+              gap: 20,
               margin: 12,
               width: 300,
-              top:30,
-              left: 10,
+              height: 50,
+              top:30
+            }} 
+            onPress={() => setStatusModalVisible(true)}>
+            <Text style={{  color: patientstatus ? '#000' : '#093624' }}>
+              {patientstatus || "Patient Status"}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
               borderWidth: 1,
-              paddingLeft: 30,
-              borderRadius: 10,
-              margin: 12,
               borderColor: '#093624',
-            }}
-            placeholder="Any Disability Caused"
-            placeholderTextColor="#093624"
-            value={anyDisablity}
-            onChangeText={setAnyDisablity}
-          />
+              borderRadius: 10,
+              left: 10,
+              paddingLeft: 10,
+              gap: 20,
+              margin: 12,
+              width: 300,
+              height: 50,
+              top:30
+            }} 
+            onPress={() => setDisabilityModalVisible(true)}>
+            <Text style={{ color: anyDisablity ? '#000' : '#093624' }}>
+              {anyDisablity || "Any Disability Caused"}
+            </Text>
+          </TouchableOpacity>
           <TouchableOpacity onPress={handleButtonPress}>
             <View
               style={{
@@ -356,16 +396,144 @@ function Patientgform({ navigation }) {
                 borderWidth: 1,
                 borderRadius: 10,
                 backgroundColor: '#093624',
-                top: 40,
+                top:30
               }}>
-              <Text style={{color: 'white', padding: 15, textAlign: 'center'}}>
+              <Text style={{ color: 'white', padding: 15, textAlign: 'center' }}>
                 Save
               </Text>
             </View>
           </TouchableOpacity>
         </View>
       </ScrollView>
- <FooterNavigationcenter navigation={navigation}/>
+
+      {/* Gender Selection Modal */}
+     {/* Gender Selection Modal */}
+<Modal
+  transparent={true}
+  animationType="slide"
+  visible={genderModalVisible}
+  onRequestClose={() => setGenderModalVisible(false)}>
+  <View style={{
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  }}>
+    <View style={{ 
+      backgroundColor: 'white', 
+      borderRadius: 10, 
+      padding: 20,
+      width: '70%', // Adjust the width here
+      height: '35%', // Adjust the height here
+      alignSelf: 'center', // Center the modal
+    }}>
+      <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold', marginBottom: 10 }}>
+        Select Gender
+      </Text>
+      {genders.map((item, index) => (
+        <TouchableOpacity key={index} onPress={() => {
+          setGender(item);
+          setGenderModalVisible(false);
+        }}>
+          <Text style={{
+            padding: 15,
+            backgroundColor: 'white',
+            borderBottomWidth: 1,
+            borderBottomColor: '#ccc',
+          }}>{item}</Text>
+        </TouchableOpacity>
+      ))}
+      <TouchableOpacity onPress={() => setGenderModalVisible(false)}>
+        <Text style={{ padding: 15, color: 'red', textAlign: 'center' }}>Close</Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+</Modal>
+
+{/* Patient Status Modal */}
+<Modal
+  transparent={true}
+  animationType="slide"
+  visible={statusModalVisible}
+  onRequestClose={() => setStatusModalVisible(false)}>
+  <View style={{
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  }}>
+    <View style={{ 
+      backgroundColor: 'white', 
+      borderRadius: 10, 
+      padding: 20,
+      width: '70%', // Adjust the width here
+      height: '40%', // Adjust the height here
+      alignSelf: 'center', // Center the modal
+    }}>
+      <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold', marginBottom: 10 }}>
+        Select Patient Status
+      </Text>
+      {statuses.map((item, index) => (
+        <TouchableOpacity key={index} onPress={() => {
+          setPatientstatus(item);
+          setStatusModalVisible(false);
+        }}>
+          <Text style={{
+            padding: 15,
+            backgroundColor: 'white',
+            borderBottomWidth: 1,
+            borderBottomColor: '#ccc',
+          }}>{item}</Text>
+        </TouchableOpacity>
+      ))}
+      <TouchableOpacity onPress={() => setStatusModalVisible(false)}>
+        <Text style={{ padding: 15, color: 'red', textAlign: 'center' }}>Close</Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+</Modal>
+
+{/* Disability Modal */}
+<Modal
+  transparent={true}
+  animationType="slide"
+  visible={disabilityModalVisible}
+  onRequestClose={() => setDisabilityModalVisible(false)}>
+  <View style={{
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  }}>
+    <View style={{ 
+      backgroundColor: 'white', 
+      borderRadius: 10, 
+      padding: 20,
+      width: '70%', // Adjust the width here
+      height: '35%', // Adjust the height here
+      alignSelf: 'center', // Center the modal
+    }}>
+      <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold', marginBottom: 10 }}>
+        Select Disability
+      </Text>
+      {disabilities.map((item, index) => (
+        <TouchableOpacity key={index} onPress={() => {
+          setAnyDisablity(item);
+          setDisabilityModalVisible(false);
+        }}>
+          <Text style={{
+            padding: 15,
+            backgroundColor: 'white',
+            borderBottomWidth: 1,
+            borderBottomColor: '#ccc',
+          }}>{item}</Text>
+        </TouchableOpacity>
+      ))}
+      <TouchableOpacity onPress={() => setDisabilityModalVisible(false)}>
+        <Text style={{ padding: 15, color: 'red', textAlign: 'center' }}>Close</Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+</Modal>
+
+      <FooterNavigationcenter navigation={navigation} />
     </>
   );
 }

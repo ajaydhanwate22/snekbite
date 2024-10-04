@@ -13,6 +13,7 @@ import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FooterNavigationcenter from './FooterNavigationcenter';
+import EvilIcons from 'react-native-vector-icons/EvilIcons'; 
 
 function PatientList({ navigation }) {
   const { t } = useTranslation();
@@ -71,12 +72,9 @@ function PatientList({ navigation }) {
           />
         </View>
 
-        <View style={{ height: 45, width: 320, backgroundColor: "#093624", alignItems: "center", borderRadius: 20, marginVertical: 15, top: 20, left: 35, flexDirection: 'row' }}>
+        <View style={{ height: 45, width: 320, backgroundColor: "#093624", alignItems: "center", borderRadius: 20, marginVertical: 15, top: 20, left: 40, flexDirection: 'row' }}>
           {searchTerm.length === 0 && (
-            <Image
-              source={require('./Assets/Search.png')}
-              style={{ width: 20, height: 20, marginLeft: 10 }}
-            />
+             <EvilIcons name="search" size={30} color="white" style={{left:10,top:-3}}/>
           )}
           <TextInput
             placeholder="Search..."
@@ -84,7 +82,7 @@ function PatientList({ navigation }) {
             style={{
               flex: 1,
               color: 'white',
-              marginLeft: 10,
+              marginLeft: 20,
             }}
             value={searchTerm}
             onChangeText={setSearchTerm}
@@ -109,7 +107,7 @@ function PatientList({ navigation }) {
                     width: 300,
                     borderWidth: 2,
                     borderColor: '#000000',
-                    left: 45,
+                    left: 48,
                     borderRadius: 20,
                   }}>
                   <TouchableOpacity

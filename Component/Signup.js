@@ -53,7 +53,7 @@ const SignupScreen = ({navigation}) => {
       });
 
       
-
+      console.log(response.data);
       const responseJson = response.data;
       if (responseJson.message === 'Registration successfully') {
         await AsyncStorage.setItem('userData', JSON.stringify({
@@ -366,7 +366,7 @@ const SignupScreen = ({navigation}) => {
               top: 20,
             }}>
             <Text style={{color: 'white', padding: 15, textAlign: 'center'}}>
-              {t('Next')}
+              {t('Submit')}
             </Text>
           </View>
         </TouchableOpacity>

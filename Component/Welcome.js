@@ -25,9 +25,9 @@ const WelcomeScreen = ({ navigation }) => {
         <Text style={{ fontSize: 12, color: '#fff', marginBottom: 50 }}>
           {t('Choose your role to access')}
         </Text>
-        <View style={{ marginTop: 30, gap: 10 }}>
+        <View style={{ marginTop: 30, gap: 20 }}>
           <TouchableOpacity
-            style={{ flexDirection: 'row', alignItems: 'center', borderColor: '#fff', borderWidth: 1, borderRadius: 6, padding: 15, marginBottom: 30, width: '80%', height: 50, maxWidth: 300, backgroundColor: 'transparent' }}
+            style={{ flexDirection: 'row', alignItems: 'center', borderColor: '#fff', borderWidth: 1, borderRadius: 6, padding: 15, marginBottom: 30, width: '80%', height: 70, maxWidth: 330, backgroundColor: 'transparent' }}
             onPress={() => handleButtonPress('Language')}>
             <Image source={require('./Assets/Hospital.png')} style={{ width: 24, height: 24, marginRight: 10 }} />
             <Text style={{ fontSize: 14, fontWeight: 'bold', color: '#fff', flex: 1, textAlign: 'center' }}>
@@ -36,7 +36,7 @@ const WelcomeScreen = ({ navigation }) => {
             <Image source={require('./Assets/Forward.png')} style={{ width: 24, height: 24, marginLeft: 10 }} />
           </TouchableOpacity>
           <TouchableOpacity
-            style={{ flexDirection: 'row', alignItems: 'center', borderColor: '#fff', borderWidth: 1, borderRadius: 6, padding: 15, marginBottom: 30, width: '80%', height: 50, maxWidth: 300, backgroundColor: 'transparent' }}
+            style={{ flexDirection: 'row', alignItems: 'center', borderColor: '#fff', borderWidth: 1, borderRadius: 6, padding: 15, marginBottom: 30, width: '80%', height: 70, maxWidth: 330, backgroundColor: 'transparent' }}
             onPress={() => handleButtonPress('RescuerlanguageScreen')}>
             <Image source={require('./Assets/IdentificationDocuments.png')} style={{ width: 24, height: 24, marginRight: 10 }} />
             <Text style={{ fontSize: 14, fontWeight: 'bold', color: '#fff', flex: 1, textAlign: 'center' }}>
@@ -45,7 +45,7 @@ const WelcomeScreen = ({ navigation }) => {
             <Image source={require('./Assets/Forward.png')} style={{ width: 24, height: 24, marginLeft: 10 }} />
           </TouchableOpacity>
           <TouchableOpacity
-            style={{ flexDirection: 'row', alignItems: 'center', borderColor: '#fff', borderWidth: 1, borderRadius: 6, padding: 15, marginBottom: 30, width: '80%', height: 50, maxWidth: 300, backgroundColor: 'transparent' }}
+            style={{ flexDirection: 'row', alignItems: 'center', borderColor: '#fff', borderWidth: 1, borderRadius: 6, padding: 15, marginBottom: 30, width: '80%', height: 70, maxWidth: 330, backgroundColor: 'transparent' }}
             onPress={() => navigation.navigate('GuestLanguage')}>
             <Image source={require('./Assets/Customer.png')} style={{ width: 24, height: 24, marginRight: 10 }} />
             <Text style={{ fontSize: 14, fontWeight: 'bold', color: '#fff', flex: 1, textAlign: 'center' }}>
@@ -59,10 +59,10 @@ const WelcomeScreen = ({ navigation }) => {
         source={require('./Assets/logo.png')}
         style={{ marginTop: 50, width: 100, height: 100, resizeMode: 'contain', marginBottom: 20 }}
       />
-      <Text style={{ color: 'white', textAlign: 'center', fontSize: 8, fontWeight: 'bold', top: 60 }}>
+      <Text style={{ color: 'white', textAlign: 'center', fontSize: 8, fontWeight: 'bold', top: 10 }}>
        { t('COPYRIGHT © 2024 WFN, ALL RIGHTS RESERVED')}
       </Text>
-      <Text style={{ color: 'white', textAlign: 'center', fontSize: 6, fontWeight: 'bold', top: 65 }}>
+      <Text style={{ color: 'white', textAlign: 'center', fontSize: 6, fontWeight: 'bold', top: 15 }}>
         {t('Developed by KodSoft')}
       </Text>
     </ImageBackground>
