@@ -2,17 +2,17 @@ import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, ImageBackground, Image, ScrollView } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-function Verifymobilescreen({ navigation }) {
+function Treatmentnewpsscreen({ navigation }) {
   const { t } = useTranslation();
   const handleButtonPress = () => {
-    navigation.navigate('Treatmentnewpsscreen');
+    navigation.navigate('Loginform2Screen');
   };
 
   return (
     <ScrollView style={{backgroundColor:'white'}}>
     <View style={{ backgroundColor: 'white' }}>
       <ImageBackground
-          source={require('./Assets/background.png')}
+       source={require('../Assets/background.png')}
         style={{
           flex: 1,
           alignItems: 'center',
@@ -24,8 +24,8 @@ function Verifymobilescreen({ navigation }) {
         }}
       >
         <Image
-         source={require('./Assets/logo.png')}
-          style={{ resizeMode: 'contain', height: 200, width: 200 }}
+             source={require('../Assets/logo.png')}
+          style={{ resizeMode: 'contain', height: 150, width: 150 }}
         />
       </ImageBackground>
       <View
@@ -34,7 +34,7 @@ function Verifymobilescreen({ navigation }) {
           height: 450,
           backgroundColor: 'white',
           left: 30,
-          top: -60,
+          top: -50,
           borderRadius: 30,
           marginBottom: -30,
           elevation: 10,
@@ -49,12 +49,10 @@ function Verifymobilescreen({ navigation }) {
             fontWeight: 'bold',
           }}
         >
-          {t('Verify Your Mobile No.')}
+          {t('Create New Password')}
         </Text>
-        <Text
-          style={{ textAlign: 'center', padding: 10, color: '#093624' }}
-        >
-          {t('Please Enter The 4 Digit Code Sent To 9********7')}
+        <Text style={{ color: '#A3A3A3', top: 30, left: 30 }}>
+          {t('Enter New Password')}
         </Text>
         <TextInput
           style={{
@@ -62,35 +60,53 @@ function Verifymobilescreen({ navigation }) {
             margin: 12,
             width: 250,
             top: 30,
-            left: 10,
+            left: 20,
             borderWidth: 1,
             paddingLeft: 30,
             borderRadius: 10,
             borderColor: '#093624',
             color: '#093624',
           }}
-          placeholder="OTP"
+          placeholder=""
           placeholderTextColor="#093624"
         />
-
+        <Text style={{ color: '#A3A3A3', top: 30, left: 30 }}>
+          {t('Confirm Password')}
+        </Text>
+        <TextInput
+          style={{
+            height: 40,
+            margin: 12,
+            width: 250,
+            top: 30,
+            left: 20,
+            borderWidth: 1,
+            paddingLeft: 30,
+            borderRadius: 10,
+            borderColor: '#093624',
+            color: '#093624',
+          }}
+          placeholder=""
+          placeholderTextColor="#093624"
+        />
         <Text
           style={{
             top: 50,
             textAlign: 'center',
             color: '#093624',
-            fontSize: 16,
+            fontSize: 12,
           }}
         >
-          {t('Resend Code')}
+          {t('Change Password')}
         </Text>
         <TouchableOpacity
-          onPress={() => handleButtonPress('Guestnewpsscreen')}
+          onPress={() => handleButtonPress('RescuerloginformScreen')}
         >
           <View
             style={{
               height: 50,
               margin: 12,
-              top: 120,
+              top: 100,
               width: 150,
               left: 75,
               borderWidth: 1,
@@ -99,7 +115,7 @@ function Verifymobilescreen({ navigation }) {
             }}
           >
             <Text style={{ color: 'white', padding: 15, left: 45 }}>
-              {t('Verify')}
+              {t('Save')}
             </Text>
           </View>
         </TouchableOpacity>
@@ -109,4 +125,4 @@ function Verifymobilescreen({ navigation }) {
   );
 }
 
-export default Verifymobilescreen;
+export default Treatmentnewpsscreen;

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { View, Text, ImageBackground, ScrollView, TouchableOpacity, Image, Modal, SafeAreaView,Alert } from 'react-native';
 import {useTranslation} from 'react-i18next';
-import RescuerFooterNavigation from './RescuerFooterNavigation';
+import FooterNavigationcenter from './FooterNavigationcenter';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
 import Icon3 from 'react-native-vector-icons/Fontisto';
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
@@ -11,15 +11,13 @@ import {useFocusEffect} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-function RescuerAuthorizesNamesreen({ navigation, route }) {
+function Profiletab({navigation, route}) {
   const {t} = useTranslation();
   const [userData, setUserData] = useState(null);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const userId = route.params?.userId; 
 
-
-  
   useEffect(() => {
     if (userId) {
       fetchUserData(userId);
@@ -34,9 +32,10 @@ function RescuerAuthorizesNamesreen({ navigation, route }) {
     }, [userId])
   );
 
+
   const fetchUserData = async (userId) => {
     try {
-      const response = await fetch(`https://realrate.store/ajayApi/Rescuefetchdata.php?userId=${userId}`);
+      const response = await fetch(`https://realrate.store/ajayApi/Fetchauthor.php?userId=${userId}`);
       const data = await response.json();
 
       if (data.message === 'User data fetched successfully') {
@@ -48,6 +47,16 @@ function RescuerAuthorizesNamesreen({ navigation, route }) {
     } catch (error) {
       console.error('Error fetching user data:', error);
     }
+  };
+
+
+  const formatDate = dateString => {
+    if (!dateString) {
+      return "Date not available"; 
+    }
+    const [day, month, year] = dateString.split('-');
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return `${day} ${months[parseInt(month) - 1]} ${year}`;
   };
 
   const handleButtonPress = (screen, params) => {
@@ -63,23 +72,23 @@ function RescuerAuthorizesNamesreen({ navigation, route }) {
     setIsEditModalVisible(false);
 
 if (selectedItem === 'asv') {
-      navigation.navigate('StockASVScreen',{ userId });
+      navigation.navigate('TreatmentAvailableASVscreen',{ userId });
     } else if (selectedItem === 'usedAsv') {
-      navigation.navigate('UsedASVscreen',{ userId });
+      navigation.navigate('TreatmentUsedASVscreen',{ userId });
     }
 };
+
 
   if (!userData) {
     return <Text>No user data found.</Text>;
   }
 
-  const { RescuerName, Age, Gender, ContactNumber, EmailID, Address, Experience, Education} = userData
-
+  const { AuthorizesName, EmailID, CenterName, ContactNumber, AvailableASVDate, UsedASVdate, UsedASV, AvailabilityofASV, CenterLocation, photo_url } = userData
 
 
   const handleLogout = () => {
     Alert.alert(
-      t('Are you sure you want to log out?'),  
+      t('Are you sure you want to log out?'),  // Alert message
       '',  // No extra message
       [
         {
@@ -91,7 +100,7 @@ if (selectedItem === 'asv') {
           onPress: async () => {
             try {
               await AsyncStorage.removeItem('userData');  // Remove user data from AsyncStorage
-              navigation.navigate('RescuerloginformScreen');  // Navigate to Home screen after logout
+              navigation.navigate('Loginform2Screen');  // Navigate to Home screen after logout
             } catch (error) {
               console.error('Error during logout:', error);
             }
@@ -103,16 +112,16 @@ if (selectedItem === 'asv') {
     );
   };
 
-
+  
   return (
     <>
       <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
         <ScrollView>
           <View style={{backgroundColor: 'white',flex:1 }}>
-           <ImageBackground
-              source={require('../Assets/background.png')}
-                 style={{ flex: 1, alignItems: 'center',justifyContent: 'center',overflow: 'hidden',height: 200,borderBottomLeftRadius: 40,
-              borderBottomRightRadius: 40,position: 'relative', }}>
+          <ImageBackground
+        source={require('../Assets/background.png')}
+        style={{ flex: 1, alignItems: 'center',justifyContent: 'center',overflow: 'hidden',height: 200,borderBottomLeftRadius: 40,
+          borderBottomRightRadius: 40,position: 'relative', }}>
             <TouchableOpacity  style={{ position: 'absolute', top: 20, left: 15 }}   onPress={handleLogout}  activeOpacity={0.7}>
             <AntDesign name="leftcircle" size={25} color="white" />
             </TouchableOpacity>
@@ -120,59 +129,41 @@ if (selectedItem === 'asv') {
       </ImageBackground>
 
           <View style={{paddingHorizontal: 10}}>
+
+
                 {/* authorization profile */}
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => handleButtonPress('AuthorEditscreen')}>
                <View style={{width: '100%', height: 109, backgroundColor: '#ffffff', top: -40, borderRadius: 10, elevation: 15, flexDirection: 'row', justifyContent: 'space-between', padding: 8, paddingLeft: 25}}>
                   <View style={{gap: 2,alignSelf:'center'}}>
-                  <Text style={{color: '#093624', fontSize: 20, fontWeight: '600', lineHeight: 24.02}}>{RescuerName}</Text>
+                  <Text style={{color: '#093624', fontSize: 20, fontWeight: '600', lineHeight: 24.02}}>{AuthorizesName}</Text>
                   <Text style={{color: '#093624', fontSize: 12, fontWeight: '500', lineHeight: 15.73}}>{EmailID}</Text>
-                  <Text style={{color: '#093624', fontSize: 12, fontWeight: '500', lineHeight: 15.73}}>{Address}</Text>
-                  {/* <Text style={{color: '#093624', fontSize: 12, fontWeight: '500', lineHeight: 15.73}}>Age-{Age}</Text> */}
+                  <Text style={{color: '#093624', fontSize: 12, fontWeight: '500', lineHeight: 15.73}}>{CenterName}</Text>
+                  <Text style={{color: '#093624', fontSize: 12, fontWeight: '500', lineHeight: 15.73}}>{CenterLocation}</Text>
                   <Text style={{color: '#093624', fontSize: 12, fontWeight: '500', lineHeight: 15.73}}>+91{ContactNumber}</Text>
                   </View>
                   <View style={{ height: 100, width: 100, backgroundColor: '#093624', borderRadius: 50, justifyContent: 'center', alignSelf: 'center', alignItems: 'center' }}>
-                  <FontAwesome6 name="user-circle" size={90} color="white" />
-                  </View>
-
+                      {photo_url ? ( <Image source={{uri: photo_url}} style={{width: '100%', height: '100%', resizeMode: 'cover', borderRadius: 50}} />
+                      ) : (<FontAwesome6 name="user-circle" size={60} color="white" />)}
+                  </View>  
                 </View>
                 </TouchableOpacity>
 
 
-                {/* upload rescuer container */}
-               <Text style={{top: -20, fontWeight: '600', fontSize: 14, lineHeight: 17.23, color: '#093624'}}>Rescue Details</Text>
+                {/* Patient Details container */}
+               <Text style={{top: -20, fontWeight: '600', fontSize: 14, lineHeight: 17.23, color: '#093624'}}>Patient Details</Text>
                 <View style={{flexDirection: 'row', bottom: 20, justifyContent: 'space-between', alignItems: 'center', top: -15}}>
 
-                {/* first container */}
-                <TouchableOpacity onPress={() => handleButtonPress('Rescuerformscreen', {userId})} style={{width: '49%'}}>
-                <View style={{height: 109, backgroundColor: '#093624', elevation: 15, borderRadius: 15, justifyContent: 'center', alignItems: 'center'}}>
-                    <MaterialCommunityIcons name="cloud-upload" size={40} color="white" />
-                    <Text style={{color: 'white', textAlign: 'center', fontSize: 14, fontWeight: '600', lineHeight: 19.36, marginTop: 10}}> Upload Rescue</Text>
-                </View>
-                </TouchableOpacity>
-
-                {/*  second container */}
-                <TouchableOpacity onPress={() => handleButtonPress('Rescuanimalscreen', {userId})}style={{width: '49%'}}>
-                <View style={{height: 109, backgroundColor: '#093624', elevation: 15, borderRadius: 15, justifyContent: 'center', alignItems: 'center'}}>
-                <Icon2 name="format-list-bulleted-add" size={40} color="white" />
-                <Text style={{ color: 'white', textAlign: 'center', fontSize: 14, fontWeight: '600', lineHeight: 19.36,  marginTop: 10 }}>Rescued Animals</Text>
-                </View>
-                </TouchableOpacity>
-
-              </View>
-
-              <Text style={{top: -5, fontWeight: '600', fontSize: 14, lineHeight: 17.23, color: '#093624'}}>Patient Details</Text>
-                <View style={{flexDirection: 'row', bottom: 20, justifyContent: 'space-between', alignItems: 'center', top: -1}}>
-
                 {/* Patient Details first container */}
-                <TouchableOpacity onPress={() => handleButtonPress('RescuePatientFormscren', {userId})} style={{width: '49%'}}>
+                <TouchableOpacity onPress={() => handleButtonPress('patientform', {userId})} style={{width: '49%'}}>
                 <View style={{height: 109, backgroundColor: '#093624', elevation: 15, borderRadius: 15, justifyContent: 'center', alignItems: 'center'}}>
                     <FontAwesome6 name="user-plus" size={40} color="white" />
                     <Text style={{color: 'white', textAlign: 'center', fontSize: 14, fontWeight: '600', lineHeight: 19.36, marginTop: 10}}>Add new patient</Text>
+
                 </View>
                 </TouchableOpacity>
 
                 {/* Patient Details second container */}
-                <TouchableOpacity onPress={() => handleButtonPress('Rescuerpatientlistscreen', {userId})}style={{width: '49%'}}>
+                <TouchableOpacity onPress={() => handleButtonPress('Patientlist', {userId})}style={{width: '49%'}}>
                 <View style={{height: 109, backgroundColor: '#093624', elevation: 15, borderRadius: 15, justifyContent: 'center', alignItems: 'center'}}>
                 <Icon2 name="format-list-bulleted-add" size={40} color="white" />
                 <Text style={{ color: 'white', textAlign: 'center', fontSize: 14, fontWeight: '600', lineHeight: 19.36,  marginTop: 10 }}>Patient List</Text>
@@ -182,30 +173,30 @@ if (selectedItem === 'asv') {
               </View>
 
                         {/* Anti Snake Venom container */}
-          <Text style={{ top: 5, fontWeight: '600', fontSize: 14, lineHeight: 17.23, color: '#093624' }}>Anti Snake Venom</Text>
+          <Text style={{ top: -5, fontWeight: '600', fontSize: 14, lineHeight: 17.23, color: '#093624' }}>Anti Snake Venom</Text>
                {/* Anti Snake Venom first container */}
-          <View style={{ height: 109, width: '100%', backgroundColor: '#093624', borderRadius: 15, elevation: 15, top:10 }}>
+          <View style={{ height: 109, width: '100%', backgroundColor: '#093624', borderRadius: 15, elevation: 15 }}>
              <View style={{ justifyContent: 'space-around', flexDirection: 'row' }}>
                   <Icon3 name="injection-syringe" size={40} color="white" style={{ top: 30 }} />
                    <View style={{flexDirection: 'column', top: 35}}>
                   <Text style={{ color: 'white', fontSize: 14, fontWeight: '600', textAlign: 'left', lineHeight: 19.36 }}>Used ASV</Text>
-                  <Text style={{ color: 'white', fontSize: 10, fontWeight: '400', lineHeight: 12.01 }}>Last used on-Date </Text>
+                  <Text style={{ color: 'white', fontSize: 10, fontWeight: '400', lineHeight: 12.01 }}>Last used on {formatDate(UsedASVdate)}</Text>
                   </View>
-                  <Text style={{ color: 'white', fontSize: 40, top: 25, fontWeight: '700', lineHeight: 58.09 }}>0</Text>
+                  <Text style={{ color: 'white', fontSize: 40, top: 25, fontWeight: '700', lineHeight: 58.09 }}>{UsedASV}</Text>
                   <TouchableOpacity onPress={() => toggleEditModal('usedAsv')}>
                   <MaterialCommunityIcons name="dots-vertical" size={15} color="white" style={{ top: 15 }} />
                   </TouchableOpacity>
               </View>
            </View>
                 {/* Anti Snake Venom second container */}
-          <View style={{ height: 109, width: '100%', backgroundColor: '#093624', top: 18, borderRadius: 15, marginBottom: 28, elevation: 15 }} >
+          <View style={{ height: 109, width: '100%', backgroundColor: '#093624', top: 8, borderRadius: 15, marginBottom: 20, elevation: 15 }} >
             <View style={{ justifyContent: 'space-around', flexDirection: 'row' }} >
               <Ionicons name="cart-sharp" size={40} color="white" style={{ top: 30 }} />
                   <View style={{flexDirection: 'column', top: 35}}>
                   <Text style={{ color: 'white', fontSize: 14, fontWeight: '600', textAlign: 'left', lineHeight: 19.36 }}>Stock ASV</Text>
-                  <Text style={{ color: 'white', fontSize: 10, fontWeight: '400', lineHeight: 12.01 }}>Last stocked on=Date</Text>
+                  <Text style={{ color: 'white', fontSize: 10, fontWeight: '400', lineHeight: 12.01 }}>Last stocked on {formatDate(AvailableASVDate)}</Text>
                   </View>
-                   <Text style={{ color: 'white', fontSize: 40, top: 25, fontWeight: '700', lineHeight: 58.09 }}>0</Text>
+                   <Text style={{ color: 'white', fontSize: 40, top: 25, fontWeight: '700', lineHeight: 58.09 }}>{AvailabilityofASV}</Text>
                   <TouchableOpacity onPress={() => toggleEditModal('asv')}>
                   <MaterialCommunityIcons name="dots-vertical" size={15} color="white" style={{top: 15}} />
                   </TouchableOpacity>
@@ -229,11 +220,12 @@ if (selectedItem === 'asv') {
             </View>
           </View>
        </Modal>
+
     </ScrollView>
-    <RescuerFooterNavigation navigation={navigation} />
+  <FooterNavigationcenter navigation={navigation} />
  </SafeAreaView>
     </>
   );
 }
 
-export default RescuerAuthorizesNamesreen;
+export default Profiletab;

@@ -2,17 +2,17 @@ import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, ImageBackground, Image, ScrollView } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-function Treatmentnewpsscreen({ navigation }) {
+function Verifymobilescreen({ navigation }) {
   const { t } = useTranslation();
   const handleButtonPress = () => {
-    navigation.navigate('Loginform2Screen');
+    navigation.navigate('Treatmentnewpsscreen');
   };
 
   return (
     <ScrollView style={{backgroundColor:'white'}}>
     <View style={{ backgroundColor: 'white' }}>
       <ImageBackground
-       source={require('./Assets/background.png')}
+          source={require('../Assets/background.png')}
         style={{
           flex: 1,
           alignItems: 'center',
@@ -24,8 +24,8 @@ function Treatmentnewpsscreen({ navigation }) {
         }}
       >
         <Image
-             source={require('./Assets/logo.png')}
-          style={{ resizeMode: 'contain', height: 200, width: 200 }}
+         source={require('../Assets/logo.png')}
+          style={{ resizeMode: 'contain', height: 150, width: 150 }}
         />
       </ImageBackground>
       <View
@@ -34,7 +34,7 @@ function Treatmentnewpsscreen({ navigation }) {
           height: 450,
           backgroundColor: 'white',
           left: 30,
-          top: -60,
+          top: -50,
           borderRadius: 30,
           marginBottom: -30,
           elevation: 10,
@@ -49,29 +49,12 @@ function Treatmentnewpsscreen({ navigation }) {
             fontWeight: 'bold',
           }}
         >
-          {t('Create New Password')}
+          {t('Verify Your Mobile No.')}
         </Text>
-        <Text style={{ color: '#A3A3A3', top: 30, left: 30 }}>
-          {t('Enter New Password')}
-        </Text>
-        <TextInput
-          style={{
-            height: 40,
-            margin: 12,
-            width: 250,
-            top: 30,
-            left: 20,
-            borderWidth: 1,
-            paddingLeft: 30,
-            borderRadius: 10,
-            borderColor: '#093624',
-            color: '#093624',
-          }}
-          placeholder=""
-          placeholderTextColor="#093624"
-        />
-        <Text style={{ color: '#A3A3A3', top: 30, left: 30 }}>
-          {t('Confirm Password')}
+        <Text
+          style={{ textAlign: 'center', padding: 10, color: '#093624' }}
+        >
+          {t('Please Enter The 4 Digit Code Sent To 9********7')}
         </Text>
         <TextInput
           style={{
@@ -79,34 +62,35 @@ function Treatmentnewpsscreen({ navigation }) {
             margin: 12,
             width: 250,
             top: 30,
-            left: 20,
+            left: 10,
             borderWidth: 1,
             paddingLeft: 30,
             borderRadius: 10,
             borderColor: '#093624',
             color: '#093624',
           }}
-          placeholder=""
+          placeholder="OTP"
           placeholderTextColor="#093624"
         />
+
         <Text
           style={{
             top: 50,
             textAlign: 'center',
             color: '#093624',
-            fontSize: 12,
+            fontSize: 16,
           }}
         >
-          {t('Change Password')}
+          {t('Resend Code')}
         </Text>
         <TouchableOpacity
-          onPress={() => handleButtonPress('RescuerloginformScreen')}
+          onPress={() => handleButtonPress('Guestnewpsscreen')}
         >
           <View
             style={{
               height: 50,
               margin: 12,
-              top: 100,
+              top: 120,
               width: 150,
               left: 75,
               borderWidth: 1,
@@ -115,7 +99,7 @@ function Treatmentnewpsscreen({ navigation }) {
             }}
           >
             <Text style={{ color: 'white', padding: 15, left: 45 }}>
-              {t('Save')}
+              {t('Verify')}
             </Text>
           </View>
         </TouchableOpacity>
@@ -125,4 +109,4 @@ function Treatmentnewpsscreen({ navigation }) {
   );
 }
 
-export default Treatmentnewpsscreen;
+export default Verifymobilescreen;

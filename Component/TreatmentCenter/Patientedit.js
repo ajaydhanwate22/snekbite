@@ -1,15 +1,7 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Alert,
-  ImageBackground,
-  Image,
-  ScrollView,
-} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, ImageBackground, Image, ScrollView } from 'react-native';
 import axios from 'axios';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 function Patientedit({ route, navigation }) {
   const { patientDetails } = route.params;
@@ -25,6 +17,8 @@ function Patientedit({ route, navigation }) {
   const [rescuername, setRescuername] = useState(patientDetails.Rescuername);
   const [patientstatus, setPatientstatus] = useState(patientDetails.Patientstatus);
   const [anyDisablity, setAnyDisablity] = useState(patientDetails.AnyDisablity);
+  const currentDate = new Date().toISOString().split('T')[0];  
+  
 
   const handleUpdate = async () => {
     const id = patientDetails.id;
@@ -71,6 +65,7 @@ function Patientedit({ route, navigation }) {
     formData.append('Rescuername', rescuername);
     formData.append('Patientstatus', patientstatus);
     formData.append('AnyDisablity', anyDisablity);
+    formData.append('Date', currentDate);
 
     try {
       const response = await axios.post('https://realrate.store/ajayApi/Updatepatient.php', formData, {
@@ -94,7 +89,7 @@ function Patientedit({ route, navigation }) {
   return (
     <ScrollView style={{ backgroundColor: 'white' }}>
      <ImageBackground
-        source={require('./Assets/background.png')}
+        source={require('../Assets/background.png')}
         style={{
           flex: 1,
           alignItems: 'center',
@@ -104,18 +99,22 @@ function Patientedit({ route, navigation }) {
           borderBottomLeftRadius: 40,
           borderBottomRightRadius: 40,
         }}>
+          <TouchableOpacity  style={{ position: 'absolute',top: 20,   left: 15}}   onPress={() => navigation.goBack()} >
+          <AntDesign name="leftcircle" size={25} color="white"/>
+          </TouchableOpacity>
+              
         <Image
-          source={require('./Assets/logo.png')}
-          style={{resizeMode: 'contain', height: 200, width: 200}}
+          source={require('../Assets/logo.png')}
+          style={{resizeMode: 'contain', height: 150, width: 150,}}
         />
       </ImageBackground>
+      <View style={{paddingHorizontal:20}}>
       <View
         style={{
-          width: 340,
-          height: 1150,
+          width:'100%',
+          height: 1250,
           backgroundColor: 'white',
-          left: 20,
-          top: -60,
+          top: -50,
           borderRadius: 30,
           marginBottom: -30,
           elevation: 5,
@@ -125,12 +124,13 @@ function Patientedit({ route, navigation }) {
             textAlign: 'center',
             color: '#093624',
             fontSize: 25,
-            margin: 30,
+            margin: 50,
             fontWeight: 'bold',
           }}>
           Update Form
         </Text>
-        <Text style={{ left: 30, color: '#093624', fontWeight: 'bold'}}>
+        <View style={{paddingHorizontal:20,gap:20}}>
+        <Text style={{ color: '#093624', fontWeight: 'bold'}}>
           Patient Details
         </Text>
         <TextInput
@@ -169,7 +169,7 @@ function Patientedit({ route, navigation }) {
           value={address}
           onChangeText={setAddress}
         />
-        <Text style={{ left: 30, color: '#093624', fontWeight: 'bold'}}>
+        <Text style={{ color: '#093624', fontWeight: 'bold'}}>
           Snakebite Details
         </Text>
         <TextInput
@@ -207,7 +207,7 @@ function Patientedit({ route, navigation }) {
           value={rescuername}
           onChangeText={setRescuername}
         />
-        <Text style={{ left: 30, color: '#093624', fontWeight: 'bold' }}>
+        <Text style={{ color: '#093624', fontWeight: 'bold' }}>
           Discharge Details
         </Text>
         <TextInput
@@ -227,18 +227,18 @@ function Patientedit({ route, navigation }) {
         <TouchableOpacity onPress={handleUpdate}>
           <View
             style={{
-              height: 50,
-              margin: 12,
-              width: 300,
-              left: 10,
+              height: 55,
+              width: '100%',
               borderWidth: 1,
               borderRadius: 10,
               backgroundColor: '#093624',
-              top:30
+              top:20
             }}>
-            <Text style={{color: 'white', padding: 15, textAlign: 'center' }}>Update</Text>
+            <Text style={{color: 'white', padding: 15, textAlign: 'center'}}>Update</Text>
           </View>
         </TouchableOpacity>
+        </View>
+      </View>
       </View>
     </ScrollView>
   );
@@ -251,12 +251,10 @@ const styles = {
     borderWidth: 1,
     borderColor: '#093624',
     borderRadius: 10,
-    left: 10,
-    paddingLeft: 10,
+    paddingLeft: 20,
     gap: 20,
-    margin: 12,
-    width: 300,
-    height: 50,
+    width: '100%',
+    height: 55,
   },
 };
 

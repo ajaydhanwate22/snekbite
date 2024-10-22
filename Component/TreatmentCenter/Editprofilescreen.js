@@ -2,17 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ImageBackground, Image, ScrollView, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTranslation } from 'react-i18next';
-import RescuerFooterNavigation from './RescuerFooterNavigation';
+import FooterNavigationcenter from './FooterNavigationcenter';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icon2 from 'react-native-vector-icons/AntDesign';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-
-function RescuerEditprofilescreen({navigation}) {
+function Editprofilescreen({ navigation }) {
   const { t } = useTranslation();
-  const [rescuername, setrescuername] = useState('');
-  // const [image, setImage] = useState('');
+  const [authorizesName, setAuthorizesName] = useState('');
+  const [image, setImage] = useState('');
 
   useEffect(() => {
     const getData = async () => {
@@ -20,8 +19,8 @@ function RescuerEditprofilescreen({navigation}) {
         const userData = await AsyncStorage.getItem('userData');
         if (userData) {
           const parsedData = JSON.parse(userData);
-          setrescuername(parsedData.RescuerName || ''); 
-          // setImage(parsedData.photo_url || ''); 
+          setAuthorizesName(parsedData.AuthorizesName || ''); 
+          setImage(parsedData.photo_url || ''); 
         }
       } catch (error) {
         console.error('Error fetching user data from AsyncStorage', error);
@@ -60,10 +59,9 @@ function RescuerEditprofilescreen({navigation}) {
     );
   };
 
-
   return (
     <>
- <ScrollView style={{ backgroundColor: 'white' }}>
+      <ScrollView style={{ backgroundColor: 'white' }}>
         <ImageBackground 
           source={require('../Assets/background.png')} 
           style={{ flex: 1, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', height: 150, borderBottomLeftRadius: 40, borderBottomRightRadius: 40 }}>    
@@ -75,17 +73,20 @@ function RescuerEditprofilescreen({navigation}) {
 
         {/* Profile photo and name */}
         <View style={{ height: 100, width: 100, backgroundColor: '#093624', borderRadius: 50, alignSelf: "center", marginVertical: 20, justifyContent: 'center', alignItems: "center" }}>
-       <FontAwesome6 name="user-circle" size={60} color="white" />
-       </View>
-   
+          {image ? (
+            <Image source={{ uri: image }} style={{ width: '100%', height: '100%', resizeMode: 'cover', borderRadius: 50 }} />
+          ) : (
+            <FontAwesome6 name="user-circle" size={60} color="white" />
+          )}
+        </View>       
         <Text style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center', color: '#093624', fontSize: 24, fontWeight: '700', lineHeight: 29.05 }}>
-          {rescuername || 'Name'}
+          {authorizesName || 'Name'}
         </Text>
 
         {/* Other options */}
         <View style={{ flexDirection: 'column', gap: 15, alignItems:'center', padding:20 }}>
           {/* Edit profile */}
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => handleButtonPress('AuthorEditscreen')}>
             <View style={{ height: 55, width: '100%', backgroundColor: '#093624', borderRadius: 10, flexDirection: "row", justifyContent: 'space-between', alignItems:'center', paddingHorizontal:15}}>
               <Icon name="user-edit" size={20} color="white" />
               <Text style={{ color: '#ffffff', right: 75, fontFamily: 'Inter', fontWeight: '500', fontSize: 15, lineHeight: 24.2 }}>
@@ -107,7 +108,7 @@ function RescuerEditprofilescreen({navigation}) {
           </TouchableOpacity>
 
           {/* About screen */}
-          <TouchableOpacity onPress={() => handleButtonPress('RescuerAboutscreen')}>
+          <TouchableOpacity onPress={() => handleButtonPress('Abouttabscreen')}>
             <View style={{ height: 55, width: '100%', backgroundColor: '#093624', borderRadius: 10, flexDirection: "row", justifyContent: 'space-between', alignItems:'center', paddingHorizontal:15}}>
               <Icon name="info-circle" size={20} color="white"/>
               <Text style={{color: '#ffffff', right: 75, fontFamily: 'Inter', fontWeight: '500', fontSize: 15, lineHeight: 24.2}}>
@@ -118,7 +119,7 @@ function RescuerEditprofilescreen({navigation}) {
           </TouchableOpacity>
 
           {/* Privacy Policy */}
-          <TouchableOpacity onPress={() => handleButtonPress('Rescueprivancypolicyscreen')}>
+          <TouchableOpacity onPress={() => handleButtonPress('Privancypolicyscreen')}>
             <View style={{ height: 55, width: '100%', backgroundColor: '#093624', borderRadius: 10, flexDirection: "row", justifyContent: 'space-between', alignItems:'center', paddingHorizontal:15}}>
               <Icon name="shield-alt" size={20} color="white" />
               <Text style={{color: '#ffffff', right: 60, fontFamily: 'Inter', fontWeight: '500', fontSize: 15, lineHeight: 24.2}}>
@@ -140,9 +141,9 @@ function RescuerEditprofilescreen({navigation}) {
           </TouchableOpacity>
         </View>
       </ScrollView>
-      <RescuerFooterNavigation navigation={navigation} />
+      <FooterNavigationcenter navigation={navigation} />
     </>
   );
 }
 
-export default RescuerEditprofilescreen;
+export default Editprofilescreen;

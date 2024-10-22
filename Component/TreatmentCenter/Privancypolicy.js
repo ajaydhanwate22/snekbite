@@ -3,7 +3,6 @@ import {
   View,
   Text,
   ImageBackground,
-  TouchableOpacity,
   ScrollView,
   Image
 } from 'react-native';
@@ -21,7 +20,7 @@ function Privancypolicyscreen({ navigation }) {
     <>
       <ScrollView style={{ backgroundColor: 'white' }}>
         <ImageBackground
-          source={require('./Assets/background.png')}
+          source={require('../Assets/background.png')}
           style={{
             flex: 1,
             alignItems: 'center',

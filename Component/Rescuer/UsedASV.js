@@ -10,6 +10,8 @@ import {
   ScrollView,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import RescuerFooterNavigation from './RescuerFooterNavigation';
+
 
 function UsedASVscreen({ navigation }) {
   const { t } = useTranslation();
@@ -131,50 +133,7 @@ function UsedASVscreen({ navigation }) {
           </TouchableOpacity>
         </View>
       </ScrollView>
-      <View style={{backgroundColor:'white'}}>
-      <View
-        style={{
-          height: 60,
-          width: 350,
-          left: 17,
-          backgroundColor: '#093624',
-          marginBottom: 8,
-          borderRadius: 15,
-        }}>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-          }}
-        >
-          <TouchableOpacity onPress={() => handleButtonPress('RescuerAuthorizesNamesreen')}>
-            <View
-              style={{
-                height: 30,
-                width: 50,
-                backgroundColor: 'red',
-                top: 15,
-                borderRadius: 20,
-              }}
-            >
-              <Text style={{ color: 'white', textAlign: 'center', top: 5 }}>
-                Profile
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleButtonPress('RescuerAboutscreen')}>
-            <View style={{justifyContent:'center', alignItems:'center',top:10}}>
-              <Image source={require('../Assets/about.png')}/>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleButtonPress('RescuerEditprofilescreen')}>
-          <View style={{justifyContent:'center', alignItems:'center', top:15}}>
-              <Image source={require('../Assets/edit.png')}/>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </View>              
-      </View>
+      <RescuerFooterNavigation navigation={navigation} />
     </>
   );
 }

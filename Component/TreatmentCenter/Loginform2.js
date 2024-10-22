@@ -6,26 +6,28 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'; 
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-function RescuerloginformScreen({ navigation }) {
+function Loginform2Screen({navigation}) {
   const {t} = useTranslation();
-  const [Rescuername, SetRescuername] = useState('');
+  const [AuthorizesName, setAuthorizesName] = useState('');
   const [Password, setPassword] = useState('');
+  const [CenterName, setCenterName] = useState('');
 
   const handleButtonPress = screenName => {
-    if (screenName === 'Rescuerforgatepsscreen') {
-      navigation.navigate('Rescuerforgatepsscreen');
-    } else if (screenName === 'RescuersignupScreen') {
-      navigation.navigate('RescuersignupScreen');
-    } else if (!Rescuername || !Password) {
+    if (screenName === 'Trantmentforgatpsscreen') {
+      navigation.navigate('Trantmentforgatpsscreen');
+    } else if (screenName === 'SignupScreen') {
+      navigation.navigate('SignupScreen');
+    } else if (!AuthorizesName || !Password || !CenterName) {
       Alert.alert('Error', 'Please fill out all fields');
       return;
     } else {
       const formData = new FormData();
-      formData.append('RescuerName', Rescuername);
+      formData.append('AuthorizesName', AuthorizesName);
+      formData.append('CenterName', CenterName);
       formData.append('Password', Password);
 
       axios
-        .post('https://realrate.store/ajayApi/Rescuesignin.php', formData, {
+        .post('https://realrate.store/ajayApi/Tratmentslogin.php', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -48,7 +50,7 @@ function RescuerloginformScreen({ navigation }) {
               {
                 text: 'OK',
                 onPress: () =>
-                  navigation.navigate('RescuerAuthorizesNamesreen', {
+                  navigation.navigate('Profiletab', {
                     userId: userData.id,
                   }),
               },
@@ -62,10 +64,10 @@ function RescuerloginformScreen({ navigation }) {
         });
     }
   };
-  
+
   return (
     <>
-     <ScrollView style={{backgroundColor: 'white'}}>
+      <ScrollView style={{backgroundColor: 'white'}}>
         <View style={{backgroundColor: 'white'}}>
         <ImageBackground source={require('../Assets/background.png')} style={{ flex: 1, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', height: 300, borderBottomLeftRadius: 40, borderBottomRightRadius: 40, position: 'relative' }}>
           <AntDesign name="leftcircle" size={25} color="white" style={{ position: 'absolute',top: 20,   left: 15}}  onPress={() => navigation.goBack()}/>
@@ -75,11 +77,15 @@ function RescuerloginformScreen({ navigation }) {
             />
           </ImageBackground>
           <View style={{paddingHorizontal:20}}>
-          <View style={{ width: '100%', height: 450, backgroundColor: 'white', top: -50, borderRadius: 30, marginBottom: -20, elevation: 5, padding: 20, gap: 25 }}>
+          <View style={{ width: '100%', height: 500, backgroundColor: 'white', top: -50, borderRadius: 30, marginBottom: -20, elevation: 5, padding: 20, gap: 20 }}>
           <Text style={{ textAlign: 'center', color: '#093624', fontSize: 25, margin: 20, fontWeight: 'bold' }}>{t('Sign In')}</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderColor: '#093624', borderRadius: 10, paddingLeft: 15, gap: 20, width: '100%', height: 55 }}>
+          <FontAwesome5 name="hospital" size={20} color="#093624"/>
+          <TextInput placeholder={t('Center name')} placeholderTextColor="#093624" value={CenterName} onChangeText={text => setCenterName(text.charAt(0).toUpperCase() + text.slice(1).toLowerCase())} style={{ flex: 1 }} />
+            </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderColor: '#093624', borderRadius: 10, paddingLeft: 15, gap: 20, width: '100%', height: 55 }}>
           <FontAwesome5 name="user-check" size={20} color="#093624"/>
-          <TextInput placeholder={t('Rescuer name')} placeholderTextColor="#093624" value={Rescuername} onChangeText={text => SetRescuername(text.charAt(0).toUpperCase() + text.slice(1).toLowerCase())} style={{ flex: 1 }} />
+          <TextInput placeholder={t('Authorizes name')} placeholderTextColor="#093624" value={AuthorizesName} onChangeText={text => setAuthorizesName(text.charAt(0).toUpperCase() + text.slice(1).toLowerCase())} style={{ flex: 1 }} />
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderColor: '#093624', borderRadius: 10, paddingLeft: 15, gap: 20, width: '100%', height: 55 }}>
            <FontAwesome5 name="key" size={20} color="#093624"/>
@@ -87,16 +93,16 @@ function RescuerloginformScreen({ navigation }) {
             </View>
             <View style={{gap: 40}}>
               <TouchableOpacity
-                onPress={() => handleButtonPress('Rescuerforgatepsscreen')}>
+                onPress={() => handleButtonPress('Trantmentforgatpsscreen')}>
             <Text style={{ textAlign: 'right', right: 20, color: '#404040', fontSize: 12, textDecorationLine: 'underline' }}>{t('Forgot Password?')}</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => handleButtonPress('RescuerAuthorizesNamesreen')}>
+              <TouchableOpacity onPress={() => handleButtonPress('Profiletab')}>
               <View style={{ height: 55, width: '50%', borderWidth: 1, left: 75, borderRadius: 10, top: -10, backgroundColor: '#093624' }}>
               <Text style={{ color: 'white', padding: 15, textAlign: 'center' }}>{t('Log In')}</Text>
               </View>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => handleButtonPress('RescuersignupScreen')}>
+                onPress={() => handleButtonPress('SignupScreen')}>
             <Text style={{ textAlign: 'center', color: '#000000', fontSize: 10, top: -25 }}>{t('New here? Create an account')}</Text>
               </TouchableOpacity>
             </View>
@@ -108,4 +114,4 @@ function RescuerloginformScreen({ navigation }) {
   );
 }
 
-export default RescuerloginformScreen;
+export default Loginform2Screen;

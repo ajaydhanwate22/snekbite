@@ -12,10 +12,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import {useTranslation} from 'react-i18next';
 import FooterNavigationcenter from './FooterNavigationcenter';
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 function Patientprofile({navigation}) {
   const {t} = useTranslation();
   const [patientDetails, setPatientDetails] = useState(null);
+  const currentDate = new Date().toISOString().split('T')[0];
 
   // Fetch patient details from AsyncStorage
   const fetchPatientId = async () => {
@@ -54,9 +57,8 @@ function Patientprofile({navigation}) {
   }, []);
 
   const handleEdit = () => {
-    navigation.navigate('Patientedit', { patientDetails });
+    navigation.navigate('Patientedit', {patientDetails});
   };
-  
 
   return (
     <>
@@ -64,7 +66,7 @@ function Patientprofile({navigation}) {
         contentContainerStyle={{flexGrow: 1, backgroundColor: 'white'}}>
         {/* backgound image and logo */}
         <ImageBackground
-          source={require('./Assets/background.png')}
+          source={require('../Assets/background.png')}
           style={{
             flex: 1,
             alignItems: 'center',
@@ -74,25 +76,30 @@ function Patientprofile({navigation}) {
             borderBottomLeftRadius: 40,
             borderBottomRightRadius: 40,
           }}>
-            <TouchableOpacity      onPress={handleEdit} >
+          <TouchableOpacity onPress={handleEdit}>
             <Image
-            source={require('./Assets/pencil.png')}
-            style={{resizeMode: 'contain',left:140}}
-          />
+              source={require('../Assets/pencil.png')}
+              style={{resizeMode: 'contain', left: 165, top:-35}}
+            />
           </TouchableOpacity>
-              <Image
-            source={require('./Assets/logo.png')}
-            style={{resizeMode: 'contain', height: 200, width: 200}}
+          <Image
+            source={require('../Assets/logo.png')}
+            style={{resizeMode: 'contain', height: 150, width: 150, top:-50}}
           />
+                 <TouchableOpacity
+          style={{position: 'absolute', top: 20, left: 15}}
+          onPress={() => navigation.goBack()}>
+          <AntDesign name="leftcircle" size={25} color="white" />
+        </TouchableOpacity>
         </ImageBackground>
         {/* profile container */}
+        <View style={{paddingHorizontal:20}}>
         <View
           style={{
-            width: 340,
-            height: 850,
+            width: '100%',
+            height: 780,
             backgroundColor: 'white',
-            left: 20,
-            top: -60,
+            top: -50,
             borderRadius: 30,
             marginBottom: -30,
             elevation: 5,
@@ -102,41 +109,61 @@ function Patientprofile({navigation}) {
               textAlign: 'center',
               color: '#093624',
               fontSize: 25,
-              marginTop: 30,
+              margin: 20,
               fontWeight: 'bold',
+              top:10
             }}>
             {t('Patient Profile')}
           </Text>
-          <View style={{alignItems: 'center', margin: 10}}>
-            <Image source={require('./Assets/patientprofileicon.png')} />
+          <View style={{height: 100,
+                      width: 100,
+                      backgroundColor: '#093624',
+                      borderRadius: 50,
+                      justifyContent: 'center',
+                      alignSelf: 'center',
+                      alignItems:'center'}}>
+          {patientDetails && patientDetails.photo_url ? (
+                <Image
+                  source={{uri: patientDetails.photo_url}}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    resizeMode: 'cover',
+                    borderRadius: 50,
+                  }}
+                />
+              ) : (
+                <FontAwesome
+                  name="user-circle"
+                  size={60}
+                  color="#093624"
+                />
+              )}
           </View>
-
           {/* first box profile cntainer  */}
+          <View style={{paddingHorizontal:30}}>
           <Text
             style={{
               fontSize: 12,
               color: '#093624',
-              marginLeft: 20,
-              // top: 30,
-              left: 10,
+              top: 30,
               fontWeight: 'bold',
             }}>
             {t('Patient Details')}
           </Text>
           <View
             style={{
-              width: 290,
+              width: '100%',
               height: 140,
-              top: 10,
+              top: 40,
               borderRadius: 10,
-              marginLeft: 20,
               backgroundColor: 'white',
               elevation: 5,
             }}>
             <View
               style={{
                 top: 10,
-                marginLeft: 20,
+                paddingLeft: 20,
                 flex: 1,
                 flexDirection: 'column',
                 gap: 5,
@@ -152,38 +179,37 @@ function Patientprofile({navigation}) {
                 </>
               )}
             </View>
+          </View>    
           </View>
           {/* second box profile container */}
+          <View style={{paddingHorizontal:30}}>
           <Text
             style={{
               fontSize: 12,
               color: '#093624',
-              marginLeft: 20,
-              top: 30,
-              left: 10,
+              top: 60,
               fontWeight: 'bold',
             }}>
             {t('Snakebite Details')}
           </Text>
           <View
             style={{
-              width: 290,
-              height: 250,
-              top: 40,
+              width: '100%',
+              height: 150,
+              top: 70,
               borderRadius: 10,
-              marginLeft: 20,
               backgroundColor: 'white',
               elevation: 5,
             }}>
             <View
               style={{
                 top: 10,
-                marginLeft: 20,
+                paddingLeft: 20,
                 flex: 1,
                 flexDirection: 'column',
                 fontSize: 10,
                 gap: 5,
-                color: '#A3A3A3',
+                color: '#A3A3A3'
               }}>
               {patientDetails && (
                 <>
@@ -194,56 +220,33 @@ function Patientprofile({navigation}) {
                   <Text>Rescuer Name: {patientDetails.Rescuername}</Text>
                 </>
               )}
-              <View
-                style={{
-                  width: 100,
-                  height: 90,
-                  top: 10,
-                  backgroundColor: '#FFFFFF',
-                  borderRadius: 5,
-                  elevation: 10,
-                }}>
-                <Image
-                  source={require('./Assets/Gallery.jpg')}
-                  style={{
-                    width: 40,
-                    height: 30,
-                    resizeMode: 'contain',
-                    position: 'absolute',
-                    top: '30%',
-                    left: '30%',
-                    elevation: 10,
-                  }}
-                />
-              </View>
             </View>
           </View>
+          </View>
           {/* third box profile conatiner */}
+          <View style={{paddingHorizontal:30}}>
           <Text
             style={{
               fontSize: 12,
               color: '#093624',
-              marginLeft: 20,
-              top: 60,
+              top: 100,
               fontWeight: 'bold',
-              left: 10,
             }}>
             {t('Discharge Details')}
           </Text>
           <View
             style={{
-              width: 290,
-              height: 120,
-              top: 70,
+              width:'100%',
+              height: 130,
+              top: 110,
               borderRadius: 10,
-              marginLeft: 20,
               backgroundColor: 'white',
               elevation: 5,
             }}>
             <View
               style={{
                 top: 20,
-                marginLeft: 20,
+                paddingLeft: 20,
                 flex: 1,
                 flexDirection: 'column',
                 gap: 20,
@@ -253,10 +256,13 @@ function Patientprofile({navigation}) {
                 <>
                   <Text>Patient Status: {patientDetails.Patientstatus}</Text>
                   <Text>Disability: {patientDetails.AnyDisablity}</Text>
+                  <Text>Date: {currentDate}</Text>
                 </>
               )}
             </View>
+          </View>   
           </View>
+        </View>
         </View>
       </ScrollView>
       <FooterNavigationcenter navigation={navigation} />

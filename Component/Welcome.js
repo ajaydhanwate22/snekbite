@@ -1,12 +1,12 @@
 import React from 'react';
-import {
-  View,
-  ImageBackground,
-  Text,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import { View, ImageBackground, Text, TouchableOpacity, Image } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import Icon2 from 'react-native-vector-icons/AntDesign'; 
+import Entypo from 'react-native-vector-icons/Entypo'; 
+import Fontisto from 'react-native-vector-icons/Fontisto'; 
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'; 
+
+
 
 const WelcomeScreen = ({ navigation }) => {
   const { t } = useTranslation();
@@ -18,46 +18,46 @@ const WelcomeScreen = ({ navigation }) => {
     <ImageBackground
       source={require('./Assets/background.png')}
       style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <View style={{ width: '100%', paddingHorizontal: 20, alignItems: 'center' }}>
-        <Text style={{ fontFamily: 'Inter', fontSize: 40, fontWeight: 'bold', color: '#fff', marginTop: 10 }}>
+      <View style={{ alignItems: 'center' }}>
+        <Text style={{fontSize: 48, fontWeight: '700', color: '#fff', marginTop: 10, lineHeight:58.09 }}>
           {t('Welcome')}
         </Text>
-        <Text style={{ fontSize: 12, color: '#fff', marginBottom: 50 }}>
+        <Text style={{ fontSize: 14, color: '#ffffff', fontWeight:'400', lineHeight:19.36 }}>
           {t('Choose your role to access')}
         </Text>
-        <View style={{ marginTop: 30, gap: 20 }}>
+        <View style={{ top:80, gap: 20,paddingHorizontal:20 }}>
           <TouchableOpacity
-            style={{ flexDirection: 'row', alignItems: 'center', borderColor: '#fff', borderWidth: 1, borderRadius: 6, padding: 15, marginBottom: 30, width: '80%', height: 70, maxWidth: 330, backgroundColor: 'transparent' }}
-            onPress={() => handleButtonPress('Language')}>
-            <Image source={require('./Assets/Hospital.png')} style={{ width: 24, height: 24, marginRight: 10 }} />
+            style={{ flexDirection: 'row', alignItems: 'center', borderColor: '#fff', borderWidth: 1, borderRadius: 6, padding: 15, marginBottom: 30, width: '100%', height: 70, backgroundColor: 'transparent' }}
+            onPress={() => handleButtonPress('TratmentCenterStack')}>
+            <FontAwesome5 name="hospital" size={20} color="white" />
             <Text style={{ fontSize: 14, fontWeight: 'bold', color: '#fff', flex: 1, textAlign: 'center' }}>
               {t('Treatment Center')}
             </Text>
-            <Image source={require('./Assets/Forward.png')} style={{ width: 24, height: 24, marginLeft: 10 }} />
-          </TouchableOpacity>
+            <Icon2 name="right" size={20} color="white" />
+            </TouchableOpacity>
           <TouchableOpacity
-            style={{ flexDirection: 'row', alignItems: 'center', borderColor: '#fff', borderWidth: 1, borderRadius: 6, padding: 15, marginBottom: 30, width: '80%', height: 70, maxWidth: 330, backgroundColor: 'transparent' }}
-            onPress={() => handleButtonPress('RescuerlanguageScreen')}>
-            <Image source={require('./Assets/IdentificationDocuments.png')} style={{ width: 24, height: 24, marginRight: 10 }} />
+            style={{ flexDirection: 'row', alignItems: 'center', borderColor: '#fff', borderWidth: 1, borderRadius: 6, padding: 15, marginBottom: 30, width: '100%', height: 70, backgroundColor: 'transparent' }}
+            onPress={() => handleButtonPress('RescuerStack')}>
+            <Fontisto name="first-aid-alt" size={20} color="white" />
             <Text style={{ fontSize: 14, fontWeight: 'bold', color: '#fff', flex: 1, textAlign: 'center' }}>
               {t('Rescuer')}
             </Text>
-            <Image source={require('./Assets/Forward.png')} style={{ width: 24, height: 24, marginLeft: 10 }} />
+            <Icon2 name="right" size={20} color="white" />
           </TouchableOpacity>
           <TouchableOpacity
-            style={{ flexDirection: 'row', alignItems: 'center', borderColor: '#fff', borderWidth: 1, borderRadius: 6, padding: 15, marginBottom: 30, width: '80%', height: 70, maxWidth: 330, backgroundColor: 'transparent' }}
-            onPress={() => navigation.navigate('GuestLanguage')}>
-            <Image source={require('./Assets/Customer.png')} style={{ width: 24, height: 24, marginRight: 10 }} />
+            style={{ flexDirection: 'row', alignItems: 'center', borderColor: '#fff', borderWidth: 1, borderRadius: 6, padding: 15, marginBottom: 30, width: '100%', height: 70, backgroundColor: 'transparent' }}
+            onPress={() => navigation.navigate('GuestStack')}>
+            <Entypo name="user" size={20} color="white" />
             <Text style={{ fontSize: 14, fontWeight: 'bold', color: '#fff', flex: 1, textAlign: 'center' }}>
               {t('Guest')}
             </Text>
-            <Image source={require('./Assets/Forward.png')} style={{ width: 24, height: 24, marginLeft: 10 }} />
+            <Icon2 name="right" size={20} color="white" />
           </TouchableOpacity>
         </View>
       </View>
       <Image
         source={require('./Assets/logo.png')}
-        style={{ marginTop: 50, width: 100, height: 100, resizeMode: 'contain', marginBottom: 20 }}
+        style={{ marginTop: 100, width: 100, height: 100, resizeMode: 'contain', marginBottom: 20 }}
       />
       <Text style={{ color: 'white', textAlign: 'center', fontSize: 8, fontWeight: 'bold', top: 10 }}>
        { t('COPYRIGHT © 2024 WFN, ALL RIGHTS RESERVED')}

@@ -12,7 +12,7 @@ function Trantmentforgatpsscreen({ navigation }) {
     <ScrollView style={{backgroundColor:'white'}}>
         <View style={{ backgroundColor: 'white' }}>
           <ImageBackground
-           source={require('./Assets/background.png')}
+           source={require('../Assets/background.png')}
             style={{
               flex: 1,
               alignItems: 'center',
@@ -24,8 +24,8 @@ function Trantmentforgatpsscreen({ navigation }) {
             }}
           >
             <Image
-                source={require('./Assets/logo.png')}
-              style={{ resizeMode: 'contain', height: 200, width: 200 }}
+                source={require('../Assets/logo.png')}
+              style={{ resizeMode: 'contain', height: 150, width: 150 }}
             />
           </ImageBackground>
           <View
@@ -34,7 +34,7 @@ function Trantmentforgatpsscreen({ navigation }) {
               height: 450,
               backgroundColor: 'white',
               left: 30,
-              top: -60,
+              top: -50,
               borderRadius: 30,
               marginBottom: -30,
               elevation: 10,
