@@ -23,7 +23,7 @@ function RescuersignupScreen({ navigation }) {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =useState(false);
-  // const [image, setImage] = useState(null);
+  const [image, setImage] = useState(null);
   const currentDate = new Date().toISOString().split('T')[0];
 
   const togglePasswordVisibility = () => {
@@ -34,22 +34,22 @@ function RescuersignupScreen({ navigation }) {
     setIsConfirmPasswordVisible(!isConfirmPasswordVisible);
   };
 
-  // const handleImagePick = () => {
-  //   const options = {
-  //     mediaType: 'photo',
-  //     quality: 1,  
-  //   };
+  const handleImagePick = () => {
+    const options = {
+      mediaType: 'photo',
+      quality: 1,  
+    };
     
-  //   launchImageLibrary(options, (response) => {
-  //     if (response.didCancel) {
-  //       console.log('User cancelled image picker');
-  //     } else if (response.errorCode) {
-  //       console.log('ImagePicker Error: ', response.errorMessage);
-  //     } else {
-  //       setImage(response.assets[0]);  
-  //     }
-  //   });
-  // };
+    launchImageLibrary(options, (response) => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.errorCode) {
+        console.log('ImagePicker Error: ', response.errorMessage);
+      } else {
+        setImage(response.assets[0]);  
+      }
+    });
+  };
 
   const handleButtonPress = async () => {
     if (!rescuername || !age || !gender || !contactnumber || !email || !address || password !== confirmPassword || !experience || !education)  
@@ -71,18 +71,22 @@ function RescuersignupScreen({ navigation }) {
     formData.append('Education', education);
     formData.append('Password', password);
     formData.append('ConfirmPassword', confirmPassword);
+    formData.append('UsedASV', 0);
+    formData.append('AvailabilityofASV', 0);
+    formData.append('AvailableASVDate', currentDate);
+    formData.append('UsedASVdate', currentDate);
 
-    // if (image) {
-    //   const localUri = image.uri;
-    //   const filename = localUri.split('/').pop();
-    //   const type = image.type;
+    if (image) {
+      const localUri = image.uri;
+      const filename = localUri.split('/').pop();
+      const type = image.type;
 
-    //   formData.append('photo', {
-    //     uri: localUri,
-    //     name: filename,
-    //     type: type,
-    //   });
-    // }
+      formData.append('photo', {
+        uri: localUri,
+        name: filename,
+        type: type,
+      });
+    }
 
     try {
       const response = await axios.post(
@@ -135,7 +139,7 @@ function RescuersignupScreen({ navigation }) {
        />
      </ImageBackground>
      <View style={{paddingHorizontal: 20}}>
-     <View style={{width: '100%', height: 950, backgroundColor: 'white', top: -50, borderRadius: 30, marginBottom: -30, elevation: 5, padding: 20, gap: 20}}>
+     <View style={{width: '100%', height: 1100, backgroundColor: 'white', top: -50, borderRadius: 30, marginBottom: -30, elevation: 5, padding: 20, gap: 20}}>
      <Text style={{ textAlign: 'center', color: '#093624', fontSize: 25, margin: 20, fontWeight: 'bold' }}>
          {t('Sign Up')}
      </Text>
@@ -198,19 +202,19 @@ function RescuersignupScreen({ navigation }) {
            </TouchableOpacity>
          </View>
 
-         {/* <TouchableOpacity onPress={handleImagePick}>
-         <View style={{ width: '35%', height: 90, top: 10, backgroundColor: '#FFFFFF', borderRadius: 10, elevation: 10, borderColor: '#000000', borderWidth: 1, marginBottom: 20, alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
-             {image ? (
-            <View style={{ width: '100%', height: '100%', padding: 10, justifyContent: 'center', alignItems: 'center' }}>
-                <Image source={{ uri: image.uri }} style={{ width: '100%', height: '100%', resizeMode: 'contain' }} />
-             </View>
-             ) : (
-         <View style={{justifyContent:'center', alignItems:"center",height: '100%',}}>
-           <Text style={{textAlign:'center'}}>Upload photo</Text>
-         </View>
-             )}
-         </View>
-         </TouchableOpacity> */}
+         <TouchableOpacity onPress={handleImagePick}>
+          <View style={{ width: '35%', height: 90, top: 10, backgroundColor: '#FFFFFF', borderRadius: 10, elevation: 10, borderColor: '#000000', borderWidth: 1, marginBottom: 20, alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
+              {image ? (
+             <View style={{ width: '100%', height: '100%', padding: 10, justifyContent: 'center', alignItems: 'center' }}>
+                 <Image source={{ uri: image.uri }} style={{ width: '100%', height: '100%', resizeMode: 'contain' }} />
+              </View>
+              ) : (
+          <View style={{justifyContent:'center', alignItems:"center",height: '100%',}}>
+            <Text style={{textAlign:'center'}}>Upload photo</Text>
+          </View>
+              )}
+          </View>
+          </TouchableOpacity>
          <TouchableOpacity onPress={handleButtonPress}>
          <View style={{ height: 55, width: '100%', borderWidth: 1, borderRadius: 10, backgroundColor: '#093624', top: 10 }}>
              <Text style={{color: 'white', padding: 15, textAlign: 'center'}}>

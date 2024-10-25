@@ -1,14 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Image,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  Alert,
-  TextInput,
-  ActivityIndicator,
-} from 'react-native';
+import { View, Image, Text, TouchableOpacity, ScrollView, Alert, TextInput, ActivityIndicator } from 'react-native';
 import axios from 'axios';
 import {useTranslation} from 'react-i18next';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -79,37 +70,14 @@ function PatientList({navigation, route}) {
           onPress={() => navigation.goBack()}>
           <AntDesign name="leftcircle" size={25} color="#093624" />
         </TouchableOpacity>
-        <Text
-          style={{
-            textAlign: 'center',
-            fontSize: 24,
-            fontWeight: '700',
-            lineHeight: 29.05,
-            margin: 30,
-            color: '#093624',
-            marginTop: 50,
-          }}>
-          {' '}
-          Patient List
+        <Text style={{ textAlign: 'center', fontSize: 24, fontWeight: '700', lineHeight: 29.05, margin: 30, color: '#093624', marginTop: 50 }}>
+         Patient List
         </Text>
 
         <View style={{paddingHorizontal: 20}}>
-          <View
-            style={{
-              height: 50,
-              width: '100%',
-              backgroundColor: '#093624',
-              alignItems: 'center',
-              borderRadius: 10,
-              flexDirection: 'row',
-            }}>
+        <View style={{ height: 50, width: '100%', backgroundColor: '#093624', alignItems: 'center', borderRadius: 10, flexDirection: 'row' }}>
             {searchTerm.length === 0 && (
-              <EvilIcons
-                name="search"
-                size={30}
-                color="white"
-                style={{left: 10, top: -3}}
-              />
+              <EvilIcons name="search" size={30} color="white" style={{left: 10, top: -3}}/>
             )}
             <TextInput
               placeholder="Search..."

@@ -1,176 +1,195 @@
-import React from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  ImageBackground,
-  StyleSheet,
-  Image,
-  ScrollView,
-} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, ImageBackground, ScrollView, Alert,Image } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import RescuerFooterNavigation from './RescuerFooterNavigation';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
+import axios from 'axios';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
-function StockASVScreen({ navigation }) {
-  const { t } = useTranslation();
-  const handleButtonPress = (screen) => {
-    navigation.navigate(screen);
+function StockASVScreen({  navigation, route }){
+  const {t} = useTranslation();
+  const [rescuername, setrescuername] = useState('');
+  const [address , setaddress] = useState('');
+  const [availabilityOfASV, setavailabilityOfASV] = useState('0');
+  const [initialUsedASV, setInitialUsedASV] = useState('0');
+  const [image, setImage] = useState(null);
+  const currentDate = new Date().toISOString().split('T')[0];
+  const { userId } = route.params;  
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        if (userId) {
+          const response = await axios.get(`https://realrate.store/ajayApi/Rescuefetchdata.php?userId=${userId}`);
+          const userData = response.data.data;  
+          if (userData) {
+            setrescuername(userData.RescuerName || '');
+            setaddress(userData.Address || '');
+          setavailabilityOfASV(userData.AvailabilityofASV || '0');
+          setImage(userData.photo_url || null);
+          setInitialUsedASV(userData.AvailabilityofASV || '0');
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching user data from server', error);
+    }
+  };
+
+  fetchUserData();
+}, [userId]);
+
+
+  const handleadd = async () => {
+    if (availabilityOfASV === initialUsedASV) {
+      Alert.alert('No update', 'No ASV update made.');
+      navigation.navigate('RescuerAuthorizesNamesreen', { userId });
+      return;
+    }
+    if (
+      !availabilityOfASV ||
+      isNaN(availabilityOfASV) ||
+      parseInt(availabilityOfASV) < 0
+    ) {
+      Alert.alert('Error', 'Please enter a valid used ASV amount.');
+      return;
+    }
+    const formData = new FormData();
+    formData.append('Address', address);
+    formData.append('AvailabilityofASV', availabilityOfASV);
+    formData.append('RescuerName', rescuername);
+    formData.append('AvailableASVDate', currentDate);
+    try {
+      const response = await axios.post(
+        'https://realrate.store/ajayApi/RescueAvailableASV.php',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        },
+      );
+      if (response.data.message === 'updated successfully') {
+        Alert.alert('Success', 'ASV stock updated successfully!');
+        navigation.navigate('RescuerAuthorizesNamesreen', { userId });
+      } else {
+        Alert.alert(
+          'Error',
+          'Failed to update ASV stock: ' + response.data.message,
+        );
+        navigation.navigate('RescuerAuthorizesNamesreen');
+      }
+    } catch (error) {
+      console.error('Error updating ASV stock:', error);
+      Alert.alert('Error', 'An error occurred while updating ASV stock.');
+      navigation.navigate('RescuerAuthorizesNamesreen');
+    }
+  };
+
+
+const handlesub = async () => {
+    if (availabilityOfASV === initialUsedASV) {
+      Alert.alert('No update', 'No ASV update made.');
+      navigation.navigate('RescuerAuthorizesNamesreen', { userId });
+      return;
+    }
+
+    if (parseInt(availabilityOfASV) > parseInt(initialUsedASV)) {
+      Alert.alert('Error', 'Cannot subtract more ASV than the initial available ASV.');
+      return;
+    }
+
+    if (
+      !availabilityOfASV ||
+      isNaN(availabilityOfASV) ||
+      parseInt(availabilityOfASV) < 0
+    ) {
+      Alert.alert('Error', 'Please enter a valid used ASV amount.');
+      return;
+    }
+    const formData = new FormData();
+    formData.append('Address', address);
+    formData.append('AvailabilityofASV', availabilityOfASV);
+    formData.append('RescuerName', rescuername);
+    formData.append('AvailableASVDate', currentDate);
+    try {
+      const response = await axios.post(
+        'https://realrate.store/ajayApi/RescueAvailableASVminus.php',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        },
+      );
+      if (response.data.message === 'updated successfully') {
+        Alert.alert('Success', 'ASV stock updated successfully!');
+        navigation.navigate('RescuerAuthorizesNamesreen', { userId });
+      } else {
+        Alert.alert(
+          'Error',
+          'Failed to update ASV stock: ' + response.data.message,
+        );
+        navigation.navigate('RescuerAuthorizesNamesreen');
+      }
+    } catch (error) {
+      console.error('Error updating ASV stock:', error);
+      Alert.alert('Error', 'An error occurred while updating ASV stock.');
+      navigation.navigate('RescuerAuthorizesNamesreen');
+    }
   };
 
   return (
     <>
-      <ScrollView style={{ backgroundColor: 'white' }}>
-        <View style={{ backgroundColor: 'white' }}>
-          <ImageBackground
-           source={require('../Assets/background.png')}
-            style={{
-              flex: 1,
-              alignItems: 'center',
-              justifyContent: 'center',
-              overflow: 'hidden',
-              height: 200,
-              borderBottomLeftRadius: 40,
-              borderBottomRightRadius: 40,
-              top: -100,
-            }}
-          ></ImageBackground>
-          <View
-            style={{
-              width: 300,
-              height: 100,
-              backgroundColor: '#093624',
-              left: 30,
-              top: -150,
-              borderRadius: 20,
-              elevation: 10,
-            }}
-          >
-            <View style={{ flexDirection: 'row' }}>
-              <View
-                style={{
-                  height: 50,
-                  width: 50,
-                  left: 50,
-                  top: 20,
-                  backgroundColor: 'white',
-                  borderRadius: 50,
-                }}
-              >
-                <Text style={{ textAlign: 'center', top: 10 }}>profile</Text>
-              </View>
-              <View style={{ textAlign: 'center', left: 80, top: 20, gap: 8 }}>
-                <Text style={{ color: 'white', fontSize: 16 }}>
-                  Authorizes Name
-                </Text>
-                <Text style={{ color: 'white', fontSize: 10 }}>
-                  Center name
-                </Text>
-              </View>
-            </View>
-          </View>
-          <Text
-            style={{
-              textAlign: 'center',
-              top: -120,
-              color: '#093624',
-              fontWeight: 'bold',
-              fontSize: 16,
-            }}
-          >
-            Stock availability of ASV
-          </Text>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              top: -50,
-              fontSize: 100,
-            }}
-          >
-            <Text style={{ fontSize: 50, left: 40, color: '#093624' }}>-</Text>
-            <Text
-              style={{ fontSize: 50, color: '#093624', fontWeight: 'bold' }}
-            >
-              7
-            </Text>
-            <Text style={{ fontSize: 50, right: 40, color: '#093624' }}>+</Text>
-          </View>
-          <Text
-            style={{
-              textAlign: 'center',
-              color: '#093624',
-              top: -10,
-              fontWeight: 'bold',
-            }}
-          >
-            Last Stocked on
-          </Text>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              top: 20,
-            }}
-          >
-            <View
-              style={{
-                height: 50,
-                width: 70,
-                backgroundColor: 'white',
-                borderRadius: 10,
-                left: 30,
-                borderWidth: 1,
-                borderColor: '#093624',
-              }}
-            >
-              <Text style={{ padding: 14, left: 10 }}>Day</Text>
-            </View>
-            <View
-              style={{
-                height: 50,
-                width: 100,
-                backgroundColor: 'white',
-                borderRadius: 10,
-                borderColor: '#093624',
-                borderWidth: 1,
-              }}
-            >
-              <Text style={{ padding: 14, left: 10 }}>Month</Text>
-            </View>
-            <View
-              style={{
-                height: 50,
-                width: 70,
-                backgroundColor: 'White',
-                borderRadius: 10,
-                right: 30,
-                borderColor: '#093624',
-                borderWidth: 1,
-              }}
-            >
-              <Text style={{ padding: 14, left: 10 }}>Year</Text>
-            </View>
-          </View>
-          <TouchableOpacity onPress={() => handleButtonPress('RescuerAuthorizesNamesreen')}>
-            <View
-              style={{
-                height: 50,
-                width: 150,
-                left: 110,
-                top: 60,
-                backgroundColor: '#093624',
-                borderRadius: 10,
-              }}
-            >
-              <Text style={{ textAlign: 'center', color: 'white', margin: 15 }}>
-                Save
-              </Text>
-            </View>
+      <ScrollView style={{backgroundColor: 'white'}}>
+        <View style={{backgroundColor: 'white'}}>
+        <ImageBackground source={require('../Assets/background.png')} style={{ flex: 1, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', height: 200, borderBottomLeftRadius: 40, borderBottomRightRadius: 40 }} />
+
+          <TouchableOpacity  style={{ position: 'absolute',top: 20,   left: 15}} onPress={() => navigation.goBack()}>
+          <AntDesign name="leftcircle" size={25} color="white"/>
           </TouchableOpacity>
+          <View style={{paddingHorizontal: 10}}>
+          <View style={{ width: '100%', height: 134, backgroundColor: '#093624', top: -50, borderRadius: 20, elevation: 10 }} >
+          
+             <View style={{flexDirection: 'row', gap: 40, padding: 15, left: 10,alignItems:"center"}}>
+             <View style={{ height: 100,width: 100,backgroundColor: '#093624', borderRadius: 50,justifyContent: 'center',
+                    alignItems: 'center', }}>
+                  {image ? (
+                      <Image source={{uri: image}} style={{ width: '100%', height: '100%',resizeMode: 'cover',borderRadius: 50,}}
+                      />
+                  ) : (
+                    <FontAwesome6 name="user-circle"  size={60} color="white"/>
+                  )}
+                </View>
+                <View style={{gap: 10}}>
+                  <Text style={{ fontSize: 20, fontWeight: '500', color: '#ffffff', lineHeight: 24.02 }}>{rescuername} </Text>
+                  <Text style={{ fontSize: 13, fontWeight: '500', color: '#ffffff', lineHeight: 15.73 }}>{address} </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+
+          <Text style={{ textAlign: 'center', color: '#093624', fontWeight: '500', fontSize: 24 }}>{t('Stock of ASV')}</Text>
+
+              <View style={{ flexDirection: 'row', justifyContent: 'center', top: 50, gap: 20, marginBottom: 150 }}>      
+                  <TextInput style={{ fontSize: 60, color: '#093624', width: '50%', textAlign: 'center', fontWeight: '700', lineHeight: 116.18, borderBottomWidth: 2, borderBottomColor: '#093624' }} value={availabilityOfASV} onChangeText={text => { if (!isNaN(text)) setavailabilityOfASV(text); }} keyboardType="numeric" />
+              </View>
+
+            <View style={{paddingHorizontal: 30,flexDirection:"row",justifyContent:'space-around', alignItems:"center",}}>
+
+              <TouchableOpacity onPress={handlesub} style={{ width:"48%"}}>
+                <View style={{backgroundColor: '#093624',height: 70,justifyContent:"center", alignItems:'center', borderRadius: 10,}}>
+                <Text style={{ color: 'white',fontSize: 20, fontWeight: 'bold',}}>Substract</Text>
+                </View>
+              </TouchableOpacity>  
+
+              <TouchableOpacity onPress={handleadd} style={{width:"48%",}}>
+                 <View style={{backgroundColor: '#093624',height: 70,justifyContent:"center", alignItems:'center', borderRadius: 10,}}>
+                     <Text style={{color: 'white', fontSize: 20, fontWeight: 'bold', }}>Add</Text>
+                 </View>
+              </TouchableOpacity> 
+
+            </View>
         </View>
       </ScrollView>
-      <RescuerFooterNavigation navigation={navigation} />
     </>
   );
 }

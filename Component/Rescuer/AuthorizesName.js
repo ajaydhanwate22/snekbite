@@ -50,6 +50,16 @@ function RescuerAuthorizesNamesreen({ navigation, route }) {
     }
   };
 
+  const formatDate = dateString => {
+    if (!dateString) {
+      return "Date not available"; 
+    }
+    const [day, month, year] = dateString.split('-');
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return `${day} ${months[parseInt(month) - 1]} ${year}`;
+  };
+
+
   const handleButtonPress = (screen, params) => {
     navigation.navigate(screen, params);
   };
@@ -73,7 +83,7 @@ if (selectedItem === 'asv') {
     return <Text>No user data found.</Text>;
   }
 
-  const { RescuerName, Age, Gender, ContactNumber, EmailID, Address, Experience, Education} = userData
+  const { RescuerName, Age, Gender, ContactNumber, EmailID, Address, Experience, Education, AvailableASVDate, UsedASVdate, UsedASV, AvailabilityofASV,photo_url } = userData
 
 
 
@@ -131,8 +141,9 @@ if (selectedItem === 'asv') {
                   <Text style={{color: '#093624', fontSize: 12, fontWeight: '500', lineHeight: 15.73}}>+91{ContactNumber}</Text>
                   </View>
                   <View style={{ height: 100, width: 100, backgroundColor: '#093624', borderRadius: 50, justifyContent: 'center', alignSelf: 'center', alignItems: 'center' }}>
-                  <FontAwesome6 name="user-circle" size={90} color="white" />
-                  </View>
+                      {photo_url ? ( <Image source={{uri: photo_url}} style={{width: '100%', height: '100%', resizeMode: 'cover', borderRadius: 50}} />
+                      ) : (<FontAwesome6 name="user-circle" size={60} color="white" />)}
+                  </View>  
 
                 </View>
                 </TouchableOpacity>
@@ -189,9 +200,9 @@ if (selectedItem === 'asv') {
                   <Icon3 name="injection-syringe" size={40} color="white" style={{ top: 30 }} />
                    <View style={{flexDirection: 'column', top: 35}}>
                   <Text style={{ color: 'white', fontSize: 14, fontWeight: '600', textAlign: 'left', lineHeight: 19.36 }}>Used ASV</Text>
-                  <Text style={{ color: 'white', fontSize: 10, fontWeight: '400', lineHeight: 12.01 }}>Last used on-Date </Text>
+                  <Text style={{ color: 'white', fontSize: 10, fontWeight: '400', lineHeight: 12.01 }}>Last used Update on {formatDate(UsedASVdate)} </Text>
                   </View>
-                  <Text style={{ color: 'white', fontSize: 40, top: 25, fontWeight: '700', lineHeight: 58.09 }}>0</Text>
+                  <Text style={{ color: 'white', fontSize: 40, top: 25, fontWeight: '700', lineHeight: 58.09 }}>{UsedASV}</Text>
                   <TouchableOpacity onPress={() => toggleEditModal('usedAsv')}>
                   <MaterialCommunityIcons name="dots-vertical" size={15} color="white" style={{ top: 15 }} />
                   </TouchableOpacity>
@@ -203,9 +214,9 @@ if (selectedItem === 'asv') {
               <Ionicons name="cart-sharp" size={40} color="white" style={{ top: 30 }} />
                   <View style={{flexDirection: 'column', top: 35}}>
                   <Text style={{ color: 'white', fontSize: 14, fontWeight: '600', textAlign: 'left', lineHeight: 19.36 }}>Stock ASV</Text>
-                  <Text style={{ color: 'white', fontSize: 10, fontWeight: '400', lineHeight: 12.01 }}>Last stocked on=Date</Text>
+                  <Text style={{ color: 'white', fontSize: 10, fontWeight: '400', lineHeight: 12.01 }}>Last stocked update on {formatDate(AvailableASVDate)}</Text>
                   </View>
-                   <Text style={{ color: 'white', fontSize: 40, top: 25, fontWeight: '700', lineHeight: 58.09 }}>0</Text>
+                   <Text style={{ color: 'white', fontSize: 40, top: 25, fontWeight: '700', lineHeight: 58.09 }}>{AvailabilityofASV}</Text>
                   <TouchableOpacity onPress={() => toggleEditModal('asv')}>
                   <MaterialCommunityIcons name="dots-vertical" size={15} color="white" style={{top: 15}} />
                   </TouchableOpacity>

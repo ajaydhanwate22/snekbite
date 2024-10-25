@@ -20,6 +20,7 @@ import RescuerAboutscreen from '../Component/Rescuer/RescuerAbout';
 import RescuerEditprofilescreen from '../Component/Rescuer/RescuerEditprofilescreen';
 import Rescueprivancypolicyscreen from '../Component/Rescuer/Rescueprivancypolicy';
 import RescuerFooterNavigation from '../Component/Rescuer/RescuerFooterNavigation';
+import Rescuepatientedit from '../Component/Rescuer/Rescuepatientedit';
 
 const Stack = createNativeStackNavigator();
 
@@ -46,6 +47,7 @@ function RescuerStack() {
         <Stack.Screen name="RescuerAboutscreen" component={RescuerAboutscreen} options={{ headerShown: false }} />
         <Stack.Screen name="RescuerEditprofilescreen" component={RescuerEditprofilescreen} options={{ headerShown: false }} />
         <Stack.Screen name="Rescueprivancypolicyscreen" component={Rescueprivancypolicyscreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Rescuepatientedit" component={Rescuepatientedit} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 }

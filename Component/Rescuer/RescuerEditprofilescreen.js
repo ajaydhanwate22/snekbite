@@ -12,7 +12,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 function RescuerEditprofilescreen({navigation}) {
   const { t } = useTranslation();
   const [rescuername, setrescuername] = useState('');
-  // const [image, setImage] = useState('');
+  const [image, setImage] = useState('');
 
   useEffect(() => {
     const getData = async () => {
@@ -21,7 +21,7 @@ function RescuerEditprofilescreen({navigation}) {
         if (userData) {
           const parsedData = JSON.parse(userData);
           setrescuername(parsedData.RescuerName || ''); 
-          // setImage(parsedData.photo_url || ''); 
+          setImage(parsedData.photo_url || ''); 
         }
       } catch (error) {
         console.error('Error fetching user data from AsyncStorage', error);
@@ -75,8 +75,12 @@ function RescuerEditprofilescreen({navigation}) {
 
         {/* Profile photo and name */}
         <View style={{ height: 100, width: 100, backgroundColor: '#093624', borderRadius: 50, alignSelf: "center", marginVertical: 20, justifyContent: 'center', alignItems: "center" }}>
-       <FontAwesome6 name="user-circle" size={60} color="white" />
-       </View>
+          {image ? (
+            <Image source={{ uri: image }} style={{ width: '100%', height: '100%', resizeMode: 'cover', borderRadius: 50 }} />
+          ) : (
+            <FontAwesome6 name="user-circle" size={60} color="white" />
+          )}
+        </View>  
    
         <Text style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center', color: '#093624', fontSize: 24, fontWeight: '700', lineHeight: 29.05 }}>
           {rescuername || 'Name'}
