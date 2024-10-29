@@ -9,6 +9,7 @@ import {
   ScrollView,
 } from 'react-native';
 import {useTranslation} from 'react-i18next';
+import GuestFooternavigation from './GuestFooternavigation';
 
 function GuestprivancyScreen({navigation}) {
   const {t} = useTranslation();
@@ -55,27 +56,7 @@ function GuestprivancyScreen({navigation}) {
             <Text style={{color:'#093624', fontSize:12,marginLeft:10,top:-30}}>We take reasonable steps to protect your information from unauthorized access, disclosure, alteration, or destruction. However, no internet or electronic storage system is completely secure, so we cannot guarantee the absolute security of your information.</Text>
         </View>
     </ScrollView>
-    <View style={{ backgroundColor: 'white' }}>
-    <View style={{ height: 50, width: 310, left: 25, backgroundColor: '#093624', marginBottom: 8, borderRadius: 15 }}>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-        <TouchableOpacity onPress={() => handleButtonPress('Guestprofilescreen')}>
-          <View style={{ height: 30, width: 50, backgroundColor: 'red', top: 10, borderRadius: 20 }}>
-            <Text style={{ color: 'white', textAlign: 'center', top: 5 }}>Profile</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => handleButtonPress('GuestAboutscreen')}>
-        <View style={{justifyContent:'center', alignItems:'center',top:5}}>
-              <Image source={require('../Assets/about.png')}/>
-            </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => handleButtonPress('GuestEditscreen')}>
-        <View style={{justifyContent:'center', alignItems:'center', top:10}}>
-              <Image source={require('../Assets/edit.png')}/>
-            </View>
-        </TouchableOpacity>
-      </View>
-    </View>
-  </View>
+    <GuestFooternavigation navigation={navigation} />
     </>
   );
 }

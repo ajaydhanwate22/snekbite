@@ -96,6 +96,7 @@ function RescuePatientFormscren({ navigation, route }) {
     formData.append('RescuerName', rescuername);
     formData.append('Address', address);
     formData.append('UsedASVdate', currentDate); 
+    formData.append('Date', currentDate);
     
     if (image) {
       const localUri = image.uri;

@@ -12,6 +12,7 @@ import GuestprivancyScreen from '../Component/Guest/Guestprivancy';
 import Guestforgatpsscreen from '../Component/Guest/Guestforgatps';
 import Guestverifynoscreen from '../Component/Guest/Guestverifyno';
 import Guestnewpsscreen from '../Component/Guest/Guestnewps';
+import GuestUpdate from '../Component/Guest/GuestUpdate';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,7 @@ function GuestStack() {
         <Stack.Screen name="Guestforgatpsscreen" component={Guestforgatpsscreen} options={{ headerShown: false }} />
         <Stack.Screen name="Guestverifynoscreen" component={Guestverifynoscreen} options={{ headerShown: false }} />
         <Stack.Screen name="Guestnewpsscreen" component={Guestnewpsscreen} options={{ headerShown: false }} />
+        <Stack.Screen name="GuestUpdate" component={GuestUpdate} options={{ headerShown: false }} />
       </Stack.Navigator>
     );
   }

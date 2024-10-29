@@ -2,12 +2,10 @@ import React, {useEffect, useState} from 'react';
 import { View, Image, Text, TouchableOpacity, ScrollView, Alert, TextInput, ActivityIndicator } from 'react-native';
 import axios from 'axios';
 import {useTranslation} from 'react-i18next';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import RescuerFooterNavigation from './RescuerFooterNavigation';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import Entypo from 'react-native-vector-icons/Entypo';
 
 function Rescuanimalscreen({ navigation, route }) {
   const {t} = useTranslation();
@@ -75,9 +73,22 @@ function Rescuanimalscreen({ navigation, route }) {
           onPress={() => navigation.goBack()}>
           <AntDesign name="leftcircle" size={25} color="#093624" />
         </TouchableOpacity>
-        <Text style={{ textAlign: 'center', fontSize: 24, fontWeight: '700', lineHeight: 29.05, margin: 30, color: '#093624', marginTop: 50 }}>
-        Rescued Animals
-        </Text>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text
+        style={{
+          textAlign: 'center',
+          fontSize: 24,
+          fontWeight: '700',
+          lineHeight: 29.05,
+          marginVertical: 20,
+          color: '#093624',
+           // Add padding if you want some space around the text
+          // width: 'auto', // Optional: Remove this if you want it to stretch according to the container
+        }}
+      >
+        Rescued Animal
+      </Text>
+    </View>
 
         <View style={{paddingHorizontal: 20}}>
         <View style={{ height: 50, width: '100%', backgroundColor: '#093624', alignItems: 'center', borderRadius: 10, flexDirection: 'row' }}>
@@ -123,11 +134,11 @@ function Rescuanimalscreen({ navigation, route }) {
         {loading ? (
           <ActivityIndicator size="large" color="#093624" />
         ) : (
-          <View style={{ marginBottom: 50, top: 40, paddingHorizontal:20}}>
+          <View style={{ marginBottom: 50, top: 30, paddingHorizontal:20}}>
           {filteredPatients.length > 0 ? (
             filteredPatients.map((patient, index) => (
-              <View key={patient.id} style={{ marginBottom: 20 }}>
-                <View style={{  height: 110, width: '100%', borderWidth: 1, borderColor: '#000000', borderRadius: 20,}}>
+              <View key={patient.id} style={{ marginBottom: 10, }}>
+                <View style={{  height: 90, width: '100%',}}>
                   
                   {/* Image Section */}
 
@@ -136,23 +147,37 @@ function Rescuanimalscreen({ navigation, route }) {
                     //   await AsyncStorage.setItem('patientId', patient.id.toString());
                     //   navigation.navigate('Patientprofile');
                     // }}
-                    style={{flexDirection:"row",}}
+                    style={{flexDirection:"row", alignItems:"center",justifyContent: 'flex-start',  flex: 1,gap:15 }}
                   >
                 
-                  <View style={{ height: 100, width: 100, backgroundColor: '#093624', borderRadius: 50, justifyContent: 'center', alignSelf:'center',top:5}}>
-                    <Image source={{ uri: patient.photo_url }} style={{ width: '100%', height: '100%', resizeMode: 'cover', borderRadius: 50 }} />
+                  <View style={{ height: 70, width: 70, backgroundColor: '#093624', borderRadius: 50,}}>
+                    <Image source={{ uri: patient.photo_url }} style={{ width: '100%', height: '100%', resizeMode: 'cover', borderRadius: 50,borderWidth:1, borderColor:"#093624"}} />
                   </View>
         
                   {/* Patient Information Section */}
-
-                    <View style={{ justifyContent: 'center', gap: 10,alignSelf:"center", left:20}}>
-                      <Text style={{ color: '#000000' }}>
-                        Name: {patient.SpeciesName}
+                  <View style={{ flex: 1 }}>
+                  <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <View style={{ justifyContent: 'center', gap: 5}}>
+                      <Text style={{color: '#093624', fontWeight: 'bold', fontSize: 20  }}>
+                      {patient.SpeciesName}
                       </Text>
                       <Text style={{ color: '#000000' }}>
                         Snake ID: {patient.SnakeID}
                       </Text>
-                    </View> 
+                    </View>
+                    <Text style={{ color: '#093624', alignSelf: 'center', fontSize:12 }}>
+          {patient.date}
+        </Text>
+      </View> 
+      <View 
+        style={{ 
+          borderBottomWidth: 1, // Adjust thickness if needed
+          borderBottomColor: '#093624', 
+          marginTop: 20, // Space above the underline
+          width: '100%', // Full width of the container
+        }} 
+      />
+    </View>
                     </TouchableOpacity>     
                   </View>
               </View>

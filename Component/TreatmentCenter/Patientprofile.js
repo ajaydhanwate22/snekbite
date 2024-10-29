@@ -72,7 +72,7 @@ function Patientprofile({navigation}) {
             alignItems: 'center',
             justifyContent: 'center',
             overflow: 'hidden',
-            height: 300,
+            height: 150,
             borderBottomLeftRadius: 40,
             borderBottomRightRadius: 40,
           }}>
@@ -82,10 +82,10 @@ function Patientprofile({navigation}) {
               style={{resizeMode: 'contain', left: 165, top:-35}}
             />
           </TouchableOpacity>
-          <Image
+          {/* <Image
             source={require('../Assets/logo.png')}
-            style={{resizeMode: 'contain', height: 150, width: 150, top:-50}}
-          />
+            style={{resizeMode: 'contain', height: 100, width: 100, top:-50}}
+          /> */}
                  <TouchableOpacity
           style={{position: 'absolute', top: 20, left: 15}}
           onPress={() => navigation.goBack()}>

@@ -88,7 +88,7 @@ function Rescuepatientedit({ route, navigation }) {
           alignItems: 'center',
           justifyContent: 'center',
           overflow: 'hidden',
-          height: 300,
+          height: 150,
           borderBottomLeftRadius: 40,
           borderBottomRightRadius: 40,
         }}>
@@ -96,10 +96,10 @@ function Rescuepatientedit({ route, navigation }) {
           <AntDesign name="leftcircle" size={25} color="white"/>
           </TouchableOpacity>
               
-        <Image
+        {/* <Image
           source={require('../Assets/logo.png')}
           style={{resizeMode: 'contain', height: 150, width: 150,}}
-        />
+        /> */}
       </ImageBackground>
       <View style={{paddingHorizontal:20}}>
       <View

@@ -49,7 +49,7 @@ const WelcomeScreen = ({ navigation }) => {
             onPress={() => navigation.navigate('GuestStack')}>
             <Entypo name="user" size={20} color="white" />
             <Text style={{ fontSize: 14, fontWeight: 'bold', color: '#fff', flex: 1, textAlign: 'center' }}>
-              {t('Guest')}
+              {t('User')}
             </Text>
             <Icon2 name="right" size={20} color="white" />
           </TouchableOpacity>

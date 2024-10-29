@@ -7,15 +7,15 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-const AuthorEditscreen = ({navigation}) => {
+const GuestUpdate = ({navigation}) => {
   const {t} = useTranslation();
-  const [centerName, setCenterName] = useState('');
-  const [centerLocation, setCenterLocation] = useState('');
-  const [email, setEmail] = useState('');
-  const [contactNumber, setContactNumber] = useState('');
-  const [authorizesName, setAuthorizesName] = useState('');
-  const [description, setdescription] = useState('');
+  const [username, setUsername] = useState('');
+  const [EmailID, setEmailID] = useState('');
+  const [ContactNumber, setContactNumber] = useState('');
+  const [address, setAddress] = useState('');
+  const [Education, setEducation] = useState('');
   const [userId, setUserId] = useState('');
   const [originalData, setOriginalData] = useState({});
 
@@ -25,12 +25,11 @@ const AuthorEditscreen = ({navigation}) => {
         const data = await AsyncStorage.getItem('userData');
         if (data) {
           const userData = JSON.parse(data);
-          setCenterName(userData.CenterName );
-          setCenterLocation(userData.CenterLocation);
-          setEmail(userData.EmailID);
+          setUsername(userData.Username);
+          setEmailID(userData.EmailID);
           setContactNumber(userData.ContactNumber);
-          setAuthorizesName(userData.AuthorizesName);
-          setdescription(userData.Description);
+          setEducation(userData.Education);
+          setAddress(userData.Address);
           setUserId(userData.id);
           setOriginalData(userData);
         }
@@ -42,24 +41,23 @@ const AuthorEditscreen = ({navigation}) => {
   }, []);
 
   const handleUpdate = async () => {
-    if (!centerName || !centerLocation || !email || !contactNumber || !authorizesName || !description) { Alert.alert('Missing Information', 'Please fill in all required fields.'); return; }
+    if (!username  || !EmailID || !ContactNumber || !address || !Education) { Alert.alert('Missing Information', 'Please fill in all required fields.'); return; }
 
-    const hasChanges = centerName !== originalData.CenterName  || centerLocation !== originalData.CenterLocation  || email !== originalData.EmailID  || contactNumber !== originalData.ContactNumber  || authorizesName !== originalData.AuthorizesName  || description !== originalData.Description;
+    const hasChanges = username !== originalData.Username  || EmailID !== originalData.EmailID  || ContactNumber !== originalData.ContactNumber  || address !== originalData.Address  || Education !== originalData.Education;
     
     if (!hasChanges) { Alert.alert('No Changes', 'No updates were made to your profile.', [{text: 'OK', onPress: () => navigation.goBack()}]); return; }
 
     const formData = new FormData();
     formData.append('userId', userId);
-    formData.append('CenterName', centerName);
-    formData.append('CenterLocation', centerLocation);
-    formData.append('EmailID', email);
-    formData.append('ContactNumber', contactNumber);
-    formData.append('Description', description);
-    formData.append('AuthorizesName', authorizesName);
+    formData.append('Username', username);
+    formData.append('EmailID', EmailID);
+    formData.append('ContactNumber', ContactNumber);
+    formData.append('Address', address);
+    formData.append('Education', Education);
 
     try {
       const response = await axios.post(
-        'https://realrate.store/ajayApi/UpdateAuthorizerprofile.php',
+        'https://realrate.store/ajayApi/GuestUpdate.php',
         formData,
         {
           headers: {
@@ -71,7 +69,7 @@ const AuthorEditscreen = ({navigation}) => {
       if (response.data.message === 'Update successful') {
         Alert.alert('Success', 'Profile updated successfully!', [
           {text: 'OK', onPress: () => {
-            navigation.navigate('Profiletab', { userId });
+            navigation.navigate('Guestprofilescreen', { userId });
           }},
         ]);
       } else {
@@ -94,45 +92,53 @@ const AuthorEditscreen = ({navigation}) => {
   return (
     
     <ScrollView contentContainerStyle={{flexGrow: 1, backgroundColor: 'white'}}>
-      <ImageBackground source={require('../Assets/background.png')} style={{ flex: 1, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', height: 150, borderBottomLeftRadius: 40, borderBottomRightRadius: 40 }}>
+      <ImageBackground source={require('../Assets/background.png')} style={{ flex: 1, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', height: 300, borderBottomLeftRadius: 40, borderBottomRightRadius: 40 }}>
       <AntDesign name="leftcircle" size={25} color="white" style={{ position: 'absolute',top: 20,   left: 15}}        onPress={() => navigation.goBack()}/>
-      {/* <Image source={require('../Assets/logo.png')} style={{ resizeMode: 'contain', height: 150, width: 150, top:-30 }} /> */}
+      <Image source={require('../Assets/logo.png')} style={{ resizeMode: 'contain', height: 150, width: 150, top:-30 }} />
       </ImageBackground>
+
         <View style={{paddingHorizontal: 20}}>
-          <View style={{ width: '100%', height: 680, backgroundColor: 'white', top: -50, borderRadius: 30, marginBottom: -30, elevation: 5, padding: 20, gap: 20 }}>
+          <View style={{ width: '100%', height: 580, backgroundColor: 'white', top: -50, borderRadius: 30, marginBottom: -30, elevation: 5, padding: 20, gap: 20 }}>
          <Text style={{ textAlign: 'center', color: '#093624', fontSize: 25, margin: 20, fontWeight: 'bold' }}>{t('Edit Profile')}</Text>
        
           {/* Render Input Fields */}
+
           <View style={styles.inputContainer}>
           <FontAwesome5 name="user-circle" size={20} color="black" />
-          <TextInput placeholder={t('Authorizes Name')} placeholderTextColor="#093624" value={authorizesName} onChangeText={text => { const capitalizedText = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase(); setAuthorizesName(capitalizedText); }}
+          <TextInput placeholder={t('Username')} placeholderTextColor="#093624" value={username} onChangeText={text => { const capitalizedText = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase(); username(capitalizedText); }}
            style={{flex: 1}} />
           </View>
-          <View style={styles.inputContainer}>
-          <Icon name="hospital-box-outline" size={20} color="black" />
-          <TextInput placeholder={t('Centre name')} placeholderTextColor="#093624" value={centerName} onChangeText={text => { const capitalizedText = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase(); setCenterName(capitalizedText); }} 
-          style={{flex: 1}} />
-          </View>
-          <View style={styles.inputContainer}>
-            <FontAwesome5 name="map-marker-alt" size={20} color="black" />
-          <TextInput placeholder={t('Centre location')} placeholderTextColor="#093624" value={centerLocation} onChangeText={text => { const capitalizedText = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase(); setCenterLocation(capitalizedText); }}
-           style={{flex: 1}} />
-          </View>
+
           <View style={styles.inputContainer}>
             <Icon name="email" size={20} color="black" />
-          <TextInput placeholder={t('Email ID (Optional)')} placeholderTextColor="#093624" value={email} onChangeText={setEmail}
+          <TextInput placeholder={t('Email ID')} placeholderTextColor="#093624" value={EmailID} onChangeText={setEmailID}
            style={{flex: 1}} />
           </View>
+
           <View style={styles.inputContainer}>
           <FontAwesome5 name="phone-alt" size={20} color="black" />
-          <TextInput placeholder={t('Contact number')} placeholderTextColor="#093624" value={contactNumber} onChangeText={setContactNumber} 
+          <TextInput placeholder={t('Contact number')} placeholderTextColor="#093624" value={ContactNumber} onChangeText={setContactNumber} 
           style={{flex: 1}} />
           </View>
+{/* 
           <View style={styles.inputContainer}>
-          <MaterialCommunityIcons name="comment" size={20} color="#093624" />
-          <TextInput placeholder={t('Description')} placeholderTextColor="#093624" value={description} onChangeText={text => { const capitalizedText = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase(); setdescription(capitalizedText); }}
+          <FontAwesome5 name="user" size={20} color="#093624" />
+          <TextInput placeholder={t('Experience')} placeholderTextColor="#093624" value={Experience} onChangeText={text => { const capitalizedText = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase(); setExperience(capitalizedText); }}
            style={{flex: 1}} /> 
+          </View> */}
+
+<View style={styles.inputContainer}>
+            <FontAwesome5 name="book-reader" size={20} color="black" />
+          <TextInput placeholder={t('Education')} placeholderTextColor="#093624" value={Education} onChangeText={text => { const capitalizedText = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase(); setEducation(capitalizedText); }}
+           style={{flex: 1}} />
           </View>
+
+          <View style={styles.inputContainer}>
+            <FontAwesome5 name="map-marker-alt" size={20} color="black" />
+          <TextInput placeholder={t('Address')} placeholderTextColor="#093624" value={address} onChangeText={text => { const capitalizedText = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase(); setAddress(capitalizedText); }}
+           style={{flex: 1}} />
+          </View>
+
           <TouchableOpacity onPress={handleUpdate}>
           <View style={{ height: 55, width: '100%', borderWidth: 1, borderRadius: 10, backgroundColor: '#093624', top: 20 }}>
             <Text style={{ color: 'white', padding: 15, textAlign: 'center' }}>{t('Update')}</Text>
@@ -147,4 +153,4 @@ const AuthorEditscreen = ({navigation}) => {
 const styles = {
   inputContainer: { flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderColor: '#093624', borderRadius: 10, paddingLeft: 15, gap: 20, width: '100%', height: 55 }
 };
-export default AuthorEditscreen;
+export default GuestUpdate;

@@ -131,7 +131,7 @@ if (selectedItem === 'asv') {
 
           <View style={{paddingHorizontal: 10}}>
                 {/* authorization profile */}
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => handleButtonPress('Rescuerupdate')}>
                <View style={{width: '100%', height: 109, backgroundColor: '#ffffff', top: -40, borderRadius: 10, elevation: 15, flexDirection: 'row', justifyContent: 'space-between', padding: 8, paddingLeft: 25}}>
                   <View style={{gap: 2,alignSelf:'center'}}>
                   <Text style={{color: '#093624', fontSize: 20, fontWeight: '600', lineHeight: 24.02}}>{RescuerName}</Text>
