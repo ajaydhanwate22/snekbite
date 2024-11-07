@@ -68,7 +68,7 @@ function Editprofilescreen({ navigation }) {
           <TouchableOpacity style={{ position: 'absolute',top: 60,   left: 15}}        onPress={() => navigation.goBack()}>
           <AntDesign name="leftcircle" size={25} color="white" />  
             </TouchableOpacity> 
-          <Text style={{ color: 'white', fontWeight: '700', fontSize: 24, right: 60, lineHeight: 29.05 }}>Profile </Text>
+          <Text style={{ color: 'white', fontWeight: '700', fontSize: 24, right: 60, lineHeight: 29.05 }}>{t('Profile')} </Text>
         </ImageBackground>
 
         {/* Profile photo and name */}
@@ -90,7 +90,7 @@ function Editprofilescreen({ navigation }) {
             <View style={{ height: 55, width: '100%', backgroundColor: '#093624', borderRadius: 10, flexDirection: "row", justifyContent: 'space-between', alignItems:'center', paddingHorizontal:15}}>
               <Icon name="user-edit" size={20} color="white" />
               <Text style={{ color: '#ffffff', right: 75, fontFamily: 'Inter', fontWeight: '500', fontSize: 15, lineHeight: 24.2 }}>
-                Edit Profile
+                {t('Edit Profile')}
               </Text>
               <Icon2 name="right" size={20} color="white"  />
             </View>
@@ -101,7 +101,7 @@ function Editprofilescreen({ navigation }) {
             <View style={{ height: 55, width: '100%', backgroundColor: '#093624', borderRadius: 10, flexDirection: "row", justifyContent: 'space-between', alignItems:'center', paddingHorizontal:15}}>
               <Icon2 name="setting" size={20} color="white" />
               <Text style={{ color: '#ffffff', right: 80, fontFamily: 'Inter', fontWeight: '500', fontSize: 15, lineHeight: 24.2 }}>
-                Setting
+                {t('Setting')}
               </Text>
               <Icon2 name="right" size={20} color="white" />
             </View>
@@ -112,7 +112,7 @@ function Editprofilescreen({ navigation }) {
             <View style={{ height: 55, width: '100%', backgroundColor: '#093624', borderRadius: 10, flexDirection: "row", justifyContent: 'space-between', alignItems:'center', paddingHorizontal:15}}>
               <Icon name="info-circle" size={20} color="white"/>
               <Text style={{color: '#ffffff', right: 75, fontFamily: 'Inter', fontWeight: '500', fontSize: 15, lineHeight: 24.2}}>
-                About Us
+                {t('About Us')}
               </Text>
               <Icon2 name="right" size={20} color="white" />
             </View>
@@ -123,7 +123,7 @@ function Editprofilescreen({ navigation }) {
             <View style={{ height: 55, width: '100%', backgroundColor: '#093624', borderRadius: 10, flexDirection: "row", justifyContent: 'space-between', alignItems:'center', paddingHorizontal:15}}>
               <Icon name="shield-alt" size={20} color="white" />
               <Text style={{color: '#ffffff', right: 60, fontFamily: 'Inter', fontWeight: '500', fontSize: 15, lineHeight: 24.2}}>
-                Privacy Policy
+                {t('Privacy Policy')}
               </Text>
               <Icon2 name="right" size={20} color="white" />
             </View>
@@ -134,7 +134,7 @@ function Editprofilescreen({ navigation }) {
             <View style={{ height: 55, width: '100%', backgroundColor: '#093624', borderRadius: 10, flexDirection: "row", justifyContent: 'space-between', alignItems:'center', paddingHorizontal:15}}>
               <Icon name="sign-out-alt" size={20} color="white" />
               <Text style={{ color: '#ffffff', right: 80, fontFamily: 'Inter', fontWeight: '500', fontSize: 15, lineHeight: 24.2 }}>
-                Logout
+                {t('Logout')}
               </Text>
               <Icon2 name="right" size={20} color="white" />
             </View>

@@ -3,10 +3,13 @@ import { View, Text, TouchableOpacity, Dimensions, StyleSheet } from 'react-nati
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
 import Icon3 from 'react-native-vector-icons/FontAwesome5';
+import {useTranslation} from 'react-i18next';
+
 
 const { height } = Dimensions.get('window'); 
 
 const FooterNavigationcenter = ({ navigation }) => {
+  const {t} = useTranslation();
   const handleButtonPress = (screen) => {
     navigation.navigate(screen);
   };
@@ -17,17 +20,17 @@ const FooterNavigationcenter = ({ navigation }) => {
 
         <TouchableOpacity onPress={() => handleButtonPress('Profiletab')} style={styles.iconContainer}>
           <Icon name="home" size={40} color="white" />
-          <Text style={styles.iconText}>Home</Text>
+          <Text style={styles.iconText}>{t('Home')}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => handleButtonPress('Abouttabscreen')} style={styles.iconContainer}>
-          <Icon2 name="explore" size={40} color="white" />
-          <Text style={styles.iconText}>Explore</Text>
+          <Icon2 name="Explore" size={40} color="white" />
+          <Text style={styles.iconText}>{('Explore')}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => handleButtonPress('Editprofilescreen')} style={styles.iconContainer}>
           <Icon3 name="user-circle" size={40} color="white" />
-          <Text style={styles.iconText}>Profile</Text>
+          <Text style={styles.iconText}>{t('Profile')}</Text>
         </TouchableOpacity>
       </View>
     </View>

@@ -21,8 +21,9 @@ const SignupScreen = ({navigation}) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [image, setImage] = useState(null);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =useState(false);
+  const [image, setImage] = useState(null);
+
 
   const currentDate = new Date().toISOString().split('T')[0];
 
@@ -198,7 +199,7 @@ const SignupScreen = ({navigation}) => {
               </View>
               ) : (
           <View style={{justifyContent:'center', alignItems:"center",height: '100%',}}>
-            <Text style={{textAlign:'center'}}>Upload photo</Text>
+            <Text style={{textAlign:'center'}}>{t('Upload photo')}</Text>
           </View>
               )}
           </View>

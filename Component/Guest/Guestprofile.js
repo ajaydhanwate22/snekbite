@@ -10,9 +10,12 @@ import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import {useFocusEffect} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { useAuth } from '../AuthContext'; 
+
 
 function Guestprofilescreen({navigation, route}) {
   const {t} = useTranslation();
+  const { logout } = useAuth();
   const [userData, setUserData] = useState(null);
   const [rescuerData, setRescuerData] = useState([]);
   const [TretmentcenterData, setTretmentcenter] = useState([]);
@@ -117,7 +120,8 @@ function Guestprofilescreen({navigation, route}) {
           onPress: async () => {
             try {
               await AsyncStorage.removeItem('userData'); 
-              navigation.navigate('GuestLoginform');  
+              logout(); 
+              navigation.navigate('Home');  
             } catch (error) {
               console.error('Error during logout:', error);
             }
@@ -164,14 +168,14 @@ function Guestprofilescreen({navigation, route}) {
                 </TouchableOpacity>
 
 
-                <Text style={{top: -20, fontWeight: '600', fontSize: 14, lineHeight: 17.23, color: '#093624'}}>Upload posts</Text>
+                <Text style={{top: -20, fontWeight: '600', fontSize: 14, lineHeight: 17.23, color: '#093624'}}>{t('Upload posts')}</Text>
                 <View style={{flexDirection: 'row', bottom: 20, justifyContent: 'space-between', alignItems: 'center', top: -15}}>
 
                 {/* first container */}
                 <TouchableOpacity onPress={() => handleButtonPress('Guestformscreen', {userId})} style={{width: '49%'}}>
                 <View style={{height: 109, backgroundColor: '#093624', elevation: 15, borderRadius: 15, justifyContent: 'center', alignItems: 'center'}}>
                     <MaterialCommunityIcons name="cloud-upload" size={40} color="white" />
-                    <Text style={{color: 'white', textAlign: 'center', fontSize: 14, fontWeight: '600', lineHeight: 19.36, marginTop: 10}}> Upload Post</Text>
+                    <Text style={{color: 'white', textAlign: 'center', fontSize: 14, fontWeight: '600', lineHeight: 19.36, marginTop: 10}}> {t('Upload Post')}</Text>
                 </View>
                 </TouchableOpacity>
 
@@ -179,25 +183,36 @@ function Guestprofilescreen({navigation, route}) {
                 <TouchableOpacity style={{width: '49%'}}>
                 <View style={{height: 109, backgroundColor: '#093624', elevation: 15, borderRadius: 15, justifyContent: 'center', alignItems: 'center'}}>
                 <Icon2 name="format-list-bulleted-add" size={40} color="white" />
-                <Text style={{ color: 'white', textAlign: 'center', fontSize: 14, fontWeight: '600', lineHeight: 19.36,  marginTop: 10 }}>List</Text>
+                <Text style={{ color: 'white', textAlign: 'center', fontSize: 14, fontWeight: '600', lineHeight: 19.36,  marginTop: 10 }}>{t('List')}</Text>
                 </View>
                 </TouchableOpacity>
 
               </View>
 
+
                 <View style={{ flex: 1,}}>
-  <Text style={{ fontWeight: '600', fontSize: 14, lineHeight: 17.23, color: '#093624'  }}>Rescuer list</Text>
+  <Text style={{ fontWeight: '600', fontSize: 14, lineHeight: 17.23, color: '#093624'  }}>{t('Rescuer list')}</Text>
   <ScrollView horizontal showsHorizontalScrollIndicator={false}>
     <View style={{ flexDirection: 'row', flexWrap: 'nowrap' }}>
       {rescuerData.map((rescuer, index) => (
         <View key={index} style={{ margin: 5 }}> 
-          <View style={{ backgroundColor: '#D9D9D9', height: 60, width: 100, borderTopLeftRadius: 10, borderTopRightRadius: 10 }} />
-          <View style={{ backgroundColor: '#ffffff', height: 60, width: 100, borderBottomLeftRadius: 10, borderBottomRightRadius: 10, elevation: 15 }}>
-            <View style={{ padding: 10 }}>
-              <Text style={{ fontWeight: '500', fontSize: 12, lineHeight: 14.52, color: '#093624' }}>{rescuer.RescuerName}</Text>
-              <Text style={{ fontWeight: '500', fontSize: 10, lineHeight: 12.1, color: '#BBBBBB' }}>{rescuer.id}</Text>
-              <Text style={{ fontWeight: '500', fontSize: 10, lineHeight: 12.1, color: '#BBBBBB' }}>{rescuer.Address}</Text>
+          <View style={{ backgroundColor: '#ffffff', height: 120, width: 100, borderBottomLeftRadius: 10, borderBottomRightRadius: 10, elevation: 5 }}>
+            <View style={{ alignSelf:"center",justifyContent:"center", gap:2,top:5 }}>
+              <Text style={{ fontWeight: '500', fontSize: 12, lineHeight: 14.52, color: '#093624', textAlign:"center" }}>{rescuer.RescuerName}</Text>
+              {/* <Text style={{ fontWeight: '500', fontSize: 10, lineHeight: 12.1, color: '#BBBBBB' }}>{rescuer.id}</Text> */}
+              <Text style={{ fontWeight: '500', fontSize: 10, lineHeight: 12.1, color: '#BBBBBB', textAlign:"center" }}>{rescuer.Address}</Text>
             </View>
+            <Image 
+      source={{ uri: rescuer.photo_url }}  // Use the photo_url from the API
+      style={{
+        height: '50%',  // Fill the height of the container
+        width: '50%',   // Fill the width of the container
+        resizeMode: 'cover', // Ensure the image fills the area without distortion
+        alignSelf:"center",
+        borderRadius:5,
+        top:10
+      }}
+    />
           </View>
         </View>
       ))}
@@ -210,29 +225,37 @@ function Guestprofilescreen({navigation, route}) {
 
 
 <View style={{ flex: 1, top:10}}>
-  <Text style={{ fontWeight: '600', fontSize: 14, lineHeight: 17.23, color: '#093624' }}>Nearby Treatment Centre</Text>
+  <Text style={{ fontWeight: '600', fontSize: 14, lineHeight: 17.23, color: '#093624' }}>{t('Nearby Treatment Centre')}</Text>
   <ScrollView horizontal showsHorizontalScrollIndicator={false}>
     <View style={{ flexDirection: 'row', flexWrap: 'nowrap' }}>
       {TretmentcenterData.map((TretmenCenter, index) => (
         <View key={index} style={{ margin: 5 }}> 
-          <View style={{ backgroundColor: '#D9D9D9', height: 60, width: 100, borderTopLeftRadius: 10, borderTopRightRadius: 10 }} />
-          <View style={{ backgroundColor: '#ffffff', height: 60, width: 100, borderBottomLeftRadius: 10, borderBottomRightRadius: 10, elevation: 15 }}>
-            <View style={{ padding: 10 }}>
-              <Text style={{ fontWeight: '500', fontSize: 12, lineHeight: 14.52, color: '#093624' }}>{TretmenCenter.CenterName}</Text>
-              <Text style={{ fontWeight: '500', fontSize: 10, lineHeight: 12.1, color: '#BBBBBB' }}>{TretmenCenter.id}</Text>
-              <Text style={{ fontWeight: '500', fontSize: 10, lineHeight: 12.1, color: '#BBBBBB' }}>{TretmenCenter.CenterLocation}</Text>
+          <View style={{ backgroundColor: '#ffffff', height: 120, width: 100, borderRadius: 10, borderBottomRightRadius: 10, elevation: 15 }}>
+  
+            <View style={{  alignSelf:"center",justifyContent:"center", gap:3, top:5 }}>
+              
+              <Text style={{ fontWeight: '500', fontSize: 12, lineHeight: 14.52, color: '#093624', textAlign:'center' }}>{TretmenCenter.CenterName}</Text>
+              {/* <Text style={{ fontWeight: '500', fontSize: 10, lineHeight: 12.1, color: '#BBBBBB' }}>{TretmenCenter.id}</Text> */}
+              <Text style={{ fontWeight: '500', fontSize: 10, lineHeight: 12.1, color: '#BBBBBB', textAlign:'center' }}>{TretmenCenter.AuthorizesName}</Text>
             </View>
+            <Image 
+      source={{ uri: TretmenCenter.photo_url }}  // Use the photo_url from the API
+      style={{
+        height: '50%',  // Fill the height of the container
+        width: '50%',   // Fill the width of the container
+        resizeMode: 'cover', // Ensure the image fills the area without distortion
+        alignSelf:"center",
+        borderRadius:5,
+        top:10
+      }}
+    />
           </View>
         </View>
       ))}
     </View>
   </ScrollView>
 </View>
-
-
-
-
-        </View>
+ </View>
       </View>
     </ScrollView>
     <GuestFooternavigation navigation={navigation} />

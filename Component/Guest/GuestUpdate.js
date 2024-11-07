@@ -8,6 +8,8 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
+import { launchImageLibrary } from 'react-native-image-picker';
 
 const GuestUpdate = ({navigation}) => {
   const {t} = useTranslation();
@@ -18,6 +20,8 @@ const GuestUpdate = ({navigation}) => {
   const [Education, setEducation] = useState('');
   const [userId, setUserId] = useState('');
   const [originalData, setOriginalData] = useState({});
+  const [photo, setPhoto] = useState('');
+
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -31,6 +35,7 @@ const GuestUpdate = ({navigation}) => {
           setEducation(userData.Education);
           setAddress(userData.Address);
           setUserId(userData.id);
+          setPhoto(userData.photo_url); // Load current photo
           setOriginalData(userData);
         }
       } catch (error) {
@@ -40,10 +45,30 @@ const GuestUpdate = ({navigation}) => {
     fetchUserData();
   }, []);
 
+
+  
+  const handleImagePick = () => {
+    const options = {
+      mediaType: 'photo',
+      quality: 1,
+    };
+
+    launchImageLibrary(options, (response) => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.errorCode) {
+        console.log('ImagePicker Error: ', response.errorMessage);
+      } else {
+        setPhoto(response.assets[0].uri);  // Update the photo state with the new image
+      }
+    });
+  };
+
+
   const handleUpdate = async () => {
     if (!username  || !EmailID || !ContactNumber || !address || !Education) { Alert.alert('Missing Information', 'Please fill in all required fields.'); return; }
 
-    const hasChanges = username !== originalData.Username  || EmailID !== originalData.EmailID  || ContactNumber !== originalData.ContactNumber  || address !== originalData.Address  || Education !== originalData.Education;
+    const hasChanges = username !== originalData.Username  || EmailID !== originalData.EmailID  || ContactNumber !== originalData.ContactNumber  || address !== originalData.Address  || Education !== originalData.Education ||photo !== originalData.photo_url;
     
     if (!hasChanges) { Alert.alert('No Changes', 'No updates were made to your profile.', [{text: 'OK', onPress: () => navigation.goBack()}]); return; }
 
@@ -54,6 +79,20 @@ const GuestUpdate = ({navigation}) => {
     formData.append('ContactNumber', ContactNumber);
     formData.append('Address', address);
     formData.append('Education', Education);
+
+
+    
+    if (photo) {
+      const localUri = photo; 
+      const filename = localUri.split('/').pop();
+      const type = 'image/jpeg';  // Or 'image/png' depending on the file type
+
+      formData.append('photo', {
+        uri: localUri,
+        name: filename,
+        type: type,
+      });
+    }
 
     try {
       const response = await axios.post(
@@ -98,10 +137,22 @@ const GuestUpdate = ({navigation}) => {
       </ImageBackground>
 
         <View style={{paddingHorizontal: 20}}>
-          <View style={{ width: '100%', height: 580, backgroundColor: 'white', top: -50, borderRadius: 30, marginBottom: -30, elevation: 5, padding: 20, gap: 20 }}>
+          <View style={{ width: '100%', height: 750, backgroundColor: 'white', top: -50, borderRadius: 30, marginBottom: -30, elevation: 5, padding: 20, gap: 20 }}>
          <Text style={{ textAlign: 'center', color: '#093624', fontSize: 25, margin: 20, fontWeight: 'bold' }}>{t('Edit Profile')}</Text>
        
           {/* Render Input Fields */}
+
+
+          <TouchableOpacity onPress={handleImagePick} style={{ alignSelf: 'center', marginBottom: 20 }}>
+            <View style={{ width: 100, height: 100, backgroundColor: '#093624', borderRadius: 50, justifyContent: 'center', alignItems: 'center' }}>
+              {photo ? (
+                <Image source={{ uri: photo }} style={{ width: '100%', height: '100%', resizeMode: 'cover', borderRadius: 50 }} />
+              ) : (
+                <FontAwesome6 name="user-circle" size={60} color="white" />
+              )}
+            </View>
+          </TouchableOpacity>
+
 
           <View style={styles.inputContainer}>
           <FontAwesome5 name="user-circle" size={20} color="black" />

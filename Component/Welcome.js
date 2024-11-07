@@ -5,7 +5,7 @@ import Icon2 from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo'; 
 import Fontisto from 'react-native-vector-icons/Fontisto'; 
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'; 
-
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 
 const WelcomeScreen = ({ navigation }) => {
@@ -19,7 +19,12 @@ const WelcomeScreen = ({ navigation }) => {
       source={require('./Assets/background.png')}
       style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <View style={{ alignItems: 'center' }}>
-        <Text style={{fontSize: 48, fontWeight: '700', color: '#fff', marginTop: 10, lineHeight:58.09 }}>
+      <TouchableOpacity
+          style={{position: 'absolute', top: -45, left: 15}}
+          onPress={() => navigation.goBack()}>
+          <AntDesign name="leftcircle" size={25} color="white" />
+        </TouchableOpacity>
+      <Text style={{fontSize: 48, fontWeight: '700', color: '#fff', marginTop: 10, lineHeight:58.09 }}>
           {t('Welcome')}
         </Text>
         <Text style={{ fontSize: 14, color: '#ffffff', fontWeight:'400', lineHeight:19.36 }}>

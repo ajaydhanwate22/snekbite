@@ -5,9 +5,11 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'; 
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { useAuth } from '../AuthContext';  // Import useAuth hook to manage auth context
 
 function Loginform2Screen({navigation}) {
   const {t} = useTranslation();
+  const { login } = useAuth();  // Destructure login function from the AuthContext.
   const [AuthorizesName, setAuthorizesName] = useState('');
   const [Password, setPassword] = useState('');
   const [CenterName, setCenterName] = useState('');
@@ -43,6 +45,7 @@ function Loginform2Screen({navigation}) {
                   userId: userData.id,
                 }),
               );
+              login(userData);
             } catch (error) {
               console.error('Error storing data', error);
             }
@@ -81,7 +84,7 @@ function Loginform2Screen({navigation}) {
           <Text style={{ textAlign: 'center', color: '#093624', fontSize: 25, margin: 20, fontWeight: 'bold' }}>{t('Sign In')}</Text>
           <View style={{ flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderColor: '#093624', borderRadius: 10, paddingLeft: 15, gap: 20, width: '100%', height: 55 }}>
           <FontAwesome5 name="hospital" size={20} color="#093624"/>
-          <TextInput placeholder={t('Center name')} placeholderTextColor="#093624" value={CenterName} onChangeText={text => setCenterName(text.charAt(0).toUpperCase() + text.slice(1).toLowerCase())} style={{ flex: 1 }} />
+          <TextInput placeholder={t('Center Name')} placeholderTextCo lor="#093624" value={CenterName} onChangeText={text => setCenterName(text.charAt(0).toUpperCase() + text.slice(1).toLowerCase())} style={{ flex: 1 }} />
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderColor: '#093624', borderRadius: 10, paddingLeft: 15, gap: 20, width: '100%', height: 55 }}>
           <FontAwesome5 name="user-check" size={20} color="#093624"/>

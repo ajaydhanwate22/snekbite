@@ -10,10 +10,13 @@ import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import {useFocusEffect} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { useAuth } from '../AuthContext'; 
+
 
 function RescuerAuthorizesNamesreen({ navigation, route }) {
   const {t} = useTranslation();
   const [userData, setUserData] = useState(null);
+  const { logout } = useAuth(); // Use the logout function from context
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const userId = route.params?.userId; 
@@ -100,8 +103,9 @@ if (selectedItem === 'asv') {
           text: t('Log Out'),  // Text for logout button
           onPress: async () => {
             try {
-              await AsyncStorage.removeItem('userData');  // Remove user data from AsyncStorage
-              navigation.navigate('RescuerloginformScreen');  // Navigate to Home screen after logout
+              await AsyncStorage.removeItem('userData'); 
+              logout(); 
+              navigation.navigate('Home');  // Navigate to Home screen after logout
             } catch (error) {
               console.error('Error during logout:', error);
             }
@@ -150,14 +154,14 @@ if (selectedItem === 'asv') {
 
 
                 {/* upload rescuer container */}
-               <Text style={{top: -20, fontWeight: '600', fontSize: 14, lineHeight: 17.23, color: '#093624'}}>Rescue Details</Text>
+               <Text style={{top: -20, fontWeight: '600', fontSize: 14, lineHeight: 17.23, color: '#093624'}}>{t('Rescue Details')}</Text>
                 <View style={{flexDirection: 'row', bottom: 20, justifyContent: 'space-between', alignItems: 'center', top: -15}}>
 
                 {/* first container */}
                 <TouchableOpacity onPress={() => handleButtonPress('Rescuerformscreen', {userId})} style={{width: '49%'}}>
                 <View style={{height: 109, backgroundColor: '#093624', elevation: 15, borderRadius: 15, justifyContent: 'center', alignItems: 'center'}}>
                     <MaterialCommunityIcons name="cloud-upload" size={40} color="white" />
-                    <Text style={{color: 'white', textAlign: 'center', fontSize: 14, fontWeight: '600', lineHeight: 19.36, marginTop: 10}}> Upload Rescue</Text>
+                    <Text style={{color: 'white', textAlign: 'center', fontSize: 14, fontWeight: '600', lineHeight: 19.36, marginTop: 10}}> {t('Upload Rescue')}</Text>
                 </View>
                 </TouchableOpacity>
 
@@ -165,20 +169,20 @@ if (selectedItem === 'asv') {
                 <TouchableOpacity onPress={() => handleButtonPress('Rescuanimalscreen', {userId})}style={{width: '49%'}}>
                 <View style={{height: 109, backgroundColor: '#093624', elevation: 15, borderRadius: 15, justifyContent: 'center', alignItems: 'center'}}>
                 <Icon2 name="format-list-bulleted-add" size={40} color="white" />
-                <Text style={{ color: 'white', textAlign: 'center', fontSize: 14, fontWeight: '600', lineHeight: 19.36,  marginTop: 10 }}>Rescued Animals</Text>
+                <Text style={{ color: 'white', textAlign: 'center', fontSize: 14, fontWeight: '600', lineHeight: 19.36,  marginTop: 10 }}>{('Rescued Animals')}</Text>
                 </View>
                 </TouchableOpacity>
 
               </View>
 
-              <Text style={{top: -5, fontWeight: '600', fontSize: 14, lineHeight: 17.23, color: '#093624'}}>Patient Details</Text>
+              <Text style={{top: -5, fontWeight: '600', fontSize: 14, lineHeight: 17.23, color: '#093624'}}>{t('Patient Details')}</Text>
                 <View style={{flexDirection: 'row', bottom: 20, justifyContent: 'space-between', alignItems: 'center', top: -1}}>
 
                 {/* Patient Details first container */}
                 <TouchableOpacity onPress={() => handleButtonPress('RescuePatientFormscren', {userId})} style={{width: '49%'}}>
                 <View style={{height: 109, backgroundColor: '#093624', elevation: 15, borderRadius: 15, justifyContent: 'center', alignItems: 'center'}}>
                     <FontAwesome6 name="user-plus" size={40} color="white" />
-                    <Text style={{color: 'white', textAlign: 'center', fontSize: 14, fontWeight: '600', lineHeight: 19.36, marginTop: 10}}>Add new patient</Text>
+                    <Text style={{color: 'white', textAlign: 'center', fontSize: 14, fontWeight: '600', lineHeight: 19.36, marginTop: 10}}>{t('Add new patient')}</Text>
                 </View>
                 </TouchableOpacity>
 
@@ -186,21 +190,21 @@ if (selectedItem === 'asv') {
                 <TouchableOpacity onPress={() => handleButtonPress('Rescuerpatientlistscreen', {userId})}style={{width: '49%'}}>
                 <View style={{height: 109, backgroundColor: '#093624', elevation: 15, borderRadius: 15, justifyContent: 'center', alignItems: 'center'}}>
                 <Icon2 name="format-list-bulleted-add" size={40} color="white" />
-                <Text style={{ color: 'white', textAlign: 'center', fontSize: 14, fontWeight: '600', lineHeight: 19.36,  marginTop: 10 }}>Patient List</Text>
+                <Text style={{ color: 'white', textAlign: 'center', fontSize: 14, fontWeight: '600', lineHeight: 19.36,  marginTop: 10 }}>{t('Patient List')}</Text>
                 </View>
                 </TouchableOpacity>
 
               </View>
 
                         {/* Anti Snake Venom container */}
-          <Text style={{ top: 5, fontWeight: '600', fontSize: 14, lineHeight: 17.23, color: '#093624' }}>Anti Snake Venom</Text>
+          <Text style={{ top: 5, fontWeight: '600', fontSize: 14, lineHeight: 17.23, color: '#093624' }}>{t('Anti Snake Venom')}</Text>
                {/* Anti Snake Venom first container */}
           <View style={{ height: 109, width: '100%', backgroundColor: '#093624', borderRadius: 15, elevation: 15, top:10 }}>
              <View style={{ justifyContent: 'space-around', flexDirection: 'row' }}>
                   <Icon3 name="injection-syringe" size={40} color="white" style={{ top: 30 }} />
                    <View style={{flexDirection: 'column', top: 35}}>
-                  <Text style={{ color: 'white', fontSize: 14, fontWeight: '600', textAlign: 'left', lineHeight: 19.36 }}>Used ASV</Text>
-                  <Text style={{ color: 'white', fontSize: 10, fontWeight: '400', lineHeight: 12.01 }}>Last used Update on {formatDate(UsedASVdate)} </Text>
+                  <Text style={{ color: 'white', fontSize: 14, fontWeight: '600', textAlign: 'left', lineHeight: 19.36 }}>{t('Used ASV')}</Text>
+                  <Text style={{ color: 'white', fontSize: 10, fontWeight: '400', lineHeight: 12.01 }}>{t('Last used Update on')} {formatDate(UsedASVdate)} </Text>
                   </View>
                   <Text style={{ color: 'white', fontSize: 40, top: 25, fontWeight: '700', lineHeight: 58.09 }}>{UsedASV}</Text>
                   <TouchableOpacity onPress={() => toggleEditModal('usedAsv')}>
@@ -213,8 +217,8 @@ if (selectedItem === 'asv') {
             <View style={{ justifyContent: 'space-around', flexDirection: 'row' }} >
               <Ionicons name="cart-sharp" size={40} color="white" style={{ top: 30 }} />
                   <View style={{flexDirection: 'column', top: 35}}>
-                  <Text style={{ color: 'white', fontSize: 14, fontWeight: '600', textAlign: 'left', lineHeight: 19.36 }}>Stock ASV</Text>
-                  <Text style={{ color: 'white', fontSize: 10, fontWeight: '400', lineHeight: 12.01 }}>Last stocked update on {formatDate(AvailableASVDate)}</Text>
+                  <Text style={{ color: 'white', fontSize: 14, fontWeight: '600', textAlign: 'left', lineHeight: 19.36 }}>{t('Stock ASV')}</Text>
+                  <Text style={{ color: 'white', fontSize: 10, fontWeight: '400', lineHeight: 12.01 }}>{t('Last stocked update on')} {formatDate(AvailableASVDate)}</Text>
                   </View>
                    <Text style={{ color: 'white', fontSize: 40, top: 25, fontWeight: '700', lineHeight: 58.09 }}>{AvailabilityofASV}</Text>
                   <TouchableOpacity onPress={() => toggleEditModal('asv')}>

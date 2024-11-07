@@ -174,13 +174,13 @@ function TreatmentUsedASVscreen({navigation, route}) {
 
             <TouchableOpacity onPress={handlesub} style={{ width:"48%"}}>
             <View style={{backgroundColor: '#093624',height: 70,justifyContent:"center", alignItems:'center', borderRadius: 10,}}>
-            <Text style={{ color: 'white',fontSize: 20, fontWeight: 'bold',}}>Substract</Text>
+            <Text style={{ color: 'white',fontSize: 20, fontWeight: 'bold',}}>{t('Substract')}</Text>
             </View>
             </TouchableOpacity>  
 
           <TouchableOpacity onPress={handleadd} style={{width:"48%",}}>
           <View style={{backgroundColor: '#093624',height: 70,justifyContent:"center", alignItems:'center', borderRadius: 10,}}>
-            <Text style={{color: 'white', fontSize: 20, fontWeight: 'bold', }}>Add</Text>
+            <Text style={{color: 'white', fontSize: 20, fontWeight: 'bold', }}>{t('Add')}</Text>
           </View>
           </TouchableOpacity> 
 

@@ -10,9 +10,11 @@ import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import {useFocusEffect} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { useAuth } from '../AuthContext'; 
 
 function Profiletab({navigation, route}) {
   const {t} = useTranslation();
+  const { logout } = useAuth(); // Use the logout function from context
   const [userData, setUserData] = useState(null);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -100,7 +102,8 @@ if (selectedItem === 'asv') {
           onPress: async () => {
             try {
               await AsyncStorage.removeItem('userData');  // Remove user data from AsyncStorage
-              navigation.navigate('Loginform2Screen');  // Navigate to Home screen after logout
+              logout(); 
+              navigation.navigate('Home');  // Navigate to Home screen after logout
             } catch (error) {
               console.error('Error during logout:', error);
             }
@@ -150,14 +153,14 @@ if (selectedItem === 'asv') {
 
 
                 {/* Patient Details container */}
-               <Text style={{top: -20, fontWeight: '600', fontSize: 14, lineHeight: 17.23, color: '#093624'}}>Patient Details</Text>
+               <Text style={{top: -20, fontWeight: '600', fontSize: 14, lineHeight: 17.23, color: '#093624'}}>{t('Patient Details')}</Text>
                 <View style={{flexDirection: 'row', bottom: 20, justifyContent: 'space-between', alignItems: 'center', top: -15}}>
 
                 {/* Patient Details first container */}
                 <TouchableOpacity onPress={() => handleButtonPress('patientform', {userId})} style={{width: '49%'}}>
                 <View style={{height: 109, backgroundColor: '#093624', elevation: 15, borderRadius: 15, justifyContent: 'center', alignItems: 'center'}}>
                     <FontAwesome6 name="user-plus" size={40} color="white" />
-                    <Text style={{color: 'white', textAlign: 'center', fontSize: 14, fontWeight: '600', lineHeight: 19.36, marginTop: 10}}>Add new patient</Text>
+                    <Text style={{color: 'white', textAlign: 'center', fontSize: 14, fontWeight: '600', lineHeight: 19.36, marginTop: 10}}>{t('Add new patient')}</Text>
 
                 </View>
                 </TouchableOpacity>
@@ -166,21 +169,21 @@ if (selectedItem === 'asv') {
                 <TouchableOpacity onPress={() => handleButtonPress('Patientlist', {userId})}style={{width: '49%'}}>
                 <View style={{height: 109, backgroundColor: '#093624', elevation: 15, borderRadius: 15, justifyContent: 'center', alignItems: 'center'}}>
                 <Icon2 name="format-list-bulleted-add" size={40} color="white" />
-                <Text style={{ color: 'white', textAlign: 'center', fontSize: 14, fontWeight: '600', lineHeight: 19.36,  marginTop: 10 }}>Patient List</Text>
+                <Text style={{ color: 'white', textAlign: 'center', fontSize: 14, fontWeight: '600', lineHeight: 19.36,  marginTop: 10 }}>{t('Patient List')}</Text>
                 </View>
                 </TouchableOpacity>
 
               </View>
 
                         {/* Anti Snake Venom container */}
-          <Text style={{ top: -5, fontWeight: '600', fontSize: 14, lineHeight: 17.23, color: '#093624' }}>Anti Snake Venom</Text>
+          <Text style={{ top: -5, fontWeight: '600', fontSize: 14, lineHeight: 17.23, color: '#093624' }}>{t('Anti Snake Venom')}</Text>
                {/* Anti Snake Venom first container */}
           <View style={{ height: 109, width: '100%', backgroundColor: '#093624', borderRadius: 15, elevation: 15 }}>
              <View style={{ justifyContent: 'space-around', flexDirection: 'row' }}>
                   <Icon3 name="injection-syringe" size={40} color="white" style={{ top: 30 }} />
                    <View style={{flexDirection: 'column', top: 35}}>
-                  <Text style={{ color: 'white', fontSize: 14, fontWeight: '600', textAlign: 'left', lineHeight: 19.36 }}>Used ASV</Text>
-                  <Text style={{ color: 'white', fontSize: 10, fontWeight: '400', lineHeight: 12.01 }}>Last used on {formatDate(UsedASVdate)}</Text>
+                  <Text style={{ color: 'white', fontSize: 14, fontWeight: '600', textAlign: 'left', lineHeight: 19.36 }}>{t('Used ASV')}</Text>
+                  <Text style={{ color: 'white', fontSize: 10, fontWeight: '400', lineHeight: 12.01 }}>{t('Last used on')} {formatDate(UsedASVdate)}</Text>
                   </View>
                   <Text style={{ color: 'white', fontSize: 40, top: 25, fontWeight: '700', lineHeight: 58.09 }}>{UsedASV}</Text>
                   <TouchableOpacity onPress={() => toggleEditModal('usedAsv')}>
@@ -193,8 +196,8 @@ if (selectedItem === 'asv') {
             <View style={{ justifyContent: 'space-around', flexDirection: 'row' }} >
               <Ionicons name="cart-sharp" size={40} color="white" style={{ top: 30 }} />
                   <View style={{flexDirection: 'column', top: 35}}>
-                  <Text style={{ color: 'white', fontSize: 14, fontWeight: '600', textAlign: 'left', lineHeight: 19.36 }}>Stock ASV</Text>
-                  <Text style={{ color: 'white', fontSize: 10, fontWeight: '400', lineHeight: 12.01 }}>Last stocked on {formatDate(AvailableASVDate)}</Text>
+                  <Text style={{ color: 'white', fontSize: 14, fontWeight: '600', textAlign: 'left', lineHeight: 19.36 }}>{t('Stock ASV')}</Text>
+                  <Text style={{ color: 'white', fontSize: 10, fontWeight: '400', lineHeight: 12.01 }}>{t('Last stocked on')} {formatDate(AvailableASVDate)}</Text>
                   </View>
                    <Text style={{ color: 'white', fontSize: 40, top: 25, fontWeight: '700', lineHeight: 58.09 }}>{AvailabilityofASV}</Text>
                   <TouchableOpacity onPress={() => toggleEditModal('asv')}>

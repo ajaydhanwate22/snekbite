@@ -198,7 +198,7 @@ function Guestsignupscreen({navigation}) {
               </View>
               ) : (
           <View style={{justifyContent:'center', alignItems:"center",height: '100%',}}>
-            <Text style={{textAlign:'center'}}>Upload photo</Text>
+            <Text style={{textAlign:'center'}}>{t('Upload photo')}</Text>
           </View>
               )}
           </View>

@@ -146,7 +146,7 @@ function RescuersignupScreen({ navigation }) {
 
      <View style={{ flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderColor: '#093624', borderRadius: 10, paddingLeft: 15, gap: 20, width: '100%', height: 55 }}>
          <FontAwesome5 name="user-check" size={20} color="#093624" />
-         <TextInput placeholder={t('Rescure Name')} placeholderTextColor="#093624" value={rescuername} onChangeText={text => { const capitalizedText = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase(); setRescuername(capitalizedText); }} style={{ flex: 1 }} />
+         <TextInput placeholder={t('Rescuer name')} placeholderTextColor="#093624" value={rescuername} onChangeText={text => { const capitalizedText = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase(); setRescuername(capitalizedText); }} style={{ flex: 1 }} />
      </View>
 
      <View style={{ flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderColor: '#093624', borderRadius: 10, paddingLeft: 15, gap: 20, width: '100%', height: 55 }}>
@@ -210,7 +210,7 @@ function RescuersignupScreen({ navigation }) {
               </View>
               ) : (
           <View style={{justifyContent:'center', alignItems:"center",height: '100%',}}>
-            <Text style={{textAlign:'center'}}>Upload photo</Text>
+            <Text style={{textAlign:'center'}}>{t('Upload photo')}</Text>
           </View>
               )}
           </View>
