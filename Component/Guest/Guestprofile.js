@@ -180,10 +180,10 @@ function Guestprofilescreen({navigation, route}) {
                 </TouchableOpacity>
 
                 {/*  second container */}
-                <TouchableOpacity style={{width: '49%'}}>
+                <TouchableOpacity onPress={() => handleButtonPress('Postsection',{userId})} style={{width: '49%'}}>
                 <View style={{height: 109, backgroundColor: '#093624', elevation: 15, borderRadius: 15, justifyContent: 'center', alignItems: 'center'}}>
                 <Icon2 name="format-list-bulleted-add" size={40} color="white" />
-                <Text style={{ color: 'white', textAlign: 'center', fontSize: 14, fontWeight: '600', lineHeight: 19.36,  marginTop: 10 }}>{t('List')}</Text>
+                <Text style={{ color: 'white', textAlign: 'center', fontSize: 14, fontWeight: '600', lineHeight: 19.36,  marginTop: 10 }}>{t('Posts')}</Text>
                 </View>
                 </TouchableOpacity>
 

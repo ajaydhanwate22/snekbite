@@ -137,15 +137,30 @@ function RescuePatientFormscren({ navigation, route }) {
   return (
     <>
   <ScrollView style={{ backgroundColor: 'white' }}>
-      <ImageBackground
-        source={require('../Assets/background.png')} style={{flex: 1,alignItems: 'center',justifyContent: 'center',
-          overflow: 'hidden',height: 300,borderBottomLeftRadius: 40,borderBottomRightRadius: 40,}}>
-            <TouchableOpacity style={{ position: 'absolute',top: 20,   left: 15}}        onPress={() => navigation.goBack()}>
+  <ImageBackground
+          source={require('../Assets/background.png')}
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            overflow: 'hidden',
+            height: 180,
+            borderBottomLeftRadius: 40,
+            borderBottomRightRadius: 40,
+          }}
+        >
+          <TouchableOpacity
+            style={{ position: 'absolute', top: 20, left: 15 }}
+            onPress={() => navigation.goBack()}
+          >
             <AntDesign name="leftcircle" size={25} color="white" />
-            </TouchableOpacity>
-              
-        <Image source={require('../Assets/logo.png')}style={{resizeMode: 'contain', height: 150, width: 150, top:-20}}/>
-      </ImageBackground>
+          </TouchableOpacity>
+
+          <Image
+            source={require('../Assets/logo.png')}
+            style={{ resizeMode: 'contain', height: 100, width: 100, top: -20 }}
+          />
+        </ImageBackground>
       <View style={{paddingHorizontal:20}}>
         <View style={{ width: '100%',height: 1200,backgroundColor: 'white',top: -50,borderRadius: 30,marginBottom: -30,elevation: 5,padding:20,gap:20}}>
           <Text style={{ textAlign: 'center',color: '#093624',fontSize: 25,fontWeight: 'bold',margin:20}}>

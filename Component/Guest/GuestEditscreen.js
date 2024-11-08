@@ -88,7 +88,7 @@ return ( <>
         {/* Other options */}
         <View style={{ flexDirection: 'column', gap: 15, alignItems:'center', padding:20 }}>
           {/* Edit profile */}
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => handleButtonPress('GuestUpdate')}>
             <View style={{ height: 55, width: '100%', backgroundColor: '#093624', borderRadius: 10, flexDirection: "row", justifyContent: 'space-between', alignItems:'center', paddingHorizontal:15}}>
               <Icon name="user-edit" size={20} color="white" />
               <Text style={{ color: '#ffffff', right: 75, fontFamily: 'Inter', fontWeight: '500', fontSize: 15, lineHeight: 24.2 }}>
