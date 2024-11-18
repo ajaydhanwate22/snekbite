@@ -57,8 +57,6 @@ function RescuePatientFormscren({ navigation, route }) {
   }, [userId]);
 
 
-  
-
   const handleImagePick = () => {
     const options = {
       mediaType: 'photo',

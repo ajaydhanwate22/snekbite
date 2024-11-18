@@ -1,5 +1,7 @@
 import React from 'react'; import { View, Text, TextInput, TouchableOpacity, ImageBackground, StyleSheet, Image, ScrollView } from 'react-native'; import { useTranslation } from 'react-i18next';
 import GuestFooternavigation from './GuestFooternavigation';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+
 
 function GuestAboutscreen({ navigation }) {
    const { t } = useTranslation();
@@ -10,10 +12,28 @@ function GuestAboutscreen({ navigation }) {
 return ( <>
   <ScrollView>
     <View style={{ backgroundColor: 'white' }}>
-      <ImageBackground source={require('../Assets/background.png')} style={{ flex: 1, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', height: 200, borderBottomLeftRadius: 40, borderBottomRightRadius: 40 }}>
-        <Image source={require('../Assets/logo.png')} style={{ resizeMode: 'contain', height: 100, width: 150 }} />
-        <Text style={{ textAlign: 'center', color: 'white', fontWeight: 'bold', fontSize: 20, top: 15 }}>About us</Text>
-      </ImageBackground>
+    <ImageBackground
+          source={require('../Assets/background.png')} 
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            overflow: 'hidden',
+            height: 180,
+            borderBottomLeftRadius: 40,
+            borderBottomRightRadius: 40,
+          }}>
+          <TouchableOpacity
+            style={{ position: 'absolute', top: 20, left: 15 }}
+            onPress={() => navigation.goBack()}>
+            <AntDesign name="leftcircle" size={25} color="white" />
+          </TouchableOpacity>
+          
+          <Image 
+            source={require('../Assets/logo.png')}
+            style={{ resizeMode: 'contain', height: 100, width: 100, top: -20 }} 
+          />
+        </ImageBackground>
       <View>
         <Text style={{ textAlign: 'center', justifyContent: 'center', marginTop: 20, color: '#093624', fontWeight: 'bold', fontSize: 20 }}>World for Nature</Text>
         <Text style={{ textAlign: 'center', color: '#093624', fontSize: 12, margin: 10 }}>Addressing the Snakebite Crisis in India World For Nature is committed to tackling the critical issue of snakebite envenoming in India. We recognize the devastating impact it has on communities, causing fatalities and disabilities.</Text>

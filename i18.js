@@ -185,7 +185,14 @@ const resources = {
       'Nearby Treatment Centre':'जवळील उपचार केंद्र',
       'Rescuer list':'बचावकर्त्यांची सूची',
       'List':'सूची',
-      'Upload Post':'पोस्ट अपलोड करा'
+      'Upload Post':'पोस्ट अपलोड',
+      'Posts':'पोस्ट',
+      'Update':'अपडेट',
+      'Current Location':'सध्याचे स्थान',
+      'Manual Location':'मैन्युअल स्थान',
+      'Upload':'अपलोड',
+      'Recent Posts':'अलीकडील पोस्ट',
+      'Search by username':'वापरकर्ता नावाने शोधा'
     },
   },
   hindi: {
@@ -309,7 +316,14 @@ const resources = {
          'Nearby Treatment Centre':'नजदीकी उपचार केंद्र',
          'Rescuer list':'बचावकर्ताओं की सूची',
          'List':'सूची',
-         'Upload Post':'पोस्ट अपलोड करें'
+         'Upload Post':'पोस्ट अपलोड',
+         'Posts':'पोस्ट',
+         'Update':'अपडेट',
+         'Current Location':'वर्तमान स्थान',
+         'Manual Location':'मैन्युअल स्थान',
+         'Upload':'अपलोड',
+         'Recent Posts':'हाल के पोस्ट',
+         'Search by username':'उपयोगकर्ता नाम से खोजें'
     },
   },
 };
@@ -324,3 +338,5 @@ i18n.use(initReactI18next).init({
 });
 
 export default i18n;
+
+

@@ -197,7 +197,7 @@ const GuestUpdate = ({ navigation }) => {
           >
             <View
               style={{
-                width: 120,
+                width: 120, 
                 height: 120,
                 backgroundColor: '#093624',
                 borderRadius: 60,

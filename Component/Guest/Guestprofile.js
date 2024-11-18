@@ -168,7 +168,7 @@ function Guestprofilescreen({navigation, route}) {
                 </TouchableOpacity>
 
 
-                <Text style={{top: -20, fontWeight: '600', fontSize: 14, lineHeight: 17.23, color: '#093624'}}>{t('Upload posts')}</Text>
+                <Text style={{top: -20, fontWeight: '600', fontSize: 14, lineHeight: 17.23, color: '#093624'}}>{t('Upload Post')}</Text>
                 <View style={{flexDirection: 'row', bottom: 20, justifyContent: 'space-between', alignItems: 'center', top: -15}}>
 
                 {/* first container */}

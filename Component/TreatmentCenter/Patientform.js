@@ -143,13 +143,28 @@ function Patientgform({ navigation, route }) {
     <>
       <ScrollView style={{ backgroundColor: 'white' }}>
       <ImageBackground
-        source={require('../Assets/background.png')} style={{flex: 1,alignItems: 'center',justifyContent: 'center',
-          overflow: 'hidden',height: 300,borderBottomLeftRadius: 40,borderBottomRightRadius: 40,}}>
-            <TouchableOpacity style={{ position: 'absolute',top: 20,   left: 15}}        onPress={() => navigation.goBack()}>
-            <AntDesign name="leftcircle" size={25} color="white" />
-            </TouchableOpacity>
-              
-        <Image source={require('../Assets/logo.png')}style={{resizeMode: 'contain', height: 150, width: 150, top:-20}}/>
+        source={require('../Assets/background.png')}
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',
+          height: 180,
+          borderBottomLeftRadius: 40,
+          borderBottomRightRadius: 40,
+        }}
+      >
+        <TouchableOpacity
+          style={{ position: 'absolute', top: 20, left: 15 }}
+          onPress={() => navigation.goBack()}
+        >
+          <AntDesign name="leftcircle" size={25} color="white" />
+        </TouchableOpacity>
+
+        <Image
+          source={require('../Assets/logo.png')}
+          style={{ resizeMode: 'contain', height: 100, width: 100, top: -20 }}
+        />
       </ImageBackground>
       <View style={{paddingHorizontal:20}}>
         <View style={{ width: '100%',height: 1350,backgroundColor: 'white',top: -50,borderRadius: 30,marginBottom: -30,elevation: 5,padding:20,gap:20}}>
@@ -207,7 +222,7 @@ function Patientgform({ navigation, route }) {
 
     <TouchableOpacity onPress={handleButtonPress}>
       <View style={{height: 55, width: '100%', borderWidth: 1, borderRadius: 10, backgroundColor: '#093624', top: 10}}>
-        <Text style={{color: 'white', padding: 15, textAlign: 'center'}}>Save</Text>
+        <Text style={{color: 'white', padding: 15, textAlign: 'center'}}>Submit</Text>
       </View>
     </TouchableOpacity>
 

@@ -135,9 +135,29 @@ const AuthorEditscreen = ({ navigation }) => {
   return (
     
     <ScrollView contentContainerStyle={{flexGrow: 1, backgroundColor: 'white'}}>
-      <ImageBackground source={require('../Assets/background.png')} style={{ flex: 1, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', height: 150, borderBottomLeftRadius: 40, borderBottomRightRadius: 40 }}>
-      <AntDesign name="leftcircle" size={25} color="white" style={{ position: 'absolute',top: 20,   left: 15}}        onPress={() => navigation.goBack()}/>
-      {/* <Image source={require('../Assets/logo.png')} style={{ resizeMode: 'contain', height: 150, width: 150, top:-30 }} /> */}
+      <ImageBackground
+        source={require('../Assets/background.png')}
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',
+          height: 180,
+          borderBottomLeftRadius: 40,
+          borderBottomRightRadius: 40,
+        }}
+      >
+        <TouchableOpacity
+          style={{ position: 'absolute', top: 20, left: 15 }}
+          onPress={() => navigation.goBack()}
+        >
+          <AntDesign name="leftcircle" size={25} color="white" />
+        </TouchableOpacity>
+
+        <Image
+          source={require('../Assets/logo.png')}
+          style={{ resizeMode: 'contain', height: 100, width: 100, top: -20 }}
+        />
       </ImageBackground>
         <View style={{paddingHorizontal: 20}}>
           <View style={{ width: '100%', height: 850, backgroundColor: 'white', top: -50, borderRadius: 30, marginBottom: -30, elevation: 5, padding: 20, gap: 20 }}>
@@ -145,13 +165,41 @@ const AuthorEditscreen = ({ navigation }) => {
        
           {/* Render Input Fields */}
 
-          <TouchableOpacity onPress={handleImagePick} style={{ alignSelf: 'center', marginBottom: 20 }}>
-            <View style={{ width: 100, height: 100, backgroundColor: '#093624', borderRadius: 50, justifyContent: 'center', alignItems: 'center' }}>
+          <TouchableOpacity
+            onPress={handleImagePick}
+            style={{ alignSelf: 'center', marginBottom: 20, position: 'relative' }}
+          >
+            <View
+              style={{
+                width: 120,
+                height: 120,
+                backgroundColor: '#093624',
+                borderRadius: 60,
+                justifyContent: 'center',
+                alignItems: 'center',
+                overflow: 'hidden',
+              }}
+            >
               {photo ? (
-                <Image source={{ uri: photo }} style={{ width: '100%', height: '100%', resizeMode: 'cover', borderRadius: 50 }} />
+                <Image
+                  source={{ uri: photo }}
+                  style={{ width: '100%', height: '100%', resizeMode: 'cover' }}
+                />
               ) : (
-                <FontAwesome6 name="user-circle" size={60} color="white" />
+                <FontAwesome6 name="user-circle" size={70} color="white" />
               )}
+            </View>
+            <View
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                right: 0,
+                backgroundColor: 'white',
+                borderRadius: 50,
+                padding: 5,
+              }}
+            >
+              <FontAwesome5 name="pen" size={20} color="#093624" />
             </View>
           </TouchableOpacity>
 

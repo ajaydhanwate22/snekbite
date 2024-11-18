@@ -105,12 +105,12 @@ function Rescuepatientedit({ route, navigation }) {
       <View
         style={{
           width:'100%',
-          height: 1150,
+          height: 1100,
           backgroundColor: 'white',
           top: -50,
           borderRadius: 30,
           marginBottom: -30,
-          elevation: 5,
+          elevation: 5
         }}>
         <Text
           style={{

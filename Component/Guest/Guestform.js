@@ -176,7 +176,7 @@ function Guestformscreen({ navigation }) {
               <AntDesign name="enviromento" size={20} color="#093624" />
               <TextInput
                 style={{ flex: 1 }}
-                placeholder="Current Location"
+                placeholder={t("Current Location")}
                 placeholderTextColor="#093624"
                 value={CurrentLocation}
                 onChangeText={setCurrentLocation}
@@ -188,7 +188,7 @@ function Guestformscreen({ navigation }) {
               <AntDesign name="pushpino" size={20} color="#093624" />
               <TextInput
                 style={{ flex: 1 }}
-                placeholder="Manual Location"
+                placeholder={t("Manual Location")}
                 placeholderTextColor="#093624"
                 value={Manuallocation}
                 onChangeText={setManualLocation}
@@ -200,7 +200,7 @@ function Guestformscreen({ navigation }) {
               <Feather name="file-text" size={20} color="#093624" />
               <TextInput
                 style={{ flex: 1 }}
-                placeholder="Description"
+                placeholder={t("Description")}
                 placeholderTextColor="#093624"
                 value={Description}
                 onChangeText={setDescription}
@@ -219,7 +219,7 @@ function Guestformscreen({ navigation }) {
                 justifyContent: 'center',
                 alignItems: 'center'
               }}>
-                <Text style={{ color: 'white', padding: 15, textAlign: 'center' }}>Upload</Text>
+                <Text style={{ color: 'white', padding: 15, textAlign: 'center' }}>{t('Upload')}</Text>
               </View>
             </TouchableOpacity>
           </View>              

@@ -5,11 +5,11 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'; 
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { useAuth } from '../AuthContext';  // Import useAuth hook to manage auth context
+import { useAuth } from '../AuthContext';  
 
 function Loginform2Screen({navigation}) {
   const {t} = useTranslation();
-  const { login } = useAuth();  // Destructure login function from the AuthContext.
+  const { login } = useAuth();  
   const [AuthorizesName, setAuthorizesName] = useState('');
   const [Password, setPassword] = useState('');
   const [CenterName, setCenterName] = useState('');
@@ -39,12 +39,7 @@ function Loginform2Screen({navigation}) {
           if (responseJson.message === 'LoggedIn successfully') {
             const userData = responseJson.user;
             try {
-              await AsyncStorage.setItem(
-                'userData',
-                JSON.stringify({
-                  userId: userData.id,
-                }),
-              );
+              await AsyncStorage.setItem('userData',JSON.stringify({userId: userData.id,}),);
               login(userData);
             } catch (error) {
               console.error('Error storing data', error);

@@ -182,7 +182,7 @@ function Postsection({ navigation }) {
             color: '#093624',
             textAlign: 'center',
           }}>
-            Recent Posts
+            {t('Recent Posts')}
           </Text>
           <View style={{
             width: '100%',
@@ -201,7 +201,7 @@ function Postsection({ navigation }) {
         }}>
           <EvilIcons name="search" size={30} color="#093624" />
           <TextInput
-            placeholder="Search by username"
+            placeholder={t("Search by username")}
             value={searchQuery}
             onChangeText={handleSearch}
             style={{

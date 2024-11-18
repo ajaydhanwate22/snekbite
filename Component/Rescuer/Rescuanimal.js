@@ -1,20 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Image, Text, TouchableOpacity, ScrollView, Alert, TextInput, ActivityIndicator } from 'react-native';
 import axios from 'axios';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import RescuerFooterNavigation from './RescuerFooterNavigation';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 function Rescuanimalscreen({ navigation, route }) {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const [patients, setPatients] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const {userId} = route.params;
-
-
+  const { userId } = route.params;
 
   const fetchPatients = async () => {
     try {
@@ -38,15 +36,13 @@ function Rescuanimalscreen({ navigation, route }) {
     }
   };
 
-
-
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       if (loading) {
         Alert.alert(
           'Loading',
           'Fetching patient data is taking longer than usual. Please wait...',
-          [{text: 'OK'}],
+          [{ text: 'OK' }],
         );
       }
     }, 5000);
@@ -64,36 +60,42 @@ function Rescuanimalscreen({ navigation, route }) {
     console.log(`Searching for: ${searchTerm}`);
   };
 
-
   return (
     <>
-       <ScrollView style={{backgroundColor: 'white'}}>
+      <ScrollView style={{ backgroundColor: 'white' }}>
         <TouchableOpacity
-          style={{position: 'absolute', top: 20, left: 15}}
+          style={{ position: 'absolute', top: 20, left: 15 }}
           onPress={() => navigation.goBack()}>
           <AntDesign name="leftcircle" size={25} color="#093624" />
         </TouchableOpacity>
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text
-        style={{
-          textAlign: 'center',
-          fontSize: 24,
-          fontWeight: '700',
-          lineHeight: 29.05,
-          marginVertical: 20,
-          color: '#093624',
-           // Add padding if you want some space around the text
-          // width: 'auto', // Optional: Remove this if you want it to stretch according to the container
-        }}
-      >
-        Rescued Animal
-      </Text>
-    </View>
 
-        <View style={{paddingHorizontal: 20}}>
-        <View style={{ height: 50, width: '100%', backgroundColor: '#093624', alignItems: 'center', borderRadius: 10, flexDirection: 'row' }}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontSize: 26,
+              fontWeight: '700',
+              color: '#093624',
+              marginVertical: 20,
+            }}>
+            {t('Rescued Animals')}
+          </Text>
+        </View>
+
+        {/* Search Bar */}
+        <View style={{ paddingHorizontal: 20 }}>
+          <View
+            style={{
+              height: 50,
+              width: '100%',
+              backgroundColor: '#093624',
+              alignItems: 'center',
+              borderRadius: 10,
+              flexDirection: 'row',
+              marginBottom: 20,
+            }}>
             {searchTerm.length === 0 && (
-              <EvilIcons name="search" size={30} color="white" style={{left: 10, top: -3}}/>
+              <EvilIcons name="search" size={30} color="white" style={{ left: 10, top: -3 }} />
             )}
             <TextInput
               placeholder="Search..."
@@ -102,96 +104,105 @@ function Rescuanimalscreen({ navigation, route }) {
                 flex: 1,
                 color: 'white',
                 paddingLeft: 20,
+                fontSize: 16,
               }}
               value={searchTerm}
               onChangeText={setSearchTerm}
             />
             {searchTerm.length > 0 && (
-              <TouchableOpacity
-                onPress={handleSearch}
-                style={{marginRight: 10}}>
-                <Text style={{color: 'white'}}>Search</Text>
+              <TouchableOpacity onPress={handleSearch} style={{ marginRight: 10 }}>
+                <Text style={{ color: 'white', fontSize: 16 }}>Search</Text>
               </TouchableOpacity>
             )}
           </View>
         </View>
+
+        {/* Upload Rescue Button */}
         <View
           style={{
-            paddingHorizontal: 40,
+            paddingHorizontal: 20,
             flexDirection: 'row',
             gap: 10,
-            top: 20,
+            // top: 10,
+            alignItems: 'center',
+            marginBottom: 20,
           }}>
           <TouchableOpacity
-            onPress={() => navigation.navigate('Rescuerformscreen', {userId})}>
+            onPress={() => navigation.navigate('Rescuerformscreen', { userId })}>
             <Ionicons name="add-circle" size={40} color="#093624" />
           </TouchableOpacity>
-          <Text style={{top: 10, fontWeight: '700', color: 'black'}}>
-          Upload Rescue
+          <Text style={{ fontWeight: '700', color: 'black', fontSize: 18 }}>
+            {t('Upload Rescue')}
           </Text>
         </View>
 
+        {/* Loading Indicator */}
         {loading ? (
-          <ActivityIndicator size="large" color="#093624" />
+          <View style={{ marginTop: 20, alignItems: 'center' }}>
+            <ActivityIndicator size="large" color="#093624" />
+            <Text style={{ marginTop: 10, color: '#093624' }}>Loading Data...</Text>
+          </View>
         ) : (
-          <View style={{ marginBottom: 50, top: 30, paddingHorizontal:20}}>
-          {filteredPatients.length > 0 ? (
-            filteredPatients.map((patient, index) => (
-              <View key={patient.id} style={{ marginBottom: 10, }}>
-                <View style={{  height: 90, width: '100%',}}>
-                  
-                  {/* Image Section */}
-
+          <View style={{ marginBottom: 50, paddingHorizontal: 20 }}>
+            {filteredPatients.length > 0 ? (
+              filteredPatients.map((patient) => (
+                <View key={patient.id} style={{ marginBottom: 15 }}>
                   <TouchableOpacity
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      backgroundColor: '#f4f4f4',
+                      padding: 15,
+                      borderRadius: 10,
+                      borderWidth: 1,
+                      borderColor: '#ddd',
+                    }}
                     // onPress={async () => {
                     //   await AsyncStorage.setItem('patientId', patient.id.toString());
                     //   navigation.navigate('Patientprofile');
                     // }}
-                    style={{flexDirection:"row", alignItems:"center",justifyContent: 'flex-start',  flex: 1,gap:15 }}
                   >
-                
-                  <View style={{ height: 70, width: 70, backgroundColor: '#093624', borderRadius: 50,}}>
-                    <Image source={{ uri: patient.photo_url }} style={{ width: '100%', height: '100%', resizeMode: 'cover', borderRadius: 50,borderWidth:1, borderColor:"#093624"}} />
-                  </View>
-        
-                  {/* Patient Information Section */}
-                  <View style={{ flex: 1 }}>
-                  <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <View style={{ justifyContent: 'center', gap: 5}}>
-                      <Text style={{color: '#093624', fontWeight: 'bold', fontSize: 20  }}>
-                      {patient.SpeciesName}
+                    <View
+                      style={{
+                        height: 70,
+                        width: 70,
+                        backgroundColor: '#093624',
+                        borderRadius: 50,
+                        overflow: 'hidden',
+                      }}>
+                      <Image
+                        source={{ uri: patient.photo_url }}
+                        style={{ width: '100%', height: '100%', resizeMode: 'cover' }}
+                      />
+                    </View>
+
+                    <View style={{ marginLeft: 15, flex: 1 }}>
+                      <Text style={{ color: '#093624', fontWeight: 'bold', fontSize: 18 }}>
+                        {patient.SpeciesName}
                       </Text>
-                      <Text style={{ color: '#000000' }}>
-                        Snake ID: {patient.SnakeID}
+                      <Text style={{ color: '#000000' }}>Snake ID: {patient.SnakeID}</Text>
+                      <Text
+                        style={{
+                          color: '#093624',
+                          fontSize: 12,
+                          marginTop: 5,
+                          textAlign: 'right',
+                        }}>
+                        {patient.date}
                       </Text>
                     </View>
-                    <Text style={{ color: '#093624', alignSelf: 'center', fontSize:12 }}>
-          {patient.date}
-        </Text>
-      </View> 
-      <View 
-        style={{ 
-          borderBottomWidth: 1, // Adjust thickness if needed
-          borderBottomColor: '#093624', 
-          marginTop: 20, // Space above the underline
-          width: '100%', // Full width of the container
-        }} 
-      />
-    </View>
-                    </TouchableOpacity>     
-                  </View>
-              </View>
-
-            ))
-          ) : (
-            <Text style={{ textAlign: 'center', color: '#000000' }}>
-              No patients found
-            </Text>
-          )}
-        </View>
-        
+                  </TouchableOpacity>
+                </View>
+              ))
+            ) : (
+              <Text style={{ textAlign: 'center', color: '#000000' }}>
+                {t('No patients found')}
+              </Text>
+            )}
+          </View>
         )}
       </ScrollView>
+
       <RescuerFooterNavigation navigation={navigation} />
     </>
   );

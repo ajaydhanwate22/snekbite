@@ -24,8 +24,8 @@ const FooterNavigationcenter = ({ navigation }) => {
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => handleButtonPress('Abouttabscreen')} style={styles.iconContainer}>
-          <Icon2 name="Explore" size={40} color="white" />
-          <Text style={styles.iconText}>{('Explore')}</Text>
+          <Icon2 name="explore" size={40} color="white" />
+          <Text style={styles.iconText}>{t('Explore')}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => handleButtonPress('Editprofilescreen')} style={styles.iconContainer}>
